@@ -27,6 +27,7 @@
   "bugs": {
     "url": "https://github.com/DavidYang2149/MyBakingRecipeMock/issues"
   },
+  "homepage": "https://davidyang2149.github.io/MyBakingRecipeMock",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",

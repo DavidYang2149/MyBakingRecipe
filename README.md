@@ -1,5 +1,5 @@
 # My Baking Recipe Mock
-[My Baking Recipe Mock](https://davidyang2149.github.io/MyBakingRecipe)은 Typescript를 포함하지 않은 버전입니다.
+[My Baking Recipe Mock](https://davidyang2149.github.io/MyBakingRecipeMock)은 Typescript를 포함하지 않은 버전입니다.
 
 ## Install dependencies
 
