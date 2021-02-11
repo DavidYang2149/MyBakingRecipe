@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "build": "NODE_ENV=production webpack --mode production",
     "test": "npm run coverage && start-server-and-test start http://localhost:9090 test:e2e",
     "test:e2e": "codeceptjs run --steps",
     "test:unit": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint --ext ts,tsx .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
