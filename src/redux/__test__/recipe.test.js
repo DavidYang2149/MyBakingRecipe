@@ -3,7 +3,10 @@ import thunk from 'redux-thunk';
 
 import reducer, {
   setRecipe,
+  setNewIngredient,
   changeRecipe,
+  changeIngredient,
+  changeNewIngredient,
   loadRecipe,
 } from '../recipe';
 
@@ -22,6 +25,7 @@ describe('recipe reducer', () => {
     ingredients: [
       { id: 1, ingredient: '', weight: 0 },
     ],
+    newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '',
   };
 
@@ -33,30 +37,7 @@ describe('recipe reducer', () => {
     });
   });
 
-  describe('setRecipe', () => {
-    it('set recipe', () => {
-      const recipe = {
-        id: 1,
-        userId: '1',
-        title: '마들렌',
-        category: 1,
-        product: 16,
-        ingredients: [
-          { id: 1, ingredient: '설탕', weight: 150 },
-          { id: 2, ingredient: '버터', weight: 150 },
-          { id: 3, ingredient: '전란', weight: 100 },
-          { id: 4, ingredient: '박력분', weight: 150 },
-        ],
-        description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
-      };
-
-      const state = reducer(initialState, setRecipe(recipe));
-
-      expect(state).toEqual(recipe);
-    });
-  });
-
-  it('change recipe', () => {
+  it('setRecipe', () => {
     const recipe = {
       id: 1,
       userId: '1',
@@ -69,27 +50,90 @@ describe('recipe reducer', () => {
         { id: 3, ingredient: '전란', weight: 100 },
         { id: 4, ingredient: '박력분', weight: 150 },
       ],
+      newIngredient: { id: 0, ingredient: '', weight: 0 },
       description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
     };
 
-    const resultRecipe = {
-      id: 1,
-      userId: '1',
-      title: '맛있는마들렌',
-      category: 1,
-      product: 16,
+    const state = reducer(initialState, setRecipe(recipe));
+
+    expect(state).toEqual(recipe);
+  });
+
+  it('setNewIngredient', () => {
+    const recipe = {
+      id: 0,
+      userId: '',
+      title: '',
+      category: 0,
+      product: 0,
       ingredients: [
-        { id: 1, ingredient: '설탕', weight: 150 },
-        { id: 2, ingredient: '버터', weight: 150 },
-        { id: 3, ingredient: '전란', weight: 100 },
-        { id: 4, ingredient: '박력분', weight: 150 },
+        { id: 2, ingredient: '설탕', weight: 100 },
+        { id: 1, ingredient: '', weight: 0 },
       ],
-      description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+      newIngredient: { id: 0, ingredient: '', weight: 0 },
+      description: '',
     };
 
-    const state = reducer(recipe, changeRecipe({ name: 'title', value: '맛있는마들렌' }));
+    const state = reducer(initialState, setNewIngredient({ fields: { id: 2, ingredient: '설탕', weight: 100 } }));
 
-    expect(state).toEqual(resultRecipe);
+    expect(state).toEqual(recipe);
+  });
+
+  it('changeRecipe', () => {
+    const recipe = {
+      id: 0,
+      userId: '',
+      title: '맛있는마들렌',
+      category: 0,
+      product: 0,
+      ingredients: [
+        { id: 1, ingredient: '', weight: 0 },
+      ],
+      newIngredient: { id: 0, ingredient: '', weight: 0 },
+      description: '',
+    };
+
+    const state = reducer(initialState, changeRecipe({ name: 'title', value: '맛있는마들렌' }));
+
+    expect(state).toEqual(recipe);
+  });
+
+  it('changeIngredient', () => {
+    const recipe = {
+      id: 0,
+      userId: '',
+      title: '',
+      category: 0,
+      product: 0,
+      ingredients: [
+        { id: 1, ingredient: '버터', weight: 0 },
+      ],
+      newIngredient: { id: 0, ingredient: '', weight: 0 },
+      description: '',
+    };
+
+    const state = reducer(initialState, changeIngredient({ name: 'ingredient-1', value: '버터' }));
+
+    expect(state).toEqual(recipe);
+  });
+
+  it('changeNewIngredient', () => {
+    const recipe = {
+      id: 0,
+      userId: '',
+      title: '',
+      category: 0,
+      product: 0,
+      ingredients: [
+        { id: 1, ingredient: '', weight: 0 },
+      ],
+      newIngredient: { id: 2, ingredient: '', weight: 100 },
+      description: '',
+    };
+
+    const state = reducer(initialState, changeNewIngredient({ name: 'weight-2', value: 100 }));
+
+    expect(state).toEqual(recipe);
   });
 });
 
