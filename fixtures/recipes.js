@@ -11,6 +11,7 @@ const recipes = [
       { id: 3, ingredient: '전란', weight: 100 },
       { id: 4, ingredient: '박력분', weight: 150 },
     ],
+    newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
   },
   {
@@ -25,6 +26,7 @@ const recipes = [
       { id: 1, ingredient: '설탕', weight: 90 },
       { id: 4, ingredient: '박력분', weight: 100 },
     ],
+    newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '파운드 케이크 만드는 방법. 오븐 170도에 50분간 굽기',
   },
 ];
