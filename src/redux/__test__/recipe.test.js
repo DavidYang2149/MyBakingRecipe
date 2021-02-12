@@ -29,7 +29,7 @@ describe('recipe reducer', () => {
     description: '',
   };
 
-  context('when state is undefined', () => {
+  context('when previous state is undefined', () => {
     it('return initialState', () => {
       const state = reducer(undefined, { type: 'action' });
 
@@ -37,103 +37,136 @@ describe('recipe reducer', () => {
     });
   });
 
-  it('setRecipe', () => {
-    const recipe = {
-      id: 1,
-      userId: '1',
-      title: '마들렌',
-      category: 1,
-      product: 16,
-      ingredients: [
-        { id: 1, ingredient: '설탕', weight: 150 },
-        { id: 2, ingredient: '버터', weight: 150 },
-        { id: 3, ingredient: '전란', weight: 100 },
-        { id: 4, ingredient: '박력분', weight: 150 },
-      ],
-      newIngredient: { id: 0, ingredient: '', weight: 0 },
-      description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
-    };
+  describe('setRecipe', () => {
+    it('update recipe', () => {
+      const recipe = {
+        id: 1,
+        userId: '1',
+        title: '마들렌',
+        category: 1,
+        product: 16,
+        ingredients: [
+          { id: 1, ingredient: '설탕', weight: 150 },
+          { id: 2, ingredient: '버터', weight: 150 },
+          { id: 3, ingredient: '전란', weight: 100 },
+          { id: 4, ingredient: '박력분', weight: 150 },
+        ],
+        newIngredient: { id: 0, ingredient: '', weight: 0 },
+        description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+      };
 
-    const state = reducer(initialState, setRecipe(recipe));
+      const state = reducer(initialState, setRecipe(recipe));
 
-    expect(state).toEqual(recipe);
+      expect(state).toEqual(recipe);
+    });
   });
 
-  it('setNewIngredient', () => {
-    const recipe = {
-      id: 0,
-      userId: '',
-      title: '',
-      category: 0,
-      product: 0,
-      ingredients: [
-        { id: 2, ingredient: '설탕', weight: 100 },
-        { id: 1, ingredient: '', weight: 0 },
-      ],
-      newIngredient: { id: 0, ingredient: '', weight: 0 },
-      description: '',
-    };
+  describe('setNewIngredient', () => {
+    it('update ingredients & delete newIngredient', () => {
+      const recipe = {
+        id: 0,
+        userId: '',
+        title: '',
+        category: 0,
+        product: 0,
+        ingredients: [
+          { id: 2, ingredient: '설탕', weight: 100 },
+          { id: 1, ingredient: '', weight: 0 },
+        ],
+        newIngredient: { id: 0, ingredient: '', weight: 0 },
+        description: '',
+      };
 
-    const state = reducer(initialState, setNewIngredient({ fields: { id: 2, ingredient: '설탕', weight: 100 } }));
+      const state = reducer(initialState, setNewIngredient({ fields: { id: 2, ingredient: '설탕', weight: 100 } }));
 
-    expect(state).toEqual(recipe);
+      expect(state).toEqual(recipe);
+    });
   });
 
-  it('changeRecipe', () => {
-    const recipe = {
-      id: 0,
-      userId: '',
-      title: '맛있는마들렌',
-      category: 0,
-      product: 0,
-      ingredients: [
-        { id: 1, ingredient: '', weight: 0 },
-      ],
-      newIngredient: { id: 0, ingredient: '', weight: 0 },
-      description: '',
-    };
+  describe('changeRecipe', () => {
+    it('change recipe', () => {
+      const recipe = {
+        id: 0,
+        userId: '',
+        title: '맛있는마들렌',
+        category: 0,
+        product: 0,
+        ingredients: [
+          { id: 1, ingredient: '', weight: 0 },
+        ],
+        newIngredient: { id: 0, ingredient: '', weight: 0 },
+        description: '',
+      };
 
-    const state = reducer(initialState, changeRecipe({ name: 'title', value: '맛있는마들렌' }));
+      const state = reducer(initialState, changeRecipe({ name: 'title', value: '맛있는마들렌' }));
 
-    expect(state).toEqual(recipe);
+      expect(state).toEqual(recipe);
+    });
   });
 
-  it('changeIngredient', () => {
-    const recipe = {
-      id: 0,
-      userId: '',
-      title: '',
-      category: 0,
-      product: 0,
-      ingredients: [
-        { id: 1, ingredient: '버터', weight: 0 },
-      ],
-      newIngredient: { id: 0, ingredient: '', weight: 0 },
-      description: '',
-    };
+  describe('changeIngredient', () => {
+    context('onChange with values', () => {
+      it('change ingredient', () => {
+        const recipe = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [
+            { id: 1, ingredient: '버터', weight: 0 },
+          ],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
 
-    const state = reducer(initialState, changeIngredient({ name: 'ingredient-1', value: '버터' }));
+        const state = reducer(initialState, changeIngredient({ name: 'ingredient-1', value: '버터' }));
 
-    expect(state).toEqual(recipe);
+        expect(state).toEqual(recipe);
+      });
+    });
+
+    context('onChange without values', () => {
+      it('not change changeIngredient', () => {
+        const recipe = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [
+            { id: 1, ingredient: '', weight: 0 },
+          ],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
+
+        const state = reducer(initialState, changeIngredient({ name: '', value: '버터' }));
+
+        expect(state).toEqual(recipe);
+      });
+    });
   });
 
-  it('changeNewIngredient', () => {
-    const recipe = {
-      id: 0,
-      userId: '',
-      title: '',
-      category: 0,
-      product: 0,
-      ingredients: [
-        { id: 1, ingredient: '', weight: 0 },
-      ],
-      newIngredient: { id: 2, ingredient: '', weight: 100 },
-      description: '',
-    };
+  describe('changeNewIngredient', () => {
+    it('change NewIngredient', () => {
+      const recipe = {
+        id: 0,
+        userId: '',
+        title: '',
+        category: 0,
+        product: 0,
+        ingredients: [
+          { id: 1, ingredient: '', weight: 0 },
+        ],
+        newIngredient: { id: 2, ingredient: '', weight: 100 },
+        description: '',
+      };
 
-    const state = reducer(initialState, changeNewIngredient({ name: 'weight-2', value: 100 }));
+      const state = reducer(initialState, changeNewIngredient({ name: 'weight-2', value: 100 }));
 
-    expect(state).toEqual(recipe);
+      expect(state).toEqual(recipe);
+    });
   });
 });
 
