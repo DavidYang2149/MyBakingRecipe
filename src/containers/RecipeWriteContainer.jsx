@@ -89,6 +89,7 @@ const RecipeWriteContainer = () => {
           value={product}
           onChange={onChangeRecipe}
         />
+        <span>개</span>
       </section>
 
       <section>
