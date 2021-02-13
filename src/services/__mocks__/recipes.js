@@ -5,3 +5,11 @@ export async function fetchRecipe() {
 export async function fetchRecipes() {
   return Promise.resolve([]);
 }
+
+export async function postRecipe() {
+  return Promise.resolve({});
+}
+
+export async function putRecipe() {
+  return Promise.resolve({});
+}

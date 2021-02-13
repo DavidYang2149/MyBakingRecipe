@@ -1,7 +1,18 @@
 import sampleRecipes from '../../../fixtures/recipes';
-import { fetchRecipe, fetchRecipes } from '../recipes';
+import {
+  fetchRecipe,
+  fetchRecipes,
+  postRecipe,
+  putRecipe,
+} from '../recipes';
 
 describe('Recipes', () => {
+  const mockFetch = (data) => {
+    global.fetch = jest.fn().mockResolvedValue({
+      async json() { return data; },
+    });
+  };
+
   describe('fetchRecipe', () => {
     it('returns recipe', async () => {
       const recipe = await fetchRecipe(1);
@@ -15,6 +26,46 @@ describe('Recipes', () => {
       const recipes = await fetchRecipes();
 
       expect(recipes[0]).toEqual(recipes[0]);
+    });
+  });
+
+  describe('postRecipe', () => {
+    beforeEach(() => {
+      mockFetch();
+    });
+
+    it('returns nothing', async () => {
+      const result = await postRecipe({
+        userId: '1',
+        title: '마들렌',
+        category: 1,
+        product: 16,
+        ingredients: [
+          { id: 1, ingredient: '설탕', weight: 150 },
+          { id: 2, ingredient: '버터', weight: 150 },
+          { id: 3, ingredient: '전란', weight: 100 },
+          { id: 4, ingredient: '박력분', weight: 150 },
+        ],
+        description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+      });
+
+      expect(result).toEqual({});
+      // TODO : when update API
+      // expect(result).toBeUndefined();
+    });
+  });
+
+  describe('putRecipe', () => {
+    beforeEach(() => {
+      mockFetch();
+    });
+
+    it('returns nothing', async () => {
+      const result = await putRecipe(sampleRecipes[0]);
+
+      expect(result).toEqual({});
+      // TODO : when update API
+      // expect(result).toBeUndefined();
     });
   });
 });

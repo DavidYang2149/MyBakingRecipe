@@ -7,3 +7,11 @@ export async function fetchRecipe(id) {
 export async function fetchRecipes() {
   return Promise.resolve(recipes);
 }
+
+export async function postRecipe() {
+  return Promise.resolve({});
+}
+
+export async function putRecipe() {
+  return Promise.resolve({});
+}
