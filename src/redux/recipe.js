@@ -10,9 +10,7 @@ const initialState = {
   title: '',
   category: 0,
   product: 0,
-  ingredients: [
-    { id: 1, ingredient: '', weight: 0 },
-  ],
+  ingredients: [],
   newIngredient: { id: 0, ingredient: '', weight: 0 },
   description: '',
 };

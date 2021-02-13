@@ -22,9 +22,7 @@ describe('recipe reducer', () => {
     title: '',
     category: 0,
     product: 0,
-    ingredients: [
-      { id: 1, ingredient: '', weight: 0 },
-    ],
+    ingredients: [],
     newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '',
   };
@@ -70,14 +68,13 @@ describe('recipe reducer', () => {
         category: 0,
         product: 0,
         ingredients: [
-          { id: 2, ingredient: '설탕', weight: 100 },
-          { id: 1, ingredient: '', weight: 0 },
+          { id: 1, ingredient: '설탕', weight: 100 },
         ],
         newIngredient: { id: 0, ingredient: '', weight: 0 },
         description: '',
       };
 
-      const state = reducer(initialState, setNewIngredient({ fields: { id: 2, ingredient: '설탕', weight: 100 } }));
+      const state = reducer(initialState, setNewIngredient({ fields: { id: 1, ingredient: '설탕', weight: 100 } }));
 
       expect(state).toEqual(recipe);
     });
@@ -91,9 +88,7 @@ describe('recipe reducer', () => {
         title: '맛있는마들렌',
         category: 0,
         product: 0,
-        ingredients: [
-          { id: 1, ingredient: '', weight: 0 },
-        ],
+        ingredients: [],
         newIngredient: { id: 0, ingredient: '', weight: 0 },
         description: '',
       };
@@ -120,13 +115,26 @@ describe('recipe reducer', () => {
           description: '',
         };
 
-        const state = reducer(initialState, changeIngredient({ name: 'ingredient-1', value: '버터' }));
+        const result = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [
+            { id: 1, ingredient: '버터', weight: 100 },
+          ],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
 
-        expect(state).toEqual(recipe);
+        const state = reducer(recipe, changeIngredient({ name: 'weight-1', value: 100 }));
+
+        expect(state).toEqual(result);
       });
     });
 
-    context('onChange without values', () => {
+    context('onChange with wrong values', () => {
       it('not change changeIngredient', () => {
         const recipe = {
           id: 0,
@@ -135,13 +143,13 @@ describe('recipe reducer', () => {
           category: 0,
           product: 0,
           ingredients: [
-            { id: 1, ingredient: '', weight: 0 },
+            { id: 1, ingredient: '버터', weight: 0 },
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
         };
 
-        const state = reducer(initialState, changeIngredient({ name: '', value: '버터' }));
+        const state = reducer(recipe, changeIngredient({ name: 'weight-2', value: 100 }));
 
         expect(state).toEqual(recipe);
       });
@@ -156,14 +164,12 @@ describe('recipe reducer', () => {
         title: '',
         category: 0,
         product: 0,
-        ingredients: [
-          { id: 1, ingredient: '', weight: 0 },
-        ],
-        newIngredient: { id: 2, ingredient: '', weight: 100 },
+        ingredients: [],
+        newIngredient: { id: 0, ingredient: '', weight: 100 },
         description: '',
       };
 
-      const state = reducer(initialState, changeNewIngredient({ name: 'weight-2', value: 100 }));
+      const state = reducer(initialState, changeNewIngredient({ name: 'weight-0', value: 100 }));
 
       expect(state).toEqual(recipe);
     });
