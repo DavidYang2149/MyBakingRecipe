@@ -61,7 +61,7 @@ const { actions, reducer } = createSlice({
 
 export function loadRecipe(id) {
   return async (dispatch) => {
-    const recipe = await fetchRecipe(id);
+    const recipe = await fetchRecipe(id) || initialState;
 
     dispatch(actions.setRecipe(recipe));
   };

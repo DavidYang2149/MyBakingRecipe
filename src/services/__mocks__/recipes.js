@@ -1,4 +1,7 @@
-export async function fetchRecipe() {
+export async function fetchRecipe(id) {
+  if (id === 0) {
+    return false;
+  }
   return Promise.resolve({});
 }
 

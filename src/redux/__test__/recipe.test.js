@@ -178,14 +178,39 @@ describe('recipe reducer', () => {
 
 describe('recipe actions', () => {
   describe('loadRecipe', () => {
-    it('runs setRecipe', async () => {
-      const store = mockStore({});
+    context('when insert right value', () => {
+      it('runs setRecipe', async () => {
+        const store = mockStore({});
 
-      await store.dispatch(loadRecipe(1));
+        await store.dispatch(loadRecipe(1));
 
-      const actions = store.getActions();
+        const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRecipe({}));
+        expect(actions[0]).toEqual(setRecipe({}));
+      });
+    });
+
+    context('when insert wrong value', () => {
+      it('runs setRecipe(init)', async () => {
+        const initialState = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
+
+        const store = mockStore({});
+
+        await store.dispatch(loadRecipe(0));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRecipe(initialState));
+      });
     });
   });
 });
