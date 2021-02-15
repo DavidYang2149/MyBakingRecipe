@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -6,10 +6,15 @@ import {
   changeNewIngredient,
   changeRecipe,
   changeIngredient,
+  loadRecipe,
 } from '../redux/recipe';
 
-const RecipeWriteContainer = () => {
+const RecipeWriteContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadRecipe(recipeId));
+  }, []);
 
   const { recipe } = useSelector((state) => ({
     recipe: state.recipe,

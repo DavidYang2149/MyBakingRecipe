@@ -123,7 +123,8 @@ describe('RecipeWriteContainer', () => {
           key: 'Shift',
         });
 
-        expect(dispatch).toBeCalledTimes(0);
+        // 1: useEffect(for Check)
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 

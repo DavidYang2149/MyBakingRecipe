@@ -27,4 +27,28 @@ describe('RecipePage', () => {
 
     expect(container).toHaveTextContent('레시피 작성 페이지');
   });
+
+  context('with params props', () => {
+    it('renders name', () => {
+      const params = { id: 1 };
+
+      const { container } = render(
+        <RecipePage params={params} />,
+      );
+
+      expect(container).toHaveTextContent('마들렌');
+    });
+  });
+
+  context('without params props', () => {
+    it('renders name', () => {
+      const { container } = render(
+        <MemoryRouter initialEntries={['/recipe/1']}>
+          <RecipePage />
+        </MemoryRouter>,
+      );
+
+      expect(container).toHaveTextContent('마들렌');
+    });
+  });
 });
