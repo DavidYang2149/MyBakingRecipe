@@ -6,12 +6,13 @@ const RecipesContainer = () => {
   const { recipes } = useSelector((state) => ({
     recipes: state.recipes,
   }));
+  const { recipesBook = [] } = recipes;
 
   return (
     <article>
       <ul>
-        {recipes && (
-          recipes.map((recipe) => (
+        {(
+          recipesBook.map((recipe) => (
             <li key={recipe.id}>
               <Link to="/recipe"><button type="button">{recipe.title}</button></Link>
             </li>

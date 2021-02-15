@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
-// import recipes from '../../../fixtures/recipes';
 import allConditionsState from '../../../fixtures/allConditionsState';
 import RecipesContainer from '../RecipesContainer';
 
@@ -14,7 +13,6 @@ describe('RecipesContainer', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
-      // recipes: recipes,
     }));
   });
 
