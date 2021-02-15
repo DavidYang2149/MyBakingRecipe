@@ -1,9 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
-// import recipes from '../../../fixtures/recipes';
 import allConditionsState from '../../../fixtures/allConditionsState';
 import ReipcesPage from '../RecipesPage';
 
@@ -11,10 +10,14 @@ jest.mock('react-redux');
 jest.mock('../../services/recipes');
 
 describe('ReipcesPage', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
-      // recipes: recipes,
     }));
   });
 
