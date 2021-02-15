@@ -21,7 +21,10 @@ module.exports = {
     filename: mode === PRODUCTION_ENV
       ? 'static/js/[name].[contenthash:8].js'
       : mode === DEVELOPMENT_ENV && 'static/js/bundle.js',
-    publicPath: '/',
+    publicPath: mode === PRODUCTION_ENV
+      ? './'
+      : mode === DEVELOPMENT_ENV && '/',
+
     // publicPath: './',  // './' : for build, '/' : for dev
   },
   module: {
