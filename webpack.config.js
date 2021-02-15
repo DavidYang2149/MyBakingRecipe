@@ -15,6 +15,7 @@ const pathHtml = path.resolve(__dirname, 'public', 'index.html');
 
 module.exports = {
   mode,
+  devtool: 'cheap-eval-source-map',
   entry: pathIndex,
   output: {
     path: pathBuild,
