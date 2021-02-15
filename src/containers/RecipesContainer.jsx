@@ -6,7 +6,7 @@ const RecipesContainer = () => {
   const { recipes } = useSelector((state) => ({
     recipes: state.recipes,
   }));
-  const { recipesBook = [] } = recipes;
+  const { recipesBook } = recipes;
 
   return (
     <article>
@@ -14,10 +14,13 @@ const RecipesContainer = () => {
         {(
           recipesBook.map((recipe) => (
             <li key={recipe.id}>
-              <Link to="/recipe"><button type="button">{recipe.title}</button></Link>
+              <Link to={`/recipe/${recipe.id}`}><button type="button">{recipe.title}</button></Link>
             </li>
           ))
         )}
+        <li>
+          <Link to="/recipe/0"><button type="button">없는 레시피</button></Link>
+        </li>
       </ul>
     </article>
   );
