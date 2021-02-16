@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import HeaderContainer from './containers/common/HeaderContainer';
 import RecipesPage from './pages/RecipesPage';
 import RecipePage from './pages/RecipePage';
 import Recipe404Page from './pages/Recipe404Page';
@@ -8,7 +9,7 @@ import Recipe404Page from './pages/Recipe404Page';
 const App = () => {
   return (
     <>
-      <div>Hello World</div>
+      <HeaderContainer />
       <Switch>
         <Route exact path="/" component={RecipesPage} />
         <Route path="/recipe/:id" component={RecipePage} />
