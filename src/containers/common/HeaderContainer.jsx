@@ -6,6 +6,9 @@ const HeaderContainer = () => {
     <nav>
       <Link to="/">Home</Link>
       <h1>My Baking Recipe</h1>
+      <Link to="/signin">Sign in</Link>
+      <Link to="/signup">Sign up</Link>
+      <button type="button">Logout</button>
     </nav>
   );
 };
