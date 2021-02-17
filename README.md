@@ -1,5 +1,5 @@
 # My Baking Recipe
-[My Baking Recipe](https://davidyang2149.github.io/MyBakingRecipe)은 Typescript를 포함하지 않은 버전입니다.
+[My Baking Recipe](https://davidyang2149.github.io/MyBakingRecipe)은 레시피를 관리하는 앱입니다.
 
 ## Install dependencies
 
