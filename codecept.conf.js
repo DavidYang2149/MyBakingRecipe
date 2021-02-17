@@ -19,7 +19,7 @@ exports.config = {
   },
   bootstrap: null,
   mocha: {},
-  name: 'mybakingrecipe mock',
+  name: 'mybakingrecipe',
   plugins: {
     retryFailedStep: {
       enabled: true,

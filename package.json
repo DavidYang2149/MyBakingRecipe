@@ -1,7 +1,7 @@
 {
-  "name": "mybakingrecipe-mock",
-  "version": "0.0.1",
-  "description": "my baking recipe mock",
+  "name": "mybakingrecipe",
+  "version": "0.0.2",
+  "description": "my baking recipe",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DavidYang2149/MyBakingRecipeMock.git"
+    "url": "git+https://github.com/DavidYang2149/MyBakingRecipe.git"
   },
   "keywords": [
     "baking",
@@ -25,9 +25,9 @@
   "author": "DavidYang",
   "license": "GPL",
   "bugs": {
-    "url": "https://github.com/DavidYang2149/MyBakingRecipeMock/issues"
+    "url": "https://github.com/DavidYang2149/MyBakingRecipe/issues"
   },
-  "homepage": "https://davidyang2149.github.io/MyBakingRecipeMock",
+  "homepage": "https://davidyang2149.github.io/MyBakingRecipe",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
