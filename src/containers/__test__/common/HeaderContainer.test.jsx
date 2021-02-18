@@ -14,7 +14,6 @@ describe('HeaderContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-    // jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector(allConditionsState));
@@ -33,24 +32,47 @@ describe('HeaderContainer', () => {
     ));
   });
 
-  it('click sign in', () => {
-    const { getByText } = render((
-      <MemoryRouter>
-        <HeaderContainer />
-      </MemoryRouter>
-    ));
+  context('with login success', () => {
+    it('click sign in', async () => {
+      const { getByText } = render((
+        <MemoryRouter>
+          <HeaderContainer />
+        </MemoryRouter>
+      ));
 
-    fireEvent.click(getByText('Sign in'));
+      fireEvent.click(getByText('Sign in'));
 
-    expect(auth.signInWithPopup).toBeCalledTimes(1);
+      await expect(auth.signInWithPopup).toBeCalledTimes(1);
 
-    expect(dispatch).toBeCalledWith({
-      type: 'user/setUser',
-      payload: { name: 'userId', value: 'test' },
+      expect(dispatch).toBeCalledWith({
+        type: 'user/setUser',
+        payload: { name: 'userId', value: 'test@email.com' },
+      });
     });
   });
 
-  it('click Logout', () => {
+  context('with login failed', () => {
+    it('click sign in', async () => {
+      // failed Case
+      const result = { user: { email: '', displayName: '' } };
+      auth.signInWithPopup = jest.fn(() => result);
+
+      const { getByText } = render((
+        <MemoryRouter>
+          <HeaderContainer />
+        </MemoryRouter>
+      ));
+
+      fireEvent.click(getByText('Sign in'));
+
+      await expect(auth.signInWithPopup).toBeCalledTimes(1);
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  it('click Logout', async () => {
+    // Already Login Case
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
       user: { email: 'test@email.com', displayName: 'test' },
@@ -64,7 +86,7 @@ describe('HeaderContainer', () => {
 
     fireEvent.click(getByText('Logout'));
 
-    expect(auth.signOut).toBeCalledTimes(1);
+    await expect(auth.signOut).toBeCalledTimes(1);
 
     expect(dispatch).toBeCalledWith({ type: 'user/clearUser' });
   });

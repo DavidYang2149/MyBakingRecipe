@@ -23,9 +23,9 @@ const HeaderContainer = () => {
     const result = await auth.signInWithPopup(provider);
     // setUser(result.user.email);
     // setUser(result.user.displayName);
-    if (result) {
+
+    if (result.user.email) {
       dispatch(setUser({ name: 'userId', value: result.user.email }));
-      dispatch(setUser({ name: 'displayName', value: result.user.displayName }));
     }
   };
 
