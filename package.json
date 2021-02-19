@@ -4,6 +4,7 @@
   "description": "my baking recipe",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --mode development",
     "dev": "webpack-dev-server --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress",
     "test": "npm run coverage && start-server-and-test start http://localhost:9090 test:e2e",
