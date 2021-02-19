@@ -16,14 +16,13 @@ const HeaderContainer = () => {
   }));
 
   const {
-    displayName,
+    userId,
   } = user;
 
   const signInWithGoogle = async () => {
     const result = await auth.signInWithPopup(provider);
     // setUser(result.user.email);
     // setUser(result.user.displayName);
-
     if (result.user.email) {
       dispatch(setUser({ name: 'userId', value: result.user.email }));
     }
@@ -38,13 +37,13 @@ const HeaderContainer = () => {
       <Link to="/">Home</Link>
       <h1>My Baking Recipe</h1>
       {
-        displayName
+        userId
           ? (
             <>
               <p>
                 Welcome,
                 &nbsp;
-                {displayName}
+                {userId}
               </p>
               <button type="button" onClick={signOut}>Logout</button>
             </>

@@ -75,7 +75,7 @@ describe('HeaderContainer', () => {
     // Already Login Case
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
-      user: { email: 'test@email.com', displayName: 'test' },
+      user: { userId: 'test@email.com', displayName: 'test' },
     }));
 
     const { getByText } = render((
