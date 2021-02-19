@@ -81,7 +81,6 @@ module.exports = {
       },
     }),
     new CleanWebpackPlugin(),
-    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env': {
         FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
@@ -94,6 +93,6 @@ module.exports = {
         FIREBASE_MEASUREMENT_ID: JSON.stringify(process.env.FIREBASE_MEASUREMENT_ID),
       },
     }),
-
+    new Dotenv(),
   ],
 };
