@@ -7,6 +7,7 @@ import {
   changeRecipe,
   changeIngredient,
   loadRecipe,
+  writeRecipe,
 } from '../redux/recipe';
 
 const RecipeWriteContainer = ({ recipeId }) => {
@@ -54,6 +55,10 @@ const RecipeWriteContainer = ({ recipeId }) => {
 
   const onClickSetNewIngredient = () => {
     dispatch(setNewIngredient({ fields: newIngredient }));
+  };
+
+  const onSubmit = () => {
+    dispatch(writeRecipe());
   };
 
   return (
@@ -170,7 +175,12 @@ const RecipeWriteContainer = ({ recipeId }) => {
       </section>
 
       <div>
-        <button type="button">저장하기</button>
+        <button
+          type="button"
+          onClick={onSubmit}
+        >
+          저장하기
+        </button>
       </div>
     </article>
   );

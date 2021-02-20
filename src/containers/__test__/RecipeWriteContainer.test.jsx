@@ -144,5 +144,13 @@ describe('RecipeWriteContainer', () => {
         },
       });
     });
+
+    it('click onSubmit', () => {
+      const { getByText } = render(<RecipeWriteContainer />);
+
+      fireEvent.click(getByText('저장하기'));
+
+      expect(dispatch).toBeCalledTimes(2);
+    });
   });
 });
