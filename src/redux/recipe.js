@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   fetchRecipe,
+  postRecipe,
 } from '../services/recipes';
 
 const initialState = {
@@ -64,6 +65,22 @@ export function loadRecipe(id) {
     const recipe = await fetchRecipe(id) || initialState;
 
     dispatch(actions.setRecipe(recipe));
+  };
+}
+
+export function writeRecipe() {
+  return async (dispatch, getState) => {
+    const { user, recipe } = getState();
+    const { userId } = user;
+    const {
+      title, category, product, ingredients, description,
+    } = recipe;
+    const recipeInfo = {
+      userId, title, category, product, ingredients, description,
+    };
+
+    const id = await postRecipe(recipeInfo);
+    dispatch(actions.changeRecipe({ name: 'id', value: id }));
   };
 }
 

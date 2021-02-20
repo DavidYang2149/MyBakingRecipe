@@ -36,14 +36,16 @@ describe('recipes reducer', () => {
 
 describe('recipes actions', () => {
   describe('loadRecipes', () => {
-    it('runs setRecipes', async () => {
-      const store = mockStore({});
+    context('with return values', () => {
+      it('runs setRecipes', async () => {
+        const store = mockStore({});
 
-      await store.dispatch(loadRecipes([]));
+        await store.dispatch(loadRecipes([]));
 
-      const actions = store.getActions();
+        const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRecipes([]));
+        expect(actions[0]).toEqual(setRecipes([]));
+      });
     });
   });
 });
