@@ -29,6 +29,9 @@ npm run lint
 
 ```sh
 npm run coverage
+
+# running option
+npx jest --watchAll --coverage --detectOpenHandles
 ```
 
 ## Run e2e tests
