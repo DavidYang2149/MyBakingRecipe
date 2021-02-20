@@ -10,7 +10,7 @@ export async function fetchRecipes() {
 }
 
 export async function postRecipe() {
-  return Promise.resolve({});
+  return Promise.resolve('1');
 }
 
 export async function putRecipe() {

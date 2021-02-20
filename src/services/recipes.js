@@ -1,3 +1,5 @@
+import { db } from './firebase';
+
 import recipes from '../../fixtures/recipes';
 
 export async function fetchRecipe(id) {
@@ -5,11 +7,18 @@ export async function fetchRecipe(id) {
 }
 
 export async function fetchRecipes() {
-  return Promise.resolve(recipes);
+  const recipesRef = db.collection('recipes');
+  const snapshot = await recipesRef.get();
+
+  return snapshot.docs;
 }
 
-export async function postRecipe() {
-  return Promise.resolve({});
+export async function postRecipe(recipe) {
+  const { id } = await db.collection('recipes').add({
+    ...recipe,
+  });
+
+  return id;
 }
 
 export async function putRecipe() {
