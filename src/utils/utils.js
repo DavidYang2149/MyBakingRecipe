@@ -7,4 +7,5 @@ export const formatRecipe = (recipe) => {
 
 export const todo = () => {
   // TODO: remove when over 2 functions.
+  return 'remove';
 };
