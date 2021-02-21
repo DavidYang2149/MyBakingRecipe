@@ -2,7 +2,30 @@ export async function fetchRecipe(id) {
   if (id === 0) {
     return false;
   }
-  return Promise.resolve({});
+
+  if (id === 2) {
+    return Promise.resolve({
+      data: jest.fn(),
+      exists: false,
+    });
+  }
+
+  return Promise.resolve({
+    id: 0,
+    data: () => {
+      return {
+        id: 0,
+        userId: '',
+        title: '',
+        category: 0,
+        product: 0,
+        ingredients: [],
+        newIngredient: { id: 0, ingredient: '', weight: 0 },
+        description: '',
+      };
+    },
+    exists: true,
+  });
 }
 
 export async function fetchRecipes() {

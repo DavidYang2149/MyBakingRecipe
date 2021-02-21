@@ -1,9 +1,9 @@
 import { db } from './firebase';
 
-import recipes from '../../fixtures/recipes';
-
 export async function fetchRecipe(id) {
-  return Promise.resolve(recipes[id - 1]);
+  const recipesRef = db.collection('recipes');
+  const recipe = recipesRef.doc(id).get();
+  return recipe;
 }
 
 export async function fetchRecipes() {
