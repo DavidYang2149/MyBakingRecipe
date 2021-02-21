@@ -4,6 +4,7 @@ import {
   fetchRecipe,
   postRecipe,
 } from '../services/recipes';
+import { formatRecipe } from '../utils/utils';
 
 const initialState = {
   id: 0,
@@ -62,9 +63,14 @@ const { actions, reducer } = createSlice({
 
 export function loadRecipe(id) {
   return async (dispatch) => {
-    const recipe = await fetchRecipe(id) || initialState;
+    const recipe = await fetchRecipe(id);
 
-    dispatch(actions.setRecipe(recipe));
+    if (!recipe.exists) {
+      dispatch(actions.setRecipe(initialState));
+      return;
+    }
+
+    dispatch(actions.setRecipe(formatRecipe(recipe)));
   };
 }
 

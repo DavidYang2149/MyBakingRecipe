@@ -179,15 +179,49 @@ describe('recipe reducer', () => {
 
 describe('recipe actions', () => {
   describe('loadRecipe', () => {
-    context('when insert right value', () => {
+    context('when insert right value (not empty)', () => {
       it('runs setRecipe', async () => {
+        const initialState = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
+
         const store = mockStore({});
 
         await store.dispatch(loadRecipe(1));
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRecipe({}));
+        expect(actions[0]).toEqual(setRecipe(initialState));
+      });
+    });
+
+    context('when insert right value (empty)', () => {
+      it('runs setRecipe', async () => {
+        const initialState = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+        };
+
+        const store = mockStore({});
+
+        await store.dispatch(loadRecipe(2));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRecipe(initialState));
       });
     });
 
