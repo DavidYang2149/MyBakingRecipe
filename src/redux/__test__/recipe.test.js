@@ -250,6 +250,40 @@ describe('recipe actions', () => {
   });
 
   describe('writeRecipe', () => {
+    context('when create new recipe', () => {
+      it('run writeRecipe', async () => {
+        const store = mockStore({
+          user: {
+            userId: 'test@test.com',
+            displayName: 'testman',
+          },
+          recipe: {
+            id: 1,
+            userId: '',
+            title: '마들렌',
+            category: 1,
+            product: 16,
+            ingredients: [
+              { id: 1, ingredient: '설탕', weight: 150 },
+              { id: 2, ingredient: '버터', weight: 150 },
+              { id: 3, ingredient: '전란', weight: 100 },
+              { id: 4, ingredient: '박력분', weight: 150 },
+            ],
+            newIngredient: { id: 0, ingredient: '', weight: 0 },
+            description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          },
+        });
+
+        await store.dispatch(writeRecipe());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(changeRecipe({ name: 'id', value: '1' }));
+      });
+    });
+  });
+
+  context('when update recipe', () => {
     it('run writeRecipe', async () => {
       const store = mockStore({
         user: {
@@ -270,15 +304,10 @@ describe('recipe actions', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
-
         },
       });
 
-      await store.dispatch(writeRecipe(0));
-
-      const actions = store.getActions();
-
-      expect(actions[0]).toEqual(changeRecipe({ name: 'id', value: '1' }));
+      await store.dispatch(writeRecipe());
     });
   });
 });

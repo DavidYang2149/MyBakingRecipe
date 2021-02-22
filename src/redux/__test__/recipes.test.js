@@ -47,5 +47,18 @@ describe('recipes actions', () => {
         expect(actions[0]).toEqual(setRecipes([]));
       });
     });
+
+    // TODO: empty value case
+    // context('with return empty values', () => {
+    //   it('runs setRecipes', async () => {
+    //     const store = mockStore({});
+
+    //     await store.dispatch(loadRecipes([]));
+
+    //     const actions = store.getActions();
+
+    //     expect(actions[0]).toEqual(setRecipes([]));
+    //   });
+    // });
   });
 });

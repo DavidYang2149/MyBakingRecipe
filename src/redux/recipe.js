@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchRecipe,
   postRecipe,
+  putRecipe,
 } from '../services/recipes';
 import { formatRecipe } from '../utils/utils';
 
@@ -77,16 +78,28 @@ export function loadRecipe(id) {
 export function writeRecipe() {
   return async (dispatch, getState) => {
     const { user, recipe } = getState();
-    const { userId } = user;
-    const {
-      title, category, product, ingredients, description,
-    } = recipe;
-    const recipeInfo = {
-      userId, title, category, product, ingredients, description,
-    };
 
-    const id = await postRecipe(recipeInfo);
-    dispatch(actions.changeRecipe({ name: 'id', value: id }));
+    if (recipe.userId === '') {
+      const { userId } = user;
+      const {
+        title, category, product, ingredients, description,
+      } = recipe;
+      const recipeInfo = {
+        userId, title, category, product, ingredients, description,
+      };
+
+      const id = await postRecipe(recipeInfo);
+      dispatch(actions.changeRecipe({ name: 'id', value: id }));
+    } else {
+      const {
+        id, title, category, product, ingredients, description,
+      } = recipe;
+      const recipeInfo = {
+        id, title, category, product, ingredients, description,
+      };
+      await putRecipe(recipeInfo);
+      dispatch(loadRecipe(id));
+    }
   };
 }
 
