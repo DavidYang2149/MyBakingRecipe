@@ -145,12 +145,47 @@ describe('RecipeWriteContainer', () => {
       });
     });
 
-    it('click onSubmit', () => {
-      const { getByText } = render(<RecipeWriteContainer />);
+    context('with new recipe', () => {
+      it('click onSubmit', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            id: 1,
+            userId: '',
+            title: '마들렌',
+            category: 1,
+            product: 16,
+            ingredients: [
+              { id: 1, ingredient: '설탕', weight: 150 },
+              { id: 2, ingredient: '버터', weight: 150 },
+              { id: 3, ingredient: '전란', weight: 100 },
+              { id: 4, ingredient: '박력분', weight: 150 },
+            ],
+            newIngredient: { id: 0, ingredient: '', weight: 0 },
+            description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          },
+        }));
+        const { getByText } = render(<RecipeWriteContainer />);
 
-      fireEvent.click(getByText('저장하기'));
+        fireEvent.click(getByText('저장하기'));
 
-      expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(2);
+      });
+    });
+
+    context('with exist recipe', () => {
+      useSelector.mockImplementation((selector) => selector({
+        ...allConditionsState,
+        recipe: recipes[0],
+      }));
+
+      it('click onSubmit', () => {
+        const { getByText } = render(<RecipeWriteContainer />);
+
+        fireEvent.click(getByText('수정하기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
   });
 });

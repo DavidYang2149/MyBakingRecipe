@@ -22,6 +22,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
   }));
 
   const {
+    userId,
     title,
     category,
     product,
@@ -179,7 +180,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
           type="button"
           onClick={onSubmit}
         >
-          저장하기
+          {userId === '' ? '저장하기' : '수정하기'}
         </button>
       </div>
     </article>
