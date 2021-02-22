@@ -1,4 +1,4 @@
-import { db } from './firebase';
+import { db, auth } from './firebase';
 
 export async function fetchRecipe(id) {
   const recipesRef = db.collection('recipes');
@@ -21,6 +21,12 @@ export async function postRecipe(recipe) {
   return id;
 }
 
-export async function putRecipe() {
-  return Promise.resolve({});
+export async function putRecipe(recipe) {
+  const userId = auth.currentUser.email;
+  const {
+    id, title, category, product, ingredients, description,
+  } = recipe;
+  await db.collection('recipes').doc(id).update({
+    userId, title, category, product, ingredients, description,
+  });
 }
