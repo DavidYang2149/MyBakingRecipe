@@ -25,9 +25,13 @@ const { actions, reducer } = createSlice({
 export function loadRecipes() {
   return async (dispatch) => {
     const response = await fetchRecipes();
-    const recipes = response.map((doc) => formatRecipe(doc));
 
-    dispatch(actions.setRecipes(recipes));
+    if (response) {
+      const recipes = response.map((doc) => formatRecipe(doc));
+      dispatch(actions.setRecipes(recipes));
+    } else {
+      dispatch(actions.setRecipes(initialState));
+    }
   };
 }
 

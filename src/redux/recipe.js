@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchRecipe,
   postRecipe,
-  putRecipe,
+  updateRecipe,
+  deleteRecipe,
 } from '../services/recipes';
 import { formatRecipe } from '../utils/utils';
 
@@ -97,9 +98,18 @@ export function writeRecipe() {
       const recipeInfo = {
         id, title, category, product, ingredients, description,
       };
-      await putRecipe(recipeInfo);
+      await updateRecipe(recipeInfo);
       dispatch(loadRecipe(id));
     }
+  };
+}
+
+export function removeRecipe() {
+  return async (dispatch, getState) => {
+    const { recipe } = getState();
+    const { id, userId } = recipe;
+
+    await deleteRecipe({ id, userId });
   };
 }
 
