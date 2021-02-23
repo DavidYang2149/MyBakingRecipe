@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
 import allConditionsState from '../../../fixtures/allConditionsState';
-import RecipePage from '../RecipePage';
+import RecipeWritePage from '../RecipeWritePage';
 
 jest.mock('react-redux');
 
-describe('RecipePage', () => {
+describe('RecipeWritePage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -21,11 +21,11 @@ describe('RecipePage', () => {
   it('render Page', () => {
     const { container } = render((
       <MemoryRouter>
-        <RecipePage />
+        <RecipeWritePage />
       </MemoryRouter>
     ));
 
-    expect(container).toHaveTextContent('레시피 뷰 페이지');
+    expect(container).toHaveTextContent('레시피 작성 페이지');
   });
 
   context('with params props', () => {
@@ -33,7 +33,7 @@ describe('RecipePage', () => {
       const params = { id: 1 };
 
       const { container } = render(
-        <RecipePage params={params} />,
+        <RecipeWritePage params={params} />,
       );
 
       expect(container).toHaveTextContent('마들렌');
@@ -43,8 +43,8 @@ describe('RecipePage', () => {
   context('without params props', () => {
     it('renders name', () => {
       const { container } = render(
-        <MemoryRouter initialEntries={['/recipe/1']}>
-          <RecipePage />
+        <MemoryRouter initialEntries={['/recipewrite/1']}>
+          <RecipeWritePage />
         </MemoryRouter>,
       );
 
