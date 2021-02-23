@@ -8,6 +8,7 @@ import {
   changeIngredient,
   loadRecipe,
   writeRecipe,
+  removeRecipe,
 } from '../redux/recipe';
 
 const RecipeWriteContainer = ({ recipeId }) => {
@@ -60,6 +61,13 @@ const RecipeWriteContainer = ({ recipeId }) => {
 
   const onSubmit = () => {
     dispatch(writeRecipe());
+  };
+
+  const onRemove = () => {
+    const ensure = window.confirm('레시피를 삭제하시겠습니까?');
+    if (ensure) {
+      dispatch(removeRecipe());
+    }
   };
 
   return (
@@ -182,6 +190,16 @@ const RecipeWriteContainer = ({ recipeId }) => {
         >
           {userId === '' ? '저장하기' : '수정하기'}
         </button>
+        {
+          userId !== '' && (
+            <button
+              type="button"
+              onClick={onRemove}
+            >
+              삭제하기
+            </button>
+          )
+        }
       </div>
     </article>
   );

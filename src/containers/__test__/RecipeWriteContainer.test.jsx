@@ -187,5 +187,27 @@ describe('RecipeWriteContainer', () => {
         expect(dispatch).toBeCalledTimes(2);
       });
     });
+
+    context('with confirm true', () => {
+      it('click onRemove', () => {
+        global.confirm = () => true;
+        const { getByText } = render(<RecipeWriteContainer />);
+
+        fireEvent.click(getByText('삭제하기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
+    });
+
+    context('with confirm false', () => {
+      it('click onRemove', () => {
+        global.confirm = () => false;
+        const { getByText } = render(<RecipeWriteContainer />);
+
+        fireEvent.click(getByText('삭제하기'));
+
+        expect(dispatch).toBeCalledTimes(1);
+      });
+    });
   });
 });
