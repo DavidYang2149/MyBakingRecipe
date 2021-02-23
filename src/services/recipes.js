@@ -14,14 +14,16 @@ export async function fetchRecipes() {
 }
 
 export async function postRecipe(recipe) {
+  const userId = auth.currentUser.email;
   const { id } = await db.collection('recipes').add({
     ...recipe,
+    userId,
   });
 
   return id;
 }
 
-export async function putRecipe(recipe) {
+export async function updateRecipe(recipe) {
   const userId = auth.currentUser.email;
   const {
     id, title, category, product, ingredients, description,
@@ -29,4 +31,10 @@ export async function putRecipe(recipe) {
   await db.collection('recipes').doc(id).update({
     userId, title, category, product, ingredients, description,
   });
+}
+
+export async function deleteRecipe({ id, userId }) {
+  if (userId === auth.currentUser.email) {
+    await db.collection('recipes').doc(id).delete();
+  }
 }

@@ -36,6 +36,10 @@ export async function postRecipe() {
   return Promise.resolve('1');
 }
 
-export async function putRecipe() {
+export async function updateRecipe() {
+  return Promise.resolve({});
+}
+
+export async function deleteRecipe() {
   return Promise.resolve({});
 }

@@ -7,7 +7,8 @@ import {
   fetchRecipe,
   fetchRecipes,
   postRecipe,
-  putRecipe,
+  updateRecipe,
+  deleteRecipe,
 } from '../recipes';
 
 describe('Recipes', () => {
@@ -59,13 +60,28 @@ describe('Recipes', () => {
     });
   });
 
-  describe('putRecipe', () => {
+  describe('updateRecipe', () => {
     beforeEach(() => {
       mockFetch();
     });
 
     it('returns nothing', async () => {
-      const result = await putRecipe(sampleRecipes[0]);
+      const result = await updateRecipe(sampleRecipes[0]);
+
+      expect(result).toEqual({});
+      // TODO : when update API
+      // expect(result).toBeUndefined();
+    });
+  });
+
+  describe('deleteRecipe', () => {
+    beforeEach(() => {
+      mockFetch();
+    });
+
+    it('returns nothing', async () => {
+      const { id, userId } = sampleRecipes[0];
+      const result = await deleteRecipe({ id, userId });
 
       expect(result).toEqual({});
       // TODO : when update API
