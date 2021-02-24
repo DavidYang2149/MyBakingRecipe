@@ -52,5 +52,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'react/prop-types': 'off',
     'linebreak-style': 'off',
+    'no-proto': 'off',
+    "no-alert": "off",
   },
 };
