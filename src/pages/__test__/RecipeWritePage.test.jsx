@@ -15,7 +15,13 @@ describe('RecipeWritePage', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector(allConditionsState));
+    useSelector.mockImplementation((selector) => selector({
+      ...allConditionsState,
+      user: {
+        userId: '1',
+        displayName: '',
+      },
+    }));
   });
 
   it('render Page', () => {
