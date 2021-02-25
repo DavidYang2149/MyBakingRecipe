@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { auth } from '../services/firebase';
+import { saveItem } from '../utils/storage';
+
 const initialState = {
   userId: '',
   displayName: '',
@@ -24,6 +27,19 @@ const { actions, reducer } = createSlice({
     },
   },
 });
+
+export function sessionLoginCheck() {
+  return async (dispatch) => {
+    const user = auth.currentUser;
+
+    if (user) {
+      saveItem('user', user.email);
+      dispatch(actions.setUser({ name: 'user', value: user.email }));
+    } else {
+      dispatch(actions.clearUser());
+    }
+  };
+}
 
 export const {
   setUser,

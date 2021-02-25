@@ -1,7 +1,14 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
 import reducer, {
   setUser,
   clearUser,
+  sessionLoginCheck,
 } from '../user';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 describe('user reducer', () => {
   const initialState = {
@@ -40,6 +47,35 @@ describe('user reducer', () => {
       const state = reducer(user, clearUser());
 
       expect(state).toEqual(initialState);
+    });
+  });
+});
+
+describe('recipes actions', () => {
+  describe('sessionLoginCheck', () => {
+    // TODO: session value case
+    // context('with currentUser values', () => {
+    //   it('runs setUser', async () => {
+    //     const store = mockStore({});
+
+    //     await store.dispatch(sessionLoginCheck());
+
+    //     const actions = store.getActions();
+
+    //     expect(actions[0]).toEqual(setUser());
+    //   });
+    // });
+
+    context('without currentUser values', () => {
+      it('runs clearUser', async () => {
+        const store = mockStore({});
+
+        await store.dispatch(sessionLoginCheck());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(clearUser());
+      });
     });
   });
 });
