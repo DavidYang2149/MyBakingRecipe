@@ -1,5 +1,9 @@
 import { db, auth } from './firebase';
 
+import {
+  isMatch,
+} from '../utils/utils';
+
 export async function fetchRecipe(id) {
   const recipesRef = db.collection('recipes');
   const recipe = recipesRef.doc(id).get();
@@ -34,7 +38,7 @@ export async function updateRecipe(recipe) {
 }
 
 export async function deleteRecipe({ id, userId }) {
-  if (userId === auth.currentUser.email) {
+  if (isMatch(userId)(auth.currentUser.email)) {
     await db.collection('recipes').doc(id).delete();
   }
 }
