@@ -10,6 +10,11 @@ import {
   writeRecipe,
   removeRecipe,
 } from '../redux/recipe';
+import {
+  isEmpty,
+  isMatch,
+  isNotEmpty,
+} from '../utils/utils';
 
 const RecipeWriteContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -18,7 +23,8 @@ const RecipeWriteContainer = ({ recipeId }) => {
     dispatch(loadRecipe(recipeId));
   }, []);
 
-  const { recipe } = useSelector((state) => ({
+  const { user, recipe } = useSelector((state) => ({
+    user: state.user,
     recipe: state.recipe,
   }));
 
@@ -50,7 +56,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
   };
 
   const onKeyUpSetNewIngredient = (event) => {
-    if (event.key === 'Enter') {
+    if (isMatch(event.key)('Enter')) {
       dispatch(setNewIngredient({ fields: newIngredient }));
     }
   };
@@ -69,6 +75,27 @@ const RecipeWriteContainer = ({ recipeId }) => {
       dispatch(removeRecipe());
     }
   };
+
+  const isNotWriteAdd = (userUserId) => (id) => (recipeUserId) => {
+    if (isNotEmpty(userUserId) && isEmpty(id) && isEmpty(recipeUserId)) {
+      return false;
+    }
+    return true;
+  };
+
+  const isNotWriteUpdate = (userUserId) => (id) => (recipeUserId) => {
+    if (isNotEmpty(userUserId) && isNotEmpty(id) && isMatch(userUserId)(recipeUserId)) {
+      return false;
+    }
+    return true;
+  };
+
+  if (isNotWriteAdd(user.userId)(recipe.id)(userId)
+    && isNotWriteUpdate(user.userId)(recipe.id)(userId)) {
+    return (
+      <div>없음</div>
+    );
+  }
 
   return (
     <article>
@@ -188,10 +215,10 @@ const RecipeWriteContainer = ({ recipeId }) => {
           type="button"
           onClick={onSubmit}
         >
-          {userId === '' ? '저장하기' : '수정하기'}
+          {isEmpty(userId) ? '저장하기' : '수정하기'}
         </button>
         {
-          userId !== '' && (
+          isNotEmpty(userId) && (
             <button
               type="button"
               onClick={onRemove}

@@ -19,7 +19,78 @@ describe('RecipeWriteContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
       recipe: recipes[0],
+      user: {
+        userId: '1',
+        displayName: '',
+      },
     }));
+  });
+
+  describe('initial sequence', () => {
+    context('with write case(add)', () => {
+      it('show recipe write', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            id: 0,
+            userId: '',
+            title: '',
+            category: 0,
+            product: 0,
+            ingredients: [],
+            newIngredient: { id: 0, ingredient: '', weight: 0 },
+            description: '',
+          },
+          user: {
+            userId: '1',
+            displayName: '',
+          },
+        }));
+
+        const { container } = render(<RecipeWriteContainer />);
+
+        expect(container).toHaveTextContent('저장하기');
+      });
+    });
+
+    context('with write case(update)', () => {
+      it('show recipe write', () => {
+        const { container } = render(<RecipeWriteContainer />);
+
+        expect(container).toHaveTextContent('수정하기');
+      });
+    });
+
+    context('with unauthorization', () => {
+      it('refuse writing', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            id: 1,
+            userId: '1',
+            title: '마들렌',
+            category: 1,
+            product: 16,
+            ingredients: [
+              { id: 1, ingredient: '설탕', weight: 150 },
+              { id: 2, ingredient: '버터', weight: 150 },
+              { id: 3, ingredient: '전란', weight: 100 },
+              { id: 4, ingredient: '박력분', weight: 150 },
+            ],
+            newIngredient: { id: 0, ingredient: '', weight: 0 },
+            description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          },
+          user: {
+            userId: '2',
+            displayName: '',
+          },
+        }));
+
+        const { container } = render(<RecipeWriteContainer />);
+
+        expect(container).toHaveTextContent('없음');
+      });
+    });
   });
 
   describe('with recipe', () => {
@@ -150,7 +221,7 @@ describe('RecipeWriteContainer', () => {
         useSelector.mockImplementation((selector) => selector({
           ...allConditionsState,
           recipe: {
-            id: 1,
+            id: 0,
             userId: '',
             title: '마들렌',
             category: 1,
@@ -163,6 +234,10 @@ describe('RecipeWriteContainer', () => {
             ],
             newIngredient: { id: 0, ingredient: '', weight: 0 },
             description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          },
+          user: {
+            userId: '1',
+            displayName: '',
           },
         }));
         const { getByText } = render(<RecipeWriteContainer />);
@@ -177,6 +252,10 @@ describe('RecipeWriteContainer', () => {
       useSelector.mockImplementation((selector) => selector({
         ...allConditionsState,
         recipe: recipes[0],
+        user: {
+          userId: '1',
+          displayName: '',
+        },
       }));
 
       it('click onSubmit', () => {
