@@ -19,6 +19,10 @@ describe('RecipeContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       ...allConditionsState,
       recipe: recipes[0],
+      user: {
+        userId: '1',
+        displayName: '',
+      },
     }));
   });
 

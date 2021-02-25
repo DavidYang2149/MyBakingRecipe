@@ -6,6 +6,10 @@ import {
   writeRecipe,
   removeRecipe,
 } from '../redux/recipe';
+import {
+  isMatch,
+  isNotEmpty,
+} from '../utils/utils';
 
 const RecipeContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -14,7 +18,8 @@ const RecipeContainer = ({ recipeId }) => {
     dispatch(loadRecipe(recipeId));
   }, []);
 
-  const { recipe } = useSelector((state) => ({
+  const { user, recipe } = useSelector((state) => ({
+    user: state.user,
     recipe: state.recipe,
   }));
 
@@ -121,7 +126,7 @@ const RecipeContainer = ({ recipeId }) => {
 
       <div>
         {
-          userId !== '' && (
+          isNotEmpty(userId) && isMatch(userId)(user.userId) && (
             <>
               <button
                 type="button"
