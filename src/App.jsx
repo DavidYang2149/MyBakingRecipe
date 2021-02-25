@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { sessionLoginCheck } from './redux/user';
 
 import HeaderContainer from './containers/common/HeaderContainer';
 import RecipesPage from './pages/RecipesPage';
@@ -8,6 +11,12 @@ import RecipeWritePage from './pages/RecipeWritePage';
 import Recipe404Page from './pages/Recipe404Page';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sessionLoginCheck());
+  }, []);
+
   return (
     <>
       <HeaderContainer />
