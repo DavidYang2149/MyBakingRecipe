@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
@@ -28,7 +29,11 @@ describe('RecipeContainer', () => {
 
   describe('with recipe', () => {
     it('renders container', () => {
-      render(<RecipeContainer />);
+      render((
+        <MemoryRouter>
+          <RecipeContainer />
+        </MemoryRouter>
+      ));
     });
 
     context('with exist recipe', () => {
@@ -38,18 +43,26 @@ describe('RecipeContainer', () => {
       }));
 
       it('click onSubmit', () => {
-        const { getByText } = render(<RecipeContainer />);
+        const { getByText } = render((
+          <MemoryRouter>
+            <RecipeContainer />
+          </MemoryRouter>
+        ));
 
         fireEvent.click(getByText('수정하기'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
     context('with confirm true', () => {
       it('click onRemove', () => {
         global.confirm = () => true;
-        const { getByText } = render(<RecipeContainer />);
+        const { getByText } = render((
+          <MemoryRouter>
+            <RecipeContainer />
+          </MemoryRouter>
+        ));
 
         fireEvent.click(getByText('삭제하기'));
 
@@ -60,7 +73,11 @@ describe('RecipeContainer', () => {
     context('with confirm false', () => {
       it('click onRemove', () => {
         global.confirm = () => false;
-        const { getByText } = render(<RecipeContainer />);
+        const { getByText } = render((
+          <MemoryRouter>
+            <RecipeContainer />
+          </MemoryRouter>
+        ));
 
         fireEvent.click(getByText('삭제하기'));
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
   loadRecipe,
-  writeRecipe,
   removeRecipe,
 } from '../redux/recipe';
 import {
@@ -31,10 +31,6 @@ const RecipeContainer = ({ recipeId }) => {
     ingredients,
     description,
   } = recipe;
-
-  const onSubmit = () => {
-    dispatch(writeRecipe());
-  };
 
   const onRemove = () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
@@ -128,12 +124,7 @@ const RecipeContainer = ({ recipeId }) => {
         {
           isNotEmpty(userId) && isMatch(userId)(user.userId) && (
             <>
-              <button
-                type="button"
-                onClick={onSubmit}
-              >
-                수정하기
-              </button>
+              <Link to={`/recipewrite/${recipe.id}`}><button type="button">수정하기</button></Link>
               <button
                 type="button"
                 onClick={onRemove}
