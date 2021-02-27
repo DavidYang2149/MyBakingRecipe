@@ -2,6 +2,7 @@ import { db, auth } from './firebase';
 
 import {
   isMatch,
+  isNotEmpty,
 } from '../utils/utils';
 
 export async function fetchRecipe(id) {
@@ -18,27 +19,36 @@ export async function fetchRecipes() {
 }
 
 export async function postRecipe(recipe) {
-  const userId = auth.currentUser.email;
-  const { id } = await db.collection('recipes').add({
-    ...recipe,
-    userId,
-  });
+  const user = auth.currentUser;
+  if (isNotEmpty(user)) {
+    const userId = user.email;
+    const { id } = await db.collection('recipes').add({
+      ...recipe,
+      userId,
+    });
 
-  return id;
+    return id;
+  }
+  return null;
 }
 
 export async function updateRecipe(recipe) {
-  const userId = auth.currentUser.email;
-  const {
-    id, title, category, product, ingredients, description,
-  } = recipe;
-  await db.collection('recipes').doc(id).update({
-    userId, title, category, product, ingredients, description,
-  });
+  const user = auth.currentUser;
+  if (isNotEmpty(user)) {
+    const userId = user.email;
+    const {
+      id, title, category, product, ingredients, description,
+    } = recipe;
+    await db.collection('recipes').doc(id).update({
+      userId, title, category, product, ingredients, description,
+    });
+  }
 }
 
 export async function deleteRecipe({ id, userId }) {
-  if (isMatch(userId)(auth.currentUser.email)) {
+  const user = auth.currentUser;
+
+  if (isNotEmpty(user) && isMatch(userId)(user.email)) {
     await db.collection('recipes').doc(id).delete();
   }
 }

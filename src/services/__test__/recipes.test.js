@@ -68,9 +68,7 @@ describe('Recipes', () => {
     it('returns nothing', async () => {
       const result = await updateRecipe(sampleRecipes[0]);
 
-      expect(result).toEqual({});
-      // TODO : when update API
-      // expect(result).toBeUndefined();
+      expect(result).toBeUndefined();
     });
   });
 
@@ -83,9 +81,7 @@ describe('Recipes', () => {
       const { id, userId } = sampleRecipes[0];
       const result = await deleteRecipe({ id, userId });
 
-      expect(result).toEqual({});
-      // TODO : when update API
-      // expect(result).toBeUndefined();
+      expect(result).toBeUndefined();
     });
   });
 });
