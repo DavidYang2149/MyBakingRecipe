@@ -90,7 +90,7 @@ export function writeRecipe() {
       };
 
       const id = await postRecipe(recipeInfo);
-      dispatch(actions.changeRecipe({ name: 'id', value: id }));
+      await dispatch(actions.changeRecipe({ name: 'id', value: id }));
     } else {
       const {
         id, title, category, product, ingredients, description,
@@ -99,7 +99,7 @@ export function writeRecipe() {
         id, title, category, product, ingredients, description,
       };
       await updateRecipe(recipeInfo);
-      dispatch(loadRecipe(id));
+      await dispatch(loadRecipe(id));
     }
   };
 }
