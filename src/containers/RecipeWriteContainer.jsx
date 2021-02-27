@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -18,6 +19,7 @@ import {
 
 const RecipeWriteContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(loadRecipe(recipeId));
@@ -65,14 +67,20 @@ const RecipeWriteContainer = ({ recipeId }) => {
     dispatch(setNewIngredient({ fields: newIngredient }));
   };
 
-  const onSubmit = () => {
-    dispatch(writeRecipe());
+  const onSubmit = async () => {
+    await dispatch(writeRecipe());
+
+    if (isEmpty(recipe.id)) {
+      return history.push('/');
+    }
+    return history.push(`/recipe/${recipe.id}`);
   };
 
-  const onRemove = () => {
+  const onRemove = async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
     if (ensure) {
-      dispatch(removeRecipe());
+      await dispatch(removeRecipe());
+      history.push('/');
     }
   };
 
