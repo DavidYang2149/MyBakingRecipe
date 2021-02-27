@@ -18,9 +18,6 @@ const RecipesContainer = () => {
             </li>
           ))
         )}
-        <li>
-          <Link to="/recipe/0"><button type="button">없는 레시피</button></Link>
-        </li>
       </ul>
     </article>
   );
