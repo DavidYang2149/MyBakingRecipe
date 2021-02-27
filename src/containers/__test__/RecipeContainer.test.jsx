@@ -7,8 +7,16 @@ import recipes from '../../../fixtures/recipes';
 import allConditionsState from '../../../fixtures/allConditionsState';
 import RecipeContainer from '../RecipeContainer';
 
+const mockPush = jest.fn();
+
 jest.mock('react-redux');
 jest.mock('../../services/recipes');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
 
 describe('RecipeContainer', () => {
   const dispatch = jest.fn();

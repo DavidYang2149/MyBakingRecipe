@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -13,6 +13,7 @@ import {
 
 const RecipeContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(loadRecipe(recipeId));
@@ -32,10 +33,11 @@ const RecipeContainer = ({ recipeId }) => {
     description,
   } = recipe;
 
-  const onRemove = () => {
+  const onRemove = async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
     if (ensure) {
-      dispatch(removeRecipe());
+      await dispatch(removeRecipe());
+      history.push('/');
     }
   };
 
