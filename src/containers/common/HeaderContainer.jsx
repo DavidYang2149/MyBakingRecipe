@@ -45,6 +45,7 @@ const HeaderContainer = () => {
                 &nbsp;
                 {userId}
               </p>
+              <Link to="/recipewrite/0"><button type="button">레시피 만들기</button></Link>
               <button type="button" onClick={signOut}>Logout</button>
             </>
           ) : <button type="button" onClick={signInWithGoogle}>Sign in</button>
