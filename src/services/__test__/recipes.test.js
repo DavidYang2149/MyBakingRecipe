@@ -54,7 +54,7 @@ describe('Recipes', () => {
         description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
       });
 
-      expect(result).toEqual({});
+      expect(result).toBeNull();
       // TODO : when update API
       // expect(result).toBeUndefined();
     });
