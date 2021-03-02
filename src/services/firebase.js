@@ -10,6 +10,8 @@ firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 
+// auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
 // export const analytics = firebase.analytics();
 
 export const fireStore = firebase.firestore;
