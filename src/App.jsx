@@ -9,6 +9,7 @@ import RecipesPage from './pages/RecipesPage';
 import RecipePage from './pages/RecipePage';
 import RecipeWritePage from './pages/RecipeWritePage';
 import Recipe404Page from './pages/Recipe404Page';
+import Main from './layouts/Main';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,14 @@ const App = () => {
   return (
     <>
       <HeaderContainer />
-      <Switch>
-        <Route exact path="/" component={RecipesPage} />
-        <Route path="/recipe/:id" component={RecipePage} />
-        <Route path="/recipewrite/:id" component={RecipeWritePage} />
-        <Route component={Recipe404Page} />
-      </Switch>
+      <Main>
+        <Switch>
+          <Route exact path="/" component={RecipesPage} />
+          <Route path="/recipe/:id" component={RecipePage} />
+          <Route path="/recipewrite/:id" component={RecipeWritePage} />
+          <Route component={Recipe404Page} />
+        </Switch>
+      </Main>
     </>
   );
 };
