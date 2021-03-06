@@ -7,6 +7,13 @@ import {
   clearUser,
 } from '../../redux/user';
 import { auth, provider } from '../../services/firebase';
+import {
+  Header,
+  HeaderTitle,
+  HeaderUser,
+  HeaderButton,
+} from '../../layouts/common/Header';
+import HomeIcon from '../../layouts/icons/HeaderIcon';
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
@@ -33,24 +40,25 @@ const HeaderContainer = () => {
     dispatch(clearUser());
   };
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <h1>My Baking Recipe</h1>
+    <Header>
+      <Link to="/">
+        {/* Home */}
+        <HomeIcon src="../../../assets/icons/home.svg" alt="Home" />
+      </Link>
+      <HeaderTitle>My Baking Recipe</HeaderTitle>
       {
         userId
           ? (
             <>
-              <p>
-                Welcome,
-                &nbsp;
+              <HeaderUser>
                 {userId}
-              </p>
-              <Link to="/recipewrite/0"><button type="button">레시피 만들기</button></Link>
-              <button type="button" onClick={signOut}>Logout</button>
+              </HeaderUser>
+              <Link to="/recipewrite/0"><HeaderButton type="button">레시피 만들기</HeaderButton></Link>
+              <HeaderButton type="button" onClick={signOut}>Logout</HeaderButton>
             </>
-          ) : <button type="button" onClick={signInWithGoogle}>Sign in</button>
+          ) : <HeaderButton type="button" onClick={signInWithGoogle}>Sign in</HeaderButton>
       }
-    </nav>
+    </Header>
   );
 };
 
