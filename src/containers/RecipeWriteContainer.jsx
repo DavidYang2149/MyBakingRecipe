@@ -180,8 +180,8 @@ const RecipeWriteContainer = ({ recipeId }) => {
       <section>
         <ul>
           <li>
-            <Label>원재료</Label>
-            <Label>용량</Label>
+            <Label htmlFor={`ingredient-${newId}`}>원재료</Label>
+            <Label htmlFor={`weight-${newId}`}>용량</Label>
           </li>
           <li>
             <Input

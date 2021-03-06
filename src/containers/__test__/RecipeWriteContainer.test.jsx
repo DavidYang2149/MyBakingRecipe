@@ -126,13 +126,12 @@ describe('RecipeWriteContainer', () => {
     });
 
     it('change ingredient', () => {
-      const { getAllByLabelText } = render(<RecipeWriteContainer />);
+      const { getByDisplayValue } = render(<RecipeWriteContainer />);
 
-      const labels = getAllByLabelText('원재료');
-      const label = labels[1];
-      expect(label.value).toBe('설탕');
+      const input = getByDisplayValue('설탕');
+      expect(input.value).toBe('설탕');
 
-      fireEvent.change(label, {
+      fireEvent.change(input, {
         target: {
           name: 'ingredient-1',
           value: '백설탕',
@@ -146,10 +145,9 @@ describe('RecipeWriteContainer', () => {
     });
 
     it('change new ingredient', () => {
-      const { getAllByLabelText } = render(<RecipeWriteContainer />);
+      const { getByLabelText } = render(<RecipeWriteContainer />);
 
-      const labels = getAllByLabelText('원재료');
-      const label = labels[0];
+      const label = getByLabelText('원재료');
       expect(label.value).toBe('');
 
       fireEvent.change(label, {
@@ -167,10 +165,9 @@ describe('RecipeWriteContainer', () => {
 
     context('keyup with enter', () => {
       it('set new ingredient', () => {
-        const { getAllByLabelText } = render(<RecipeWriteContainer />);
+        const { getByLabelText } = render(<RecipeWriteContainer />);
 
-        const labels = getAllByLabelText('원재료');
-        const label = labels[0];
+        const label = getByLabelText('원재료');
         expect(label.value).toBe('');
 
         fireEvent.keyUp(label, {
@@ -192,10 +189,9 @@ describe('RecipeWriteContainer', () => {
 
     context('keyup without enter', () => {
       it('nothing to change', () => {
-        const { getAllByLabelText } = render(<RecipeWriteContainer />);
+        const { getByLabelText } = render(<RecipeWriteContainer />);
 
-        const labels = getAllByLabelText('원재료');
-        const label = labels[0];
+        const label = getByLabelText('원재료');
         expect(label.value).toBe('');
 
         fireEvent.keyUp(label, {
