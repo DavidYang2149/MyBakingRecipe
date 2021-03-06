@@ -10,6 +10,14 @@ import {
   isMatch,
   isNotEmpty,
 } from '../utils/utils';
+import {
+  Label,
+  Input,
+  Select,
+  Span,
+  Textarea,
+  Button,
+} from '../layouts/Recipe';
 
 const RecipeContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -48,63 +56,88 @@ const RecipeContainer = ({ recipeId }) => {
       </div>
 
       <section>
-        <label htmlFor="title">레시피명</label>
-        <input
+        <Label
+          htmlFor="title"
+          display="block"
+        >
+          레시피명
+        </Label>
+        <Input
           type="text"
           id="title"
           name="title"
           value={title}
+          width="60%"
+          display="block"
           disabled
         />
-        <label htmlFor="category">카테고리</label>
-        <select
-          id="category"
-          name="category"
-          value={category}
-          disabled
+        <Label
+          htmlFor="category"
+          width="30%"
+          display="inline-block"
         >
-          <option value="0">선택</option>
-          <option value="1">쿠키</option>
-          <option value="2">구움과자</option>
-          <option value="3">케이크</option>
-          <option value="4">빵</option>
-          <option value="5">마카롱</option>
-          <option value="6">기타</option>
-        </select>
-        <label htmlFor="product">생산량</label>
-        <input
-          type="number"
-          id="product"
-          name="product"
-          value={product}
-          disabled
-        />
-        <span>개</span>
+          카테고리
+        </Label>
+        <Label
+          htmlFor="product"
+          width="20%"
+          display="inline-block"
+        >
+          생산량
+        </Label>
+        <div>
+          <Select
+            id="category"
+            name="category"
+            value={category}
+            width="30%"
+            disabled
+          >
+            <option value="0">선택</option>
+            <option value="1">쿠키</option>
+            <option value="2">구움과자</option>
+            <option value="3">케이크</option>
+            <option value="4">빵</option>
+            <option value="5">마카롱</option>
+            <option value="6">기타</option>
+          </Select>
+          <Input
+            type="number"
+            id="product"
+            name="product"
+            value={product}
+            width="20%"
+            disabled
+          />
+          <Span>개</Span>
+        </div>
       </section>
 
       <section>
         <ul>
+          <li>
+            <Label>원재료</Label>
+            <Label>용량</Label>
+          </li>
           {
             ingredients.map(({ id, ingredient, weight }) => {
               return (
                 <li key={id}>
-                  <label htmlFor={`ingredient-${id}`}>원재료</label>
-                  <input
+                  <Input
                     type="text"
                     id={`ingredient-${id}`}
                     name={`ingredient-${id}`}
                     value={ingredient}
                     disabled
                   />
-                  <label htmlFor={`weight-${id}`}>용량</label>
-                  <input
+                  <Input
                     type="number"
                     id={`weight-${id}`}
                     name={`weight-${id}`}
                     value={weight}
                     disabled
                   />
-                  <span>g</span>
+                  <Span>g</Span>
                 </li>
               );
             })
@@ -113,8 +146,13 @@ const RecipeContainer = ({ recipeId }) => {
       </section>
 
       <section>
-        <label htmlFor="description">만드는 방법</label>
-        <textarea
+        <Label
+          htmlFor="description"
+          display="block"
+        >
+          만드는 방법
+        </Label>
+        <Textarea
           id="description"
           name="description"
           value={description}
@@ -122,21 +160,21 @@ const RecipeContainer = ({ recipeId }) => {
         />
       </section>
 
-      <div>
-        {
-          isNotEmpty(userId) && isMatch(userId)(user.userId) && (
-            <>
-              <Link to={`/recipewrite/${recipe.id}`}><button type="button">수정하기</button></Link>
-              <button
-                type="button"
-                onClick={onRemove}
-              >
-                삭제하기
-              </button>
-            </>
-          )
-        }
-      </div>
+      {
+        isNotEmpty(userId) && isMatch(userId)(user.userId) && (
+          <section>
+            <Link to={`/recipewrite/${recipe.id}`}>
+              <Button type="button">수정하기</Button>
+            </Link>
+            <Button
+              type="button"
+              onClick={onRemove}
+            >
+              삭제하기
+            </Button>
+          </section>
+        )
+      }
     </article>
   );
 };
