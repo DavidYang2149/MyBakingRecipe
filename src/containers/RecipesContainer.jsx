@@ -21,7 +21,7 @@ const RecipesContainer = () => {
             <RecipeCard key={recipe.id} className="card-item">
               <Link to={`/recipe/${recipe.id}`}>
                 <figure className="card-image">
-                  <img src="" alt="recipe" />
+                  <img src="images/cookie.jpeg" alt="recipe" />
                 </figure>
                 <div className="card-desc">
                   {recipe.title}

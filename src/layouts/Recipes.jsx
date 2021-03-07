@@ -9,7 +9,7 @@ const RecipeCards = styled.ul`
       justify-content: space-between;
       li {
         /* width: 30%; */
-        flex-basis: 33.3%;
+        flex-basis: 30%;
         flex-direction: column;
         /* box-shadow: rgb(0 0 0 / 4%) 4px 4px 16px 0px;
         padding: 1 1 0 0rem; */
@@ -36,7 +36,10 @@ const RecipeCard = styled.li`
   }
 
   .card-image img {
-    display: none;
+    /* display: none; */
+    max-width: 200px;
+    max-height: 200px;
+    background-size: cover;
   }
 
   .card-desc {
