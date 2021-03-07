@@ -65,7 +65,7 @@ describe('RecipeWriteContainer', () => {
       it('show recipe write', () => {
         const { container } = render(<RecipeWriteContainer />);
 
-        expect(container).toHaveTextContent('수정하기');
+        expect(container).toHaveTextContent('수정완료');
       });
     });
 
@@ -265,7 +265,7 @@ describe('RecipeWriteContainer', () => {
       it('click onSubmit', () => {
         const { getByText } = render(<RecipeWriteContainer />);
 
-        fireEvent.click(getByText('수정하기'));
+        fireEvent.click(getByText('수정완료'));
 
         expect(dispatch).toBeCalledTimes(2);
       });

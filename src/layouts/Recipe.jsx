@@ -67,6 +67,11 @@ const Button = styled.button`
   margin: 10px;
 `;
 
+const Paragraph = styled.p`
+  font-size: 2rem;
+  font-weight: 700;
+`;
+
 export {
   Label,
   Input,
@@ -74,4 +79,5 @@ export {
   Span,
   Textarea,
   Button,
+  Paragraph,
 };

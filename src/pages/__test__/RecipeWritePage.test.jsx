@@ -31,7 +31,7 @@ describe('RecipeWritePage', () => {
       </MemoryRouter>
     ));
 
-    expect(container).toHaveTextContent('레시피 작성 페이지');
+    expect(container).toHaveTextContent('레시피명');
   });
 
   context('with params props', () => {

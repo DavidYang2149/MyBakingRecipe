@@ -23,6 +23,7 @@ import {
   Span,
   Textarea,
   Button,
+  Paragraph,
 } from '../layouts/Recipe';
 
 const RecipeWriteContainer = ({ recipeId }) => {
@@ -115,10 +116,9 @@ const RecipeWriteContainer = ({ recipeId }) => {
 
   return (
     <article>
-      <div>
-        레시피 작성 페이지
-      </div>
-
+      <Paragraph>
+        {isEmpty(userId) ? '레시피 제작' : `${title} 편집`}
+      </Paragraph>
       <section>
         <Label
           htmlFor="title"
@@ -259,7 +259,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
           type="button"
           onClick={onSubmit}
         >
-          {isEmpty(userId) ? '저장하기' : '수정하기'}
+          {isEmpty(userId) ? '저장하기' : '수정완료'}
         </Button>
         {
           isNotEmpty(userId) && (

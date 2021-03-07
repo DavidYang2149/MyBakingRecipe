@@ -17,6 +17,7 @@ import {
   Span,
   Textarea,
   Button,
+  Paragraph,
 } from '../layouts/Recipe';
 
 const RecipeContainer = ({ recipeId }) => {
@@ -51,10 +52,9 @@ const RecipeContainer = ({ recipeId }) => {
 
   return (
     <article>
-      <div>
-        레시피 뷰 페이지
-      </div>
-
+      <Paragraph>
+        {title}
+      </Paragraph>
       <section>
         <Label
           htmlFor="title"
