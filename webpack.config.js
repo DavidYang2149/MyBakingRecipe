@@ -2,6 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const DEVELOPMENT_ENV = 'development';
@@ -26,18 +27,13 @@ module.exports = {
     publicPath: mode === PRODUCTION_ENV
       ? './'
       : mode === DEVELOPMENT_ENV && '/',
-
     // publicPath: './',  // './' : for build, '/' : for dev
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
-      },
       {
         test: /\.(jpe?g|PNG|gif|svg)$/i,
         loader: 'url-loader',
@@ -57,15 +53,19 @@ module.exports = {
         },
       },
       {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader',
         include: pathSrc,
       },
     ],
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
   },
   devServer: {
     overlay: true,
@@ -78,6 +78,11 @@ module.exports = {
       templateParameters: {
         env: mode === DEVELOPMENT_ENV ? '(개발모드)' : '',
       },
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/images', to: './images' },
+      ],
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
