@@ -43,7 +43,7 @@ const HeaderContainer = () => {
     <Header>
       <Link to="/">
         {/* Home */}
-        <HomeIcon src="../../../assets/icons/home.svg" alt="Home" />
+        <HomeIcon src="images/home.svg" alt="Home" />
       </Link>
       <HeaderTitle>My Baking Recipe</HeaderTitle>
       {
