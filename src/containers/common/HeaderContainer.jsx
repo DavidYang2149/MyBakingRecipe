@@ -45,7 +45,9 @@ const HeaderContainer = () => {
         {/* Home */}
         <HomeIcon src="images/home.svg" alt="Home" />
       </Link>
-      <HeaderTitle>My Baking Recipe</HeaderTitle>
+      <Link to="/">
+        <HeaderTitle>My Baking Recipe</HeaderTitle>
+      </Link>
       {
         userId
           ? (
