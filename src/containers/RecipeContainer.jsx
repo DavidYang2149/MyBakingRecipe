@@ -116,8 +116,18 @@ const RecipeContainer = ({ recipeId }) => {
       <section>
         <ul>
           <li>
-            <Label>원재료</Label>
-            <Label>용량</Label>
+            <Label
+              width="32%"
+              display="inline-block"
+            >
+              원재료
+            </Label>
+            <Label
+              width="20%"
+              display="inline-block"
+            >
+              용량
+            </Label>
           </li>
           {
             ingredients.map(({ id, ingredient, weight }) => {
@@ -128,6 +138,7 @@ const RecipeContainer = ({ recipeId }) => {
                     id={`ingredient-${id}`}
                     name={`ingredient-${id}`}
                     value={ingredient}
+                    width="30%"
                     disabled
                   />
                   <Input
@@ -135,6 +146,7 @@ const RecipeContainer = ({ recipeId }) => {
                     id={`weight-${id}`}
                     name={`weight-${id}`}
                     value={weight}
+                    width="20%"
                     disabled
                   />
                   <Span>g</Span>

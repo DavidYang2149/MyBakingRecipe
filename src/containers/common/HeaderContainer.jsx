@@ -42,7 +42,6 @@ const HeaderContainer = () => {
   return (
     <Header>
       <Link to="/">
-        {/* Home */}
         <HomeIcon src="images/home.svg" alt="Home" />
       </Link>
       <Link to="/">

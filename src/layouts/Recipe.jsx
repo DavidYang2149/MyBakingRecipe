@@ -11,6 +11,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
+  color: #000;
   display: ${(props) => props.display};
   min-width: 100px;
   width: ${(props) => props.width};
@@ -25,6 +26,7 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
+  color: #000;
   min-width: 100px;
   width: ${(props) => props.width};
   font-size: 1.1rem;
@@ -43,11 +45,12 @@ const Span = styled.span`
 `;
 
 const Textarea = styled.textarea`
+  color: #000;
   min-width: 300px;
   min-height: 200px;
   width: 70%;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
   border-radius: 0.25rem;
   border: 1px solid #e5e7eb;
   background-color: #e4e7eb;
