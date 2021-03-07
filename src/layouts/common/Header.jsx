@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Header = styled.nav`
+const HeaderNav = styled.nav`
 display: flex;
 justify-content: space-between;
 background: #fff;
@@ -37,7 +37,7 @@ const HeaderButton = styled.button`
 `;
 
 export {
-  Header,
+  HeaderNav,
   HeaderTitle,
   HeaderUser,
   HeaderButton,
