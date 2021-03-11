@@ -72,9 +72,11 @@ describe('recipes actions', () => {
 
         await store.dispatch(sessionLoginCheck());
 
-        const actions = store.getActions();
+        setTimeout(() => {
+          const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clearUser());
+          expect(actions[0]).toEqual(clearUser());
+        }, 1500);
       });
     });
   });

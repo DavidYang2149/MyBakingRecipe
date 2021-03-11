@@ -7,6 +7,7 @@ import {
 } from '../../redux/user';
 import { auth, provider } from '../../services/firebase';
 import Header from '../../components/common/Header';
+import { saveItem } from '../../utils/storage';
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const HeaderContainer = () => {
   const signInWithGoogle = async () => {
     const result = await auth.signInWithPopup(provider);
     if (result.user && result.user.email) {
+      saveItem('user', result.user.email);
       dispatch(setUser({ name: 'userId', value: result.user.email }));
     }
   };
