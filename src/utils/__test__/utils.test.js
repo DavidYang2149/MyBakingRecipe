@@ -2,8 +2,10 @@ import {
   formatRecipe,
   isEmpty,
   isMatch,
+  isArray,
   isNotEmpty,
   isNotMatch,
+  isNotArray,
 } from '../utils';
 import sampleRecipes from '../../../fixtures/recipes';
 
@@ -47,6 +49,20 @@ describe('isMatch', () => {
   });
 });
 
+describe('isArray', () => {
+  context('with array value', () => {
+    it('return true', () => {
+      expect(isArray([])).toBe(true);
+    });
+  });
+
+  context('without array value', () => {
+    it('return false', () => {
+      expect(isArray('1')).toBe(false);
+    });
+  });
+});
+
 describe('isNotEmpty', () => {
   context('with empty value', () => {
     it('return false (reverse result)', () => {
@@ -71,6 +87,20 @@ describe('isNotMatch', () => {
   context('with no match value', () => {
     it('return true (reverse result)', () => {
       expect(isNotMatch('1')('2')).toBe(true);
+    });
+  });
+});
+
+describe('isNotArray', () => {
+  context('with array value', () => {
+    it('return false (reverse result)', () => {
+      expect(isNotArray([])).toBe(false);
+    });
+  });
+
+  context('without array value', () => {
+    it('return true (reverse result)', () => {
+      expect(isNotArray('1')).toBe(true);
     });
   });
 });

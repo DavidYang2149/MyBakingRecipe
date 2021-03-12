@@ -26,3 +26,11 @@ export const isMatch = (left) => (right) => {
 export const isNotMatch = (left) => (right) => {
   return !isMatch(left)(right);
 };
+
+export const isArray = (value) => {
+  return Array.isArray(value);
+};
+
+export const isNotArray = (value) => {
+  return !isArray(value);
+};
