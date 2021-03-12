@@ -11,14 +11,12 @@ import {
   isNotEmpty,
 } from '../utils/utils';
 import {
-  Label,
-  Input,
-  Select,
-  Span,
-  Textarea,
   Button,
-  Paragraph,
 } from '../layouts/Recipe';
+import RecipeTitle from '../components/RecipeTitle';
+import RecipeBasicInfo from '../components/RecipeBasicInfo';
+import RecipeDescription from '../components/RecipeDescription';
+import IngredientList from '../components/IngredientList';
 
 const RecipeContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -52,125 +50,20 @@ const RecipeContainer = ({ recipeId }) => {
 
   return (
     <article>
-      <Paragraph>
-        {title}
-      </Paragraph>
-      <section>
-        <Label
-          htmlFor="title"
-          display="block"
-        >
-          레시피명
-        </Label>
-        <Input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          width="60%"
-          display="block"
-          disabled
-        />
-        <Label
-          htmlFor="category"
-          width="30%"
-          display="inline-block"
-        >
-          카테고리
-        </Label>
-        <Label
-          htmlFor="product"
-          width="20%"
-          display="inline-block"
-        >
-          생산량
-        </Label>
-        <div>
-          <Select
-            id="category"
-            name="category"
-            value={category}
-            width="30%"
-            disabled
-          >
-            <option value="0">선택</option>
-            <option value="1">쿠키</option>
-            <option value="2">구움과자</option>
-            <option value="3">케이크</option>
-            <option value="4">빵</option>
-            <option value="5">마카롱</option>
-            <option value="6">기타</option>
-          </Select>
-          <Input
-            type="number"
-            id="product"
-            name="product"
-            value={product}
-            width="20%"
-            disabled
-          />
-          <Span>개</Span>
-        </div>
-      </section>
+      <RecipeTitle title={title} />
+      <RecipeBasicInfo
+        title={title}
+        category={category}
+        product={product}
+      />
 
-      <section>
-        <ul>
-          <li>
-            <Label
-              width="32%"
-              display="inline-block"
-            >
-              원재료
-            </Label>
-            <Label
-              width="20%"
-              display="inline-block"
-            >
-              용량
-            </Label>
-          </li>
-          {
-            ingredients.map(({ id, ingredient, weight }) => {
-              return (
-                <li key={id}>
-                  <Input
-                    type="text"
-                    id={`ingredient-${id}`}
-                    name={`ingredient-${id}`}
-                    value={ingredient}
-                    width="30%"
-                    disabled
-                  />
-                  <Input
-                    type="number"
-                    id={`weight-${id}`}
-                    name={`weight-${id}`}
-                    value={weight}
-                    width="20%"
-                    disabled
-                  />
-                  <Span>g</Span>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </section>
+      <IngredientList
+        ingredients={ingredients}
+      />
 
-      <section>
-        <Label
-          htmlFor="description"
-          display="block"
-        >
-          만드는 방법
-        </Label>
-        <Textarea
-          id="description"
-          name="description"
-          value={description}
-          disabled
-        />
-      </section>
+      <RecipeDescription
+        description={description}
+      />
 
       {
         isNotEmpty(userId) && isMatch(userId)(user.userId) && (

@@ -19,12 +19,13 @@ import {
 import {
   Input,
   Label,
-  Select,
   Span,
-  Textarea,
   Button,
-  Paragraph,
 } from '../layouts/Recipe';
+import RecipeTitle from '../components/RecipeTitle';
+import RecipeBasicInfo from '../components/RecipeBasicInfo';
+import RecipeDescription from '../components/RecipeDescription';
+import IngredientList from '../components/IngredientList';
 
 const RecipeWriteContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -116,72 +117,31 @@ const RecipeWriteContainer = ({ recipeId }) => {
 
   return (
     <article>
-      <Paragraph>
-        {isEmpty(userId) ? '레시피 제작' : `${title} 편집`}
-      </Paragraph>
-      <section>
-        <Label
-          htmlFor="title"
-          display="block"
-        >
-          레시피명
-        </Label>
-        <Input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          onChange={onChangeRecipe}
-          width="60%"
-          display="block"
-        />
-        <Label
-          htmlFor="category"
-          width="30%"
-          display="inline-block"
-        >
-          카테고리
-        </Label>
-        <Label
-          htmlFor="product"
-          width="20%"
-          display="inline-block"
-        >
-          생산량
-        </Label>
-        <div>
-          <Select
-            id="category"
-            name="category"
-            value={category}
-            onChange={onChangeRecipe}
-            width="30%"
-          >
-            <option value="0">선택</option>
-            <option value="1">쿠키</option>
-            <option value="2">구움과자</option>
-            <option value="3">케이크</option>
-            <option value="4">빵</option>
-            <option value="5">마카롱</option>
-            <option value="6">기타</option>
-          </Select>
-          <Input
-            type="number"
-            id="product"
-            name="product"
-            value={product}
-            onChange={onChangeRecipe}
-            width="20%"
-          />
-          <Span>개</Span>
-        </div>
-      </section>
+      <RecipeTitle title={isEmpty(userId) ? '레시피 제작' : `${title} 편집`} />
+      <RecipeBasicInfo
+        title={title}
+        category={category}
+        product={product}
+        onChangeRecipe={onChangeRecipe}
+      />
 
       <section>
         <ul>
           <li>
-            <Label htmlFor={`ingredient-${newId}`}>원재료</Label>
-            <Label htmlFor={`weight-${newId}`}>용량</Label>
+            <Label
+              width="32%"
+              display="inline-block"
+              htmlFor={`ingredient-${newId}`}
+            >
+              원재료
+            </Label>
+            <Label
+              width="20%"
+              display="inline-block"
+              htmlFor={`weight-${newId}`}
+            >
+              용량
+            </Label>
           </li>
           <li>
             <Input
@@ -191,6 +151,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
               value={newIngredient.ingredient}
               onChange={onChangeNewIngredient}
               onKeyUp={onKeyUpSetNewIngredient}
+              width="30%"
             />
             <Input
               type="number"
@@ -199,6 +160,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
               value={newIngredient.weight}
               onChange={onChangeNewIngredient}
               onKeyUp={onKeyUpSetNewIngredient}
+              width="20%"
             />
             <Span>g</Span>
             <Button
@@ -211,48 +173,15 @@ const RecipeWriteContainer = ({ recipeId }) => {
         </ul>
       </section>
 
-      <section>
-        <ul>
-          {
-            ingredients.map(({ id, ingredient, weight }) => {
-              return (
-                <li key={id}>
-                  <Input
-                    type="text"
-                    id={`ingredient-${id}`}
-                    name={`ingredient-${id}`}
-                    value={ingredient}
-                    onChange={onChangeIngredient}
-                  />
-                  <Input
-                    type="number"
-                    id={`weight-${id}`}
-                    name={`weight-${id}`}
-                    value={weight}
-                    onChange={onChangeIngredient}
-                  />
-                  <Span>g</Span>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </section>
+      <IngredientList
+        ingredients={ingredients}
+        onChangeIngredient={onChangeIngredient}
+      />
 
-      <section>
-        <Label
-          htmlFor="description"
-          display="block"
-        >
-          만드는 방법
-        </Label>
-        <Textarea
-          id="description"
-          name="description"
-          value={description}
-          onChange={onChangeRecipe}
-        />
-      </section>
+      <RecipeDescription
+        description={description}
+        onChangeRecipe={onChangeRecipe}
+      />
 
       <section>
         <Button
