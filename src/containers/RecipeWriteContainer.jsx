@@ -17,15 +17,13 @@ import {
   isNotEmpty,
 } from '../utils/utils';
 import {
-  Input,
-  Label,
-  Span,
   Button,
 } from '../layouts/Recipe';
 import RecipeTitle from '../components/RecipeTitle';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
+import IngredientAdd from '../components/IngredientAdd';
 
 const RecipeWriteContainer = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -125,53 +123,13 @@ const RecipeWriteContainer = ({ recipeId }) => {
         onChangeRecipe={onChangeRecipe}
       />
 
-      <section>
-        <ul>
-          <li>
-            <Label
-              width="32%"
-              display="inline-block"
-              htmlFor={`ingredient-${newId}`}
-            >
-              원재료
-            </Label>
-            <Label
-              width="20%"
-              display="inline-block"
-              htmlFor={`weight-${newId}`}
-            >
-              용량
-            </Label>
-          </li>
-          <li>
-            <Input
-              type="text"
-              id={`ingredient-${newId}`}
-              name={`ingredient-${newId}`}
-              value={newIngredient.ingredient}
-              onChange={onChangeNewIngredient}
-              onKeyUp={onKeyUpSetNewIngredient}
-              width="30%"
-            />
-            <Input
-              type="number"
-              id={`weight-${newId}`}
-              name={`weight-${newId}`}
-              value={newIngredient.weight}
-              onChange={onChangeNewIngredient}
-              onKeyUp={onKeyUpSetNewIngredient}
-              width="20%"
-            />
-            <Span>g</Span>
-            <Button
-              type="button"
-              onClick={onClickSetNewIngredient}
-            >
-              추가하기
-            </Button>
-          </li>
-        </ul>
-      </section>
+      <IngredientAdd
+        newId={newId}
+        newIngredient={newIngredient}
+        onChangeNewIngredient={onChangeNewIngredient}
+        onKeyUpSetNewIngredient={onKeyUpSetNewIngredient}
+        onClickSetNewIngredient={onClickSetNewIngredient}
+      />
 
       <IngredientList
         ingredients={ingredients}
