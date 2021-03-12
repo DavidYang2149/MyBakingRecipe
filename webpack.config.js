@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const DEVELOPMENT_ENV = 'development';
 const PRODUCTION_ENV = 'production';
@@ -18,7 +19,9 @@ const pathHtml = path.resolve(__dirname, 'public', 'index.html');
 module.exports = {
   mode,
   devtool: 'cheap-eval-source-map',
-  entry: pathIndex,
+  entry: {
+    main: pathIndex,
+  },
   output: {
     path: pathBuild,
     filename: mode === PRODUCTION_ENV
@@ -28,6 +31,12 @@ module.exports = {
       ? './'
       : mode === DEVELOPMENT_ENV && '/',
     // publicPath: './',  // './' : for build, '/' : for dev
+  },
+  optimization: {
+    runtimeChunk: true,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -86,5 +95,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new BundleAnalyzerPlugin(),
   ],
 };
