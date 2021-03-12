@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import {
-  RecipeCards,
-  RecipeCard,
-} from '../layouts/Recipes';
+import RecipeList from '../components/RecipeList';
 
 const RecipesContainer = () => {
   const { recipes } = useSelector((state) => ({
@@ -15,22 +11,7 @@ const RecipesContainer = () => {
 
   return (
     <article>
-      <RecipeCards className="card-list">
-        {(
-          recipesBook.map((recipe) => (
-            <RecipeCard key={recipe.id} className="card-item">
-              <Link to={`/recipe/${recipe.id}`}>
-                <figure className="card-image">
-                  <img src="images/cookie.jpeg" alt="recipe" />
-                </figure>
-                <div className="card-desc">
-                  {recipe.title}
-                </div>
-              </Link>
-            </RecipeCard>
-          ))
-        )}
-      </RecipeCards>
+      <RecipeList recipesBook={recipesBook} />
     </article>
   );
 };
