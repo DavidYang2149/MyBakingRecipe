@@ -60,6 +60,18 @@ const { actions, reducer } = createSlice({
         newIngredient: { ...state.newIngredient, id: parseInt(targetId, 10), [targetName]: value },
       };
     },
+    removeIngredient(state, { payload: { value } }) {
+      const length = state.ingredients.length - 1;
+      return {
+        ...state,
+        ingredients: state.ingredients.filter((ingredient) => {
+          return parseInt(ingredient.id, 10) !== parseInt(value, 10);
+        }).map((obj, index) => {
+          return { id: length - index, ingredient: obj.ingredient, weight: obj.weight };
+        }),
+        newIngredient: { ...state.newIngredient, id: parseInt(length + 1, 10) },
+      };
+    },
   },
 });
 
@@ -119,6 +131,7 @@ export const {
   changeRecipe,
   changeIngredient,
   changeNewIngredient,
+  removeIngredient,
 } = actions;
 
 export default reducer;

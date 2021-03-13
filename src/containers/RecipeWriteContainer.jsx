@@ -7,6 +7,7 @@ import {
   changeNewIngredient,
   changeRecipe,
   changeIngredient,
+  removeIngredient,
   loadRecipe,
   writeRecipe,
   removeRecipe,
@@ -63,6 +64,11 @@ const RecipeWriteContainer = ({ recipeId }) => {
   const onChangeNewIngredient = (event) => {
     const { name, value } = event.target;
     dispatch(changeNewIngredient({ name, value }));
+  };
+
+  const onRemoveIngredient = (event) => {
+    const { value } = event.target;
+    dispatch(removeIngredient({ value }));
   };
 
   const onKeyUpSetNewIngredient = (event) => {
@@ -134,6 +140,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
       <IngredientList
         ingredients={ingredients}
         onChangeIngredient={onChangeIngredient}
+        onRemoveIngredient={onRemoveIngredient}
       />
 
       <RecipeDescription

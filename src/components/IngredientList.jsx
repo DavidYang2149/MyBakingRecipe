@@ -5,7 +5,7 @@ import { Label } from '../layouts/Recipe';
 import { isEmpty } from '../utils/utils';
 
 const IngredientList = ({
-  ingredients, onChangeIngredient,
+  ingredients, onChangeIngredient, onRemoveIngredient,
 }) => {
   return (
     <section>
@@ -35,6 +35,7 @@ const IngredientList = ({
                 ingredient={ingredient}
                 weight={weight}
                 onChangeIngredient={onChangeIngredient}
+                onRemoveIngredient={onRemoveIngredient}
               />
             );
           })

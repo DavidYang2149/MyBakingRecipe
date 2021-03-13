@@ -292,5 +292,13 @@ describe('RecipeWriteContainer', () => {
         expect(dispatch).toBeCalledTimes(1);
       });
     });
+
+    it('click onRemoveIngredient', () => {
+      const { getAllByText } = render(<RecipeWriteContainer />);
+
+      fireEvent.click(getAllByText('삭제')[0]);
+
+      expect(dispatch).toBeCalledTimes(2);
+    });
   });
 });
