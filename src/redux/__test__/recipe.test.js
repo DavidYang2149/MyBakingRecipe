@@ -51,7 +51,7 @@ describe('recipe reducer', () => {
           { id: 3, ingredient: '전란', weight: 100 },
           { id: 4, ingredient: '박력분', weight: 150 },
         ],
-        newIngredient: { id: 0, ingredient: '', weight: 0 },
+        newIngredient: { id: 5, ingredient: '', weight: 0 },
         description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
       };
 
