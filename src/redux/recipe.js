@@ -27,6 +27,7 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         ...payload,
+        newIngredient: { id: payload.ingredients.length + 1, ingredient: '', weight: 0 },
       };
     },
     setNewIngredient(state, { payload: { fields } }) {
