@@ -4,7 +4,7 @@
 
 import sampleRecipes from '../../../fixtures/recipes';
 import {
-  fetchRecipe,
+  // fetchRecipe,
   fetchRecipes,
   postRecipe,
   updateRecipe,
@@ -18,13 +18,13 @@ describe('Recipes', () => {
     });
   };
 
-  describe('fetchRecipe', () => {
-    it('returns recipe', async () => {
-      const recipe = await fetchRecipe(1);
+  // describe('fetchRecipe', () => {
+  //   it('returns recipe', async () => {
+  //     const recipe = await fetchRecipe(1);
 
-      expect(recipe).toEqual(sampleRecipes[0]);
-    });
-  });
+  //     expect(recipe).toEqual(sampleRecipes[0]);
+  //   });
+  // });
 
   describe('fetchRecipes', () => {
     it('renders recipes', async () => {
