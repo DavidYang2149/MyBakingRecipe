@@ -9,6 +9,7 @@ describe('IngredientItem', () => {
       id={id}
       ingredient={ingredient}
       weight={weight}
+      provided={jest.fn()}
     />
   ));
 
