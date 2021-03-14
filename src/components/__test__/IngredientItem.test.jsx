@@ -4,21 +4,47 @@ import { render } from '@testing-library/react';
 import IngredientItem from '../IngredientItem';
 
 describe('IngredientItem', () => {
-  const renderIngredientItem = ({ id, ingredient, weight }) => render((
+  const onChange = jest.fn();
+  beforeEach(() => {
+    onChange.mockClear();
+  });
+
+  const renderIngredientItem = ({
+    id, ingredient, weight, onChangeIngredient, onRemoveIngredient, provided,
+  }) => render((
     <IngredientItem
       id={id}
       ingredient={ingredient}
       weight={weight}
-      provided={jest.fn()}
+      onChangeIngredient={onChangeIngredient}
+      onRemoveIngredient={onRemoveIngredient}
+      provided={provided}
     />
   ));
 
   context('with ingredient', () => {
+    const provided = {
+      draggableProps: {
+        style: {},
+      },
+      dragHandleProps: {
+        style: {},
+      },
+      innerRef: jest.fn(),
+    };
+
     it('render values', () => {
       const id = 1;
       const ingredient = '박력분';
       const weight = '100';
-      const { getByDisplayValue } = renderIngredientItem({ id, ingredient, weight });
+      const { getByDisplayValue } = renderIngredientItem({
+        id,
+        ingredient,
+        weight,
+        onChangeIngredient: onChange,
+        onRemoveIngredient: onChange,
+        provided,
+      });
 
       expect(getByDisplayValue('박력분')).toHaveValue('박력분');
       expect(getByDisplayValue('100')).toHaveValue(100);

@@ -9,10 +9,14 @@ describe('IngredientList', () => {
     onChange.mockClear();
   });
 
-  const renderIngredientList = ({ ingredients, onChangeIngredient }) => render((
+  const renderIngredientList = ({
+    ingredients, onChangeIngredient, onRemoveIngredient, onDragEndIngredient,
+  }) => render((
     <IngredientList
       ingredients={ingredients}
       onChangeIngredient={onChangeIngredient}
+      onRemoveIngredient={onRemoveIngredient}
+      onDragEndIngredient={onDragEndIngredient}
     />
   ));
 
@@ -23,10 +27,13 @@ describe('IngredientList', () => {
     { id: 4, ingredient: '박력분', weight: 150 },
   ];
 
-  context('with onChangeIngredient', () => {
+  context('with onDragEndIngredient', () => {
     it('render values', () => {
       const { container, getByDisplayValue } = renderIngredientList({
-        ingredients, onChangeIngredient: onChange,
+        ingredients,
+        onChangeIngredient: onChange,
+        onRemoveIngredient: onChange,
+        onDragEndIngredient: onChange,
       });
 
       expect(container).not.toHaveTextContent('원재료');

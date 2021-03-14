@@ -80,7 +80,7 @@ const { actions, reducer } = createSlice({
       ingredients.splice(originIndex, 1);
       ingredients.splice(destinationIndex, 0, originIngredient);
 
-      const length = ingredients.length;
+      const { length } = ingredients;
       return {
         ...state,
         ingredients: ingredients.map((obj, index) => {
