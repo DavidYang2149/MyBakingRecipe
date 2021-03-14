@@ -75,6 +75,38 @@ const Paragraph = styled.p`
   font-weight: 700;
 `;
 
+const Hamburger = styled.span`
+  margin-left: 4px;
+  position: relative;  
+  background: #000;  
+  display: inline-block;
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+
+  ::before {
+  position: absolute;
+  background: #000;  
+  top: -10px;
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+  content: '';
+
+  }
+
+  ::after {
+  background: #000;  
+  position: absolute;
+  top: 10px;
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+  content: '';
+  }
+
+`;
+
 export {
   Label,
   Input,
@@ -83,4 +115,5 @@ export {
   Textarea,
   Button,
   Paragraph,
+  Hamburger,
 };

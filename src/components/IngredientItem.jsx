@@ -45,6 +45,7 @@ const IngredientItem = ({
       {...provided.dragHandleProps}
       {...provided.draggableProps}
     >
+      <Hamburger />
       <Input
         type="text"
         id={`ingredient-${id}`}
