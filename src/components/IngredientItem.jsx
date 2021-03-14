@@ -6,13 +6,18 @@ import { isEmpty, isNotEmpty } from '../utils/utils';
 const IngredientItem = ({
   id, ingredient, weight,
   onChangeIngredient, onRemoveIngredient,
+  provided,
 }) => {
   if (isEmpty(id)) {
     return false;
   }
 
   return (
-    <li>
+    <li
+      ref={provided.innerRef}
+      {...provided.dragHandleProps}
+      {...provided.draggableProps}
+    >
       <Input
         type="text"
         id={`ingredient-${id}`}
