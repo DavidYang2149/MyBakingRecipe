@@ -23,9 +23,9 @@ const Header = ({ userId, signInWithGoogle, signOut }) => {
           ? (
             <>
               <HeaderUser>
-                {userId}
+                {userId.split('@')[0]}
               </HeaderUser>
-              <Link to="/recipewrite/0"><HeaderButton type="button">레시피 만들기</HeaderButton></Link>
+              <Link to="/recipewrite/0"><HeaderButton type="button">New Recipe</HeaderButton></Link>
               <HeaderButton type="button" onClick={signOut}>Logout</HeaderButton>
             </>
           ) : <HeaderButton type="button" onClick={signInWithGoogle}>Sign in</HeaderButton>
