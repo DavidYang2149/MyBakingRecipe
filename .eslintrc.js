@@ -53,6 +53,7 @@ module.exports = {
     'react/prop-types': 'off',
     'linebreak-style': 'off',
     'no-proto': 'off',
-    "no-alert": "off",
+    'no-alert': 'off',
+    'react/jsx-props-no-spreading': [{ 'html': 'ignore' }],
   },
 };
