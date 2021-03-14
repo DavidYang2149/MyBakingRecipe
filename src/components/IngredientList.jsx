@@ -6,15 +6,11 @@ import { Label } from '../layouts/Recipe';
 import { isEmpty } from '../utils/utils';
 
 const IngredientList = ({
-  ingredients, onChangeIngredient, onRemoveIngredient,
+  ingredients, onChangeIngredient, onRemoveIngredient, onDragEndIngredient
 }) => {
-  const handleChange = (result) => {
-    console.log('result ? ', result);
-  };
-
   return (
     <section>
-      <DragDropContext onDragEnd={handleChange}>
+      <DragDropContext onDragEnd={onDragEndIngredient}>
         <Droppable droppableId="ingredients">
           {(provided) => (
             <ul

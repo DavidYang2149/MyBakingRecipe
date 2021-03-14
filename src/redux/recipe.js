@@ -73,6 +73,21 @@ const { actions, reducer } = createSlice({
         newIngredient: { ...state.newIngredient, id: parseInt(length + 1, 10) },
       };
     },
+    swapIngredients(state, { payload: { originIndex, destinationIndex } }) {
+      const ingredients = [...state.ingredients];
+      const originIngredient = ingredients[originIndex];
+
+      ingredients.splice(originIndex, 1);
+      ingredients.splice(destinationIndex, 0, originIngredient);
+
+      const length = ingredients.length;
+      return {
+        ...state,
+        ingredients: ingredients.map((obj, index) => {
+          return { ...obj, id: length - index };
+        }),
+      };
+    },
   },
 });
 
@@ -133,6 +148,7 @@ export const {
   changeIngredient,
   changeNewIngredient,
   removeIngredient,
+  swapIngredients,
 } = actions;
 
 export default reducer;

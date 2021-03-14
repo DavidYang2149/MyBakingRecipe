@@ -8,6 +8,7 @@ import {
   changeRecipe,
   changeIngredient,
   removeIngredient,
+  swapIngredients,
   loadRecipe,
   writeRecipe,
   removeRecipe,
@@ -81,6 +82,13 @@ const RecipeWriteContainer = ({ recipeId }) => {
     dispatch(setNewIngredient({ fields: newIngredient }));
   };
 
+  const onDragEndIngredient = (result) => {
+    const originIndex = result.source.index || 0;
+    const destinationIndex = result.destination.index || 0;
+
+    dispatch(swapIngredients({ originIndex, destinationIndex }));
+  };
+
   const onSubmit = async () => {
     await dispatch(writeRecipe());
 
@@ -141,6 +149,7 @@ const RecipeWriteContainer = ({ recipeId }) => {
         ingredients={ingredients}
         onChangeIngredient={onChangeIngredient}
         onRemoveIngredient={onRemoveIngredient}
+        onDragEndIngredient={onDragEndIngredient}
       />
 
       <RecipeDescription
