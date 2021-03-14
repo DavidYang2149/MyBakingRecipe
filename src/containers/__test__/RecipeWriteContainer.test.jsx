@@ -300,5 +300,32 @@ describe('RecipeWriteContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
+
+    it('mouse drag onDragEndIngredient', async () => {
+      // TODO: swapIngredients TEST
+      const { getAllByText } = render(<RecipeWriteContainer />);
+
+      fireEvent.mouseDown(getAllByText('g')[2]);
+      fireEvent.mouseMove(getAllByText('g')[2], {
+        clientX: 40,
+        clientY: 40,
+      });
+      fireEvent.mouseUp(getAllByText('g')[2]);
+
+      // expect(dispatch).toBeCalledWith({
+      //   type: 'recipe/swapIngredients',
+      //   payload: {
+      //     fields: {
+      //       id: 0,
+      //       ingredient: '',
+      //       weight: 0,
+      //     },
+      //   },
+      // });
+
+      // await expect(getAllByText('g')[1]).toBeCalledWith();
+      // await expect(dispatch).toBeCalledWith();
+      expect(dispatch).toBeCalledTimes(1);
+    });
   });
 });
