@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Input, Label, Span, Button,
 } from '../layouts/Recipe';
+import { isEmpty } from '../utils/utils';
 
 const IngredientAdd = ({
   newId, newIngredient,
@@ -50,6 +51,7 @@ const IngredientAdd = ({
           <Button
             type="button"
             onClick={onClickSetNewIngredient}
+            disabled={isEmpty(newIngredient.ingredient) || isEmpty(newIngredient.weight)}
           >
             추가하기
           </Button>

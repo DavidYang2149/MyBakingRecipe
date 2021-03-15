@@ -203,20 +203,53 @@ describe('RecipeWriteContainer', () => {
       });
     });
 
-    it('click and set new ingredient', () => {
-      const { getByText } = render(<RecipeWriteContainer />);
-
-      fireEvent.click(getByText('추가하기'));
-
-      expect(dispatch).toBeCalledWith({
-        type: 'recipe/setNewIngredient',
-        payload: {
-          fields: {
-            id: 0,
-            ingredient: '',
-            weight: 0,
+    context('with new ingredient values', () => {
+      it('click and set new ingredient', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            ...recipes[0],
+            newIngredient: { id: 0, ingredient: '바닐라빈', weight: 10 },
           },
-        },
+          user: {
+            userId: '1',
+            displayName: '',
+          },
+        }));
+
+        const { getByText } = render(<RecipeWriteContainer />);
+
+        fireEvent.click(getByText('추가하기'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'recipe/setNewIngredient',
+          payload: {
+            fields: {
+              id: 0,
+              ingredient: '바닐라빈',
+              weight: 10,
+            },
+          },
+        });
+      });
+    });
+
+    context('without new ingredient values', () => {
+      it('click and not to change', () => {
+        const { getByText } = render(<RecipeWriteContainer />);
+
+        fireEvent.click(getByText('추가하기'));
+
+        expect(dispatch).not.toBeCalledWith({
+          type: 'recipe/setNewIngredient',
+          payload: {
+            fields: {
+              id: 0,
+              ingredient: '',
+              weight: 0,
+            },
+          },
+        });
       });
     });
 

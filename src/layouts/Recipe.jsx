@@ -68,6 +68,13 @@ const Button = styled.button`
   border-color: #361d74;
   cursor: pointer;
   margin: 10px;
+  transition: 0.5s;
+
+  :disabled {
+    cursor: default;
+    opacity: 0.5;
+    background-color: #808080;
+  }
 `;
 
 const Paragraph = styled.p`
