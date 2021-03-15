@@ -52,7 +52,7 @@ const IngredientItem = ({
         name={`ingredient-${id}`}
         value={ingredient}
         onChange={onChangeIngredient}
-        width="25%"
+        width="24%"
       />
       <Input
         type="number"
@@ -60,7 +60,7 @@ const IngredientItem = ({
         name={`weight-${id}`}
         value={weight}
         onChange={onChangeIngredient}
-        width="15%"
+        width="13%"
       />
       <Span>g</Span>
       <Button

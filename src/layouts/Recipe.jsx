@@ -84,10 +84,11 @@ const Paragraph = styled.p`
 
 const Hamburger = styled.span`
   margin-left: 8px;
+  margin-bottom: 5px;
   position: relative;  
   background: #000;  
   display: inline-block;
-  width: 30px;
+  width: 26px;
   height: 4px;
   border-radius: 4px;
 
@@ -95,7 +96,7 @@ const Hamburger = styled.span`
   position: absolute;
   background: #000;  
   top: -10px;
-  width: 30px;
+  width: 26px;
   height: 4px;
   border-radius: 4px;
   content: '';
@@ -106,12 +107,11 @@ const Hamburger = styled.span`
   background: #000;  
   position: absolute;
   top: 10px;
-  width: 30px;
+  width: 26px;
   height: 4px;
   border-radius: 4px;
   content: '';
   }
-
 `;
 
 export {
