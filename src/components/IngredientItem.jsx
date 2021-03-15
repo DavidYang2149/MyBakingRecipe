@@ -52,7 +52,7 @@ const IngredientItem = ({
         name={`ingredient-${id}`}
         value={ingredient}
         onChange={onChangeIngredient}
-        width="30%"
+        width="25%"
       />
       <Input
         type="number"

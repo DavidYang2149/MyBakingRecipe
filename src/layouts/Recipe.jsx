@@ -76,7 +76,7 @@ const Paragraph = styled.p`
 `;
 
 const Hamburger = styled.span`
-  margin-left: 4px;
+  margin-left: 8px;
   position: relative;  
   background: #000;  
   display: inline-block;
