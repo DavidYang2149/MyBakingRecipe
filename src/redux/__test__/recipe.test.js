@@ -191,6 +191,8 @@ describe('recipe actions', () => {
           ingredients: [],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          created: false,
+          updated: false,
         };
 
         const store = mockStore({});

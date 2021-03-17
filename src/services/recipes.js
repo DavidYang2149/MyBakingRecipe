@@ -1,9 +1,11 @@
-import { db, auth } from './firebase';
+import { db, auth, fireStore } from './firebase';
 
 import {
   isMatch,
   isNotEmpty,
 } from '../utils/utils';
+
+const fieldValue = fireStore.FieldValue;
 
 export async function fetchRecipe(id) {
   const recipesRef = db.collection('recipes');
@@ -13,7 +15,7 @@ export async function fetchRecipe(id) {
 
 export async function fetchRecipes() {
   const recipesRef = db.collection('recipes');
-  const snapshot = await recipesRef.get();
+  const snapshot = await recipesRef.orderBy('created', 'desc').get();
 
   return snapshot.docs;
 }
@@ -25,6 +27,8 @@ export async function postRecipe(recipe) {
     const { id } = await db.collection('recipes').add({
       ...recipe,
       userId,
+      created: fieldValue.serverTimestamp(),
+      updated: fieldValue.serverTimestamp(),
     });
 
     return id;
@@ -40,7 +44,13 @@ export async function updateRecipe(recipe) {
       id, title, category, product, ingredients, description,
     } = recipe;
     await db.collection('recipes').doc(id).update({
-      userId, title, category, product, ingredients, description,
+      userId,
+      title,
+      category,
+      product,
+      ingredients,
+      description,
+      updated: fieldValue.serverTimestamp(),
     });
   }
 }
