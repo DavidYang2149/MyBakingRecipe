@@ -1,30 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  loadRecipe,
-  removeRecipe,
-} from '../redux/recipe';
-import {
-  isMatch,
-  isNotEmpty,
-} from '../utils/utils';
-import {
-  Button,
-} from '../layouts/Recipe';
 import RecipeTitle from '../components/RecipeTitle';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
+import { Button } from '../layouts/Recipe';
+import { removeRecipe } from '../redux/recipe';
+import {
+  isMatch,
+  isNotEmpty,
+} from '../utils/utils';
 
-const RecipeContainer = ({ recipeId }) => {
+const RecipeContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(loadRecipe(recipeId));
-  }, []);
 
   const { user, recipe } = useSelector((state) => ({
     user: state.user,

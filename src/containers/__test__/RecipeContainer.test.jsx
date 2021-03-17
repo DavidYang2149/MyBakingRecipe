@@ -3,9 +3,9 @@ import { MemoryRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
+import RecipeContainer from '../RecipeContainer';
 import recipes from '../../../fixtures/recipes';
 import allConditionsState from '../../../fixtures/allConditionsState';
-import RecipeContainer from '../RecipeContainer';
 
 const mockPush = jest.fn();
 
@@ -59,7 +59,7 @@ describe('RecipeContainer', () => {
 
         fireEvent.click(getByText('수정하기'));
 
-        expect(dispatch).toBeCalledTimes(1);
+        expect(dispatch).toBeCalledTimes(0);
       });
     });
 
@@ -74,7 +74,7 @@ describe('RecipeContainer', () => {
 
         fireEvent.click(getByText('삭제하기'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
@@ -89,7 +89,7 @@ describe('RecipeContainer', () => {
 
         fireEvent.click(getByText('삭제하기'));
 
-        expect(dispatch).toBeCalledTimes(1);
+        expect(dispatch).toBeCalledTimes(0);
       });
     });
   });
