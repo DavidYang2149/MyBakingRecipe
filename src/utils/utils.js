@@ -1,10 +1,3 @@
-export const formatRecipe = (recipe) => {
-  return {
-    ...recipe.data(),
-    id: recipe.id,
-  };
-};
-
 export const isEmpty = (value) => {
   if (!value) {
     return true;
@@ -33,4 +26,22 @@ export const isArray = (value) => {
 
 export const isNotArray = (value) => {
   return !isArray(value);
+};
+
+export const changeDateToString = (date) => {
+  if (isEmpty(date)) {
+    return false;
+  }
+  return date.toDate().toISOString().substr(0, 10);
+};
+
+export const formatRecipe = (recipe) => {
+  const { created, updated } = recipe.data();
+
+  return {
+    ...recipe.data(),
+    id: recipe.id,
+    created: changeDateToString(created),
+    updated: changeDateToString(updated),
+  };
 };

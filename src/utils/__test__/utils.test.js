@@ -1,4 +1,5 @@
 import {
+  changeDateToString,
   formatRecipe,
   isEmpty,
   isMatch,
@@ -8,6 +9,23 @@ import {
   isNotArray,
 } from '../utils';
 import sampleRecipes from '../../../fixtures/recipes';
+
+test('changeDateToString', () => {
+  const mockData = {
+    toDate: () => {
+      return mockData;
+    },
+    toISOString: () => {
+      return mockData;
+    },
+    substr: () => {
+      return '2021-03-17';
+    },
+  };
+
+  const result = changeDateToString(mockData);
+  expect(result).toEqual('2021-03-17');
+});
 
 test('formatRecipe', () => {
   const settings = {
