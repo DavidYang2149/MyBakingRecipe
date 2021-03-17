@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import RecipeTitle from '../components/RecipeTitle';
+import RecipeBasicInfo from '../components/RecipeBasicInfo';
+import RecipeDescription from '../components/RecipeDescription';
+import IngredientList from '../components/IngredientList';
+import IngredientAdd from '../components/IngredientAdd';
+import { Button } from '../layouts/Recipe';
 import {
   setNewIngredient,
   changeNewIngredient,
@@ -9,7 +15,6 @@ import {
   changeIngredient,
   removeIngredient,
   swapIngredients,
-  loadRecipe,
   writeRecipe,
   removeRecipe,
 } from '../redux/recipe';
@@ -18,22 +23,10 @@ import {
   isMatch,
   isNotEmpty,
 } from '../utils/utils';
-import {
-  Button,
-} from '../layouts/Recipe';
-import RecipeTitle from '../components/RecipeTitle';
-import RecipeBasicInfo from '../components/RecipeBasicInfo';
-import RecipeDescription from '../components/RecipeDescription';
-import IngredientList from '../components/IngredientList';
-import IngredientAdd from '../components/IngredientAdd';
 
-const RecipeWriteContainer = ({ recipeId }) => {
+const RecipeWriteContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(loadRecipe(recipeId));
-  }, []);
 
   const { user, recipe } = useSelector((state) => ({
     user: state.user,

@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
-import recipes from '../../../fixtures/recipes';
-import allConditionsState from '../../../fixtures/allConditionsState';
 import RecipeWriteContainer from '../RecipeWriteContainer';
+import allConditionsState from '../../../fixtures/allConditionsState';
+import recipes from '../../../fixtures/recipes';
 
 const mockPush = jest.fn();
 
@@ -198,8 +198,7 @@ describe('RecipeWriteContainer', () => {
           key: 'Shift',
         });
 
-        // 1: useEffect(for Check)
-        expect(dispatch).toBeCalledTimes(1);
+        expect(dispatch).toBeCalledTimes(0);
       });
     });
 
@@ -281,7 +280,7 @@ describe('RecipeWriteContainer', () => {
 
         fireEvent.click(getByText('저장하기'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
@@ -300,7 +299,7 @@ describe('RecipeWriteContainer', () => {
 
         fireEvent.click(getByText('수정완료'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
@@ -311,7 +310,7 @@ describe('RecipeWriteContainer', () => {
 
         fireEvent.click(getByText('삭제하기'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
@@ -322,7 +321,7 @@ describe('RecipeWriteContainer', () => {
 
         fireEvent.click(getByText('삭제하기'));
 
-        expect(dispatch).toBeCalledTimes(1);
+        expect(dispatch).toBeCalledTimes(0);
       });
     });
 
@@ -331,7 +330,7 @@ describe('RecipeWriteContainer', () => {
 
       fireEvent.click(getAllByText('삭제')[0]);
 
-      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toBeCalledTimes(1);
     });
 
     it('mouse drag onDragEndIngredient', async () => {
@@ -358,7 +357,7 @@ describe('RecipeWriteContainer', () => {
 
       // await expect(getAllByText('g')[1]).toBeCalledWith();
       // await expect(dispatch).toBeCalledWith();
-      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledTimes(0);
     });
   });
 });
