@@ -32,7 +32,7 @@ export const changeDateToString = (date) => {
   if (isEmpty(date)) {
     return false;
   }
-  return date.toDate().toISOString().substr(0, 10);
+  return date.toDate().toISOString();
 };
 
 export const formatRecipe = (recipe) => {
@@ -45,3 +45,5 @@ export const formatRecipe = (recipe) => {
     updated: changeDateToString(updated),
   };
 };
+
+export const RECIPE_COUNT = 12;

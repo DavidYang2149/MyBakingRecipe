@@ -16,9 +16,6 @@ test('changeDateToString', () => {
       return mockData;
     },
     toISOString: () => {
-      return mockData;
-    },
-    substr: () => {
       return '2021-03-17';
     },
   };
