@@ -18,6 +18,9 @@ const RecipeItem = ({ recipe }) => {
         <div className="card-desc">
           {recipe.title}
         </div>
+        <div className="card-desc">
+          {recipe.created.substr(0, 10)}
+        </div>
       </Link>
     </RecipeCard>
   );
