@@ -1,10 +1,13 @@
 import { db, auth, fireStore } from './firebase';
 
 import {
+  isEmpty,
   isMatch,
   isNotEmpty,
+  RECIPE_COUNT,
 } from '../utils/utils';
 
+const timeStamp = (dateTime) => fireStore.Timestamp.fromDate(new Date(dateTime));
 const fieldValue = fireStore.FieldValue;
 
 export async function fetchRecipe(id) {
@@ -13,10 +16,15 @@ export async function fetchRecipe(id) {
   return recipe;
 }
 
-export async function fetchRecipes() {
+export async function fetchRecipes(lastRecipe) {
   const recipesRef = db.collection('recipes');
-  const snapshot = await recipesRef.orderBy('created', 'desc').get();
 
+  if (isEmpty(lastRecipe)) {
+    const snapshot = await recipesRef.orderBy('created', 'desc').limit(RECIPE_COUNT).get();
+    return snapshot.docs;
+  }
+
+  const snapshot = await recipesRef.orderBy('created', 'desc').startAfter(timeStamp(lastRecipe.created)).limit(RECIPE_COUNT).get();
   return snapshot.docs;
 }
 
