@@ -13,7 +13,11 @@ const recipes = [
     ],
     newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
-    created: false,
+    created: {
+      substr: () => false,
+      toDate: () => recipes[0].created,
+      toISOString: () => recipes[0].created,
+    },
     updated: false,
   },
   {
@@ -30,7 +34,11 @@ const recipes = [
     ],
     newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '파운드 케이크 만드는 방법. 오븐 170도에 50분간 굽기',
-    created: false,
+    created: {
+      substr: () => false,
+      toDate: () => recipes[0].created,
+      toISOString: () => recipes[0].created,
+    },
     updated: false,
   },
 ];
