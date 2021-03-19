@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,11 @@ import ReipcesPage from '../RecipesPage';
 
 jest.mock('react-redux');
 jest.mock('../../services/recipes');
+
+window.IntersectionObserver = jest.fn(function () {
+  this.observe = jest.fn();
+  this.unobserve = jest.fn();
+});
 
 describe('ReipcesPage', () => {
   const dispatch = jest.fn();
