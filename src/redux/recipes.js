@@ -65,6 +65,8 @@ export function loadRecipes() {
 
 export const {
   setRecipes,
+  setLastRecipe,
+  addRecipes,
 } = actions;
 
 export default reducer;
