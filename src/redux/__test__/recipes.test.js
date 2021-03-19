@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 
 import reducer, {
   setRecipes,
+  addRecipes,
   loadRecipes,
 } from '../recipes';
 import sampleRecipes from '../../../fixtures/recipes';
@@ -15,6 +16,7 @@ const mockStore = configureStore(middlewares);
 describe('recipes reducer', () => {
   const initialState = {
     recipesBook: [],
+    lastRecipe: { recipe: null, isLast: false },
   };
 
   context('when previous state is undefined', () => {
@@ -28,8 +30,12 @@ describe('recipes reducer', () => {
   describe('setRecipes', () => {
     it('update recipes', () => {
       const state = reducer(initialState, setRecipes(sampleRecipes));
+      const result = {
+        recipesBook: [...sampleRecipes],
+        lastRecipe: { recipe: null, isLast: false },
+      };
 
-      expect(state).toEqual({ recipesBook: [...sampleRecipes] });
+      expect(state).toEqual(result);
     });
   });
 });
@@ -38,13 +44,20 @@ describe('recipes actions', () => {
   describe('loadRecipes', () => {
     context('with return values', () => {
       it('runs setRecipes', async () => {
-        const store = mockStore({});
+        const initialState = {
+          recipes: {
+            recipesBook: [],
+            lastRecipe: { recipe: null, isLast: false },
+          },
+        };
+        const store = mockStore(initialState);
+        store.getState = () => initialState;
 
         await store.dispatch(loadRecipes([]));
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRecipes([]));
+        expect(actions[0]).toEqual(addRecipes([]));
       });
     });
 
