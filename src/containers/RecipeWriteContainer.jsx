@@ -86,17 +86,24 @@ const RecipeWriteContainer = () => {
     await dispatch(writeRecipe());
 
     if (isEmpty(recipe.id)) {
-      return history.push('/');
+      history.push('/');
+      setTimeout(() => { history.go(0); }, 100);
+      return;
     }
-    return history.push(`/recipe/${recipe.id}`);
+
+    history.push(`/recipe/${recipe.id}`);
+    setTimeout(() => { history.go(0); }, 100);
   };
 
   const onRemove = async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
-    if (ensure) {
-      await dispatch(removeRecipe());
-      history.push('/');
+    if (isEmpty(ensure)) {
+      return;
     }
+
+    await dispatch(removeRecipe());
+    history.push('/');
+    setTimeout(() => { history.go(0); }, 100);
   };
 
   const isNotWriteAdd = (userUserId) => (id) => (recipeUserId) => {

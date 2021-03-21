@@ -10,6 +10,7 @@ import { Button } from '../layouts/Recipe';
 import { removeRecipe } from '../redux/recipe';
 import {
   isMatch,
+  isEmpty,
   isNotEmpty,
 } from '../utils/utils';
 
@@ -33,10 +34,13 @@ const RecipeContainer = () => {
 
   const onRemove = async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
-    if (ensure) {
-      await dispatch(removeRecipe());
-      history.push('/');
+    if (isEmpty(ensure)) {
+      return;
     }
+
+    await dispatch(removeRecipe());
+    history.push('/');
+    setTimeout(() => { history.go(0); }, 100);
   };
 
   return (
