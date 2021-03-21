@@ -37,6 +37,7 @@ export async function postRecipe(recipe) {
       userId,
       created: fieldValue.serverTimestamp(),
       updated: fieldValue.serverTimestamp(),
+      show: true,
     });
 
     return id;
