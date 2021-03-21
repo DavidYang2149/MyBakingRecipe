@@ -19,6 +19,7 @@ const recipes = [
       toISOString: () => recipes[0].created,
     },
     updated: false,
+    show: true,
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const recipes = [
       toISOString: () => recipes[0].created,
     },
     updated: false,
+    show: true,
   },
 ];
 
