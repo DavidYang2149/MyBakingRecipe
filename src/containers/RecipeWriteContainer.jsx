@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import RecipeTitle from '../components/RecipeTitle';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
+import RecipeImageUpload from '../components/RecipeImageUpload';
 import IngredientList from '../components/IngredientList';
 import IngredientAdd from '../components/IngredientAdd';
 import { Button } from '../layouts/Recipe';
@@ -17,6 +18,7 @@ import {
   swapIngredients,
   writeRecipe,
   removeRecipe,
+  removeFile,
 } from '../redux/recipe';
 import {
   isEmpty,
@@ -41,8 +43,11 @@ const RecipeWriteContainer = () => {
     ingredients,
     newIngredient,
     description,
+    upload,
+    image,
   } = recipe;
 
+  const fileInputRef = useRef();
   const newId = ingredients.length + 1;
 
   const onChangeRecipe = (event) => {
@@ -106,6 +111,27 @@ const RecipeWriteContainer = () => {
     setTimeout(() => { history.go(0); }, 100);
   };
 
+  const onFileChange = (event) => {
+    const { target: { files } } = event;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const { currentTarget: { result } } = finishedEvent;
+      dispatch(changeRecipe({ name: 'upload', value: result }));
+    };
+    reader.readAsDataURL(theFile);
+  };
+
+  const onClearFile = () => {
+    dispatch(changeRecipe({ name: 'upload', value: null }));
+    fileInputRef.current.value = '';
+  };
+
+  const onRemoveFile = async () => {
+    dispatch(removeFile());
+    fileInputRef.current.value = '';
+  };
+
   const isNotWriteAdd = (userUserId) => (id) => (recipeUserId) => {
     if (isNotEmpty(userUserId) && isEmpty(id) && isEmpty(recipeUserId)) {
       return false;
@@ -155,6 +181,15 @@ const RecipeWriteContainer = () => {
       <RecipeDescription
         description={description}
         onChangeRecipe={onChangeRecipe}
+      />
+
+      <RecipeImageUpload
+        upload={upload}
+        image={image}
+        fileInputRef={fileInputRef}
+        onFileChange={onFileChange}
+        onClearFile={onClearFile}
+        onRemoveFile={onRemoveFile}
       />
 
       <section>
