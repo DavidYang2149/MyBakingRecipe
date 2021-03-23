@@ -5,8 +5,14 @@ import {
   postRecipe,
   updateRecipe,
   deleteRecipe,
+  postFile,
+  deleteFile,
 } from '../services/recipes';
-import { formatRecipe } from '../utils/utils';
+import {
+  isEmpty,
+  isNotEmpty,
+  formatRecipe,
+} from '../utils/utils';
 
 const initialState = {
   id: 0,
@@ -17,6 +23,8 @@ const initialState = {
   ingredients: [],
   newIngredient: { id: 0, ingredient: '', weight: 0 },
   description: '',
+  upload: null,
+  image: null,
 };
 
 const { actions, reducer } = createSlice({
@@ -106,29 +114,48 @@ export function loadRecipe(id) {
 
 export function writeRecipe() {
   return async (dispatch, getState) => {
-    const { user, recipe } = getState();
+    const {
+      user: { userId },
+      recipe: {
+        id, title, category, product, ingredients, description, upload, image,
+      },
+    } = getState();
 
-    if (recipe.userId === '') {
-      const { userId } = user;
-      const {
-        title, category, product, ingredients, description,
-      } = recipe;
-      const recipeInfo = {
-        userId, title, category, product, ingredients, description,
-      };
-
-      const id = await postRecipe(recipeInfo);
-      await dispatch(actions.changeRecipe({ name: 'id', value: id }));
-    } else {
-      const {
-        id, title, category, product, ingredients, description,
-      } = recipe;
-      const recipeInfo = {
-        id, title, category, product, ingredients, description,
-      };
-      await updateRecipe(recipeInfo);
-      await dispatch(loadRecipe(id));
+    if (isEmpty(userId)) {
+      return;
     }
+
+    // Image upload Check
+    let imageURL = '';
+
+    // Replace Image
+    if (isNotEmpty(upload) && isNotEmpty(image)) {
+      await deleteFile({ image });
+      imageURL = await postFile({ userId, upload });
+    }
+
+    // Create Image
+    if (isNotEmpty(upload) && isEmpty(image)) {
+      imageURL = await postFile({ userId, upload });
+    }
+
+    // Create
+    if (isEmpty(id)) {
+      const recipeInfo = {
+        userId, title, category, product, ingredients, description, image: imageURL || image,
+      };
+
+      const createId = await postRecipe(recipeInfo);
+      await dispatch(actions.changeRecipe({ name: 'id', value: createId }));
+      return;
+    }
+
+    // Update
+    const recipeInfo = {
+      id, title, category, product, ingredients, description, image: imageURL || image,
+    };
+    await updateRecipe(recipeInfo);
+    await dispatch(loadRecipe(id));
   };
 }
 
@@ -138,6 +165,15 @@ export function removeRecipe() {
     const { id, userId } = recipe;
 
     await deleteRecipe({ id, userId });
+  };
+}
+
+export function removeFile() {
+  return async (dispatch, getState) => {
+    const { recipe: { image } } = getState();
+
+    await deleteFile({ image });
+    dispatch(actions.changeRecipe({ name: 'image', value: null }));
   };
 }
 
