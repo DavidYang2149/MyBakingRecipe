@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import RecipeTitle from '../components/RecipeTitle';
+import RecipeImage from '../components/RecipeImage';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
@@ -18,19 +19,14 @@ const RecipeContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user, recipe } = useSelector((state) => ({
+  const {
+    user, recipe: {
+      id, userId, title, category, product, ingredients, description, image,
+    },
+  } = useSelector((state) => ({
     user: state.user,
     recipe: state.recipe,
   }));
-
-  const {
-    userId,
-    title,
-    category,
-    product,
-    ingredients,
-    description,
-  } = recipe;
 
   const onRemove = async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
@@ -46,6 +42,7 @@ const RecipeContainer = () => {
   return (
     <article>
       <RecipeTitle title={title} />
+      <RecipeImage image={image} />
       <RecipeBasicInfo
         title={title}
         category={category}
@@ -63,7 +60,7 @@ const RecipeContainer = () => {
       {
         isNotEmpty(userId) && isMatch(userId)(user.userId) && (
           <section>
-            <Link to={`/recipewrite/${recipe.id}`}>
+            <Link to={`/recipewrite/${id}`}>
               <Button type="button">수정하기</Button>
             </Link>
             <Button
