@@ -1,5 +1,8 @@
-import { db, auth, fireStore } from './firebase';
+import { v4 as uuidv4 } from 'uuid';
 
+import {
+  db, auth, fireStore, storage,
+} from './firebase';
 import {
   isEmpty,
   isMatch,
@@ -50,7 +53,7 @@ export async function updateRecipe(recipe) {
   if (isNotEmpty(user)) {
     const userId = user.email;
     const {
-      id, title, category, product, ingredients, description,
+      id, title, category, product, ingredients, description, image,
     } = recipe;
     await db.collection('recipes').doc(id).update({
       userId,
@@ -59,6 +62,7 @@ export async function updateRecipe(recipe) {
       product,
       ingredients,
       description,
+      image,
       updated: fieldValue.serverTimestamp(),
     });
   }
@@ -70,4 +74,15 @@ export async function deleteRecipe({ id, userId }) {
   if (isNotEmpty(user) && isMatch(userId)(user.email)) {
     await db.collection('recipes').doc(id).delete();
   }
+}
+
+export async function postFile({ userId, upload }) {
+  const fileRef = await storage.ref().child(`${userId.split('@')[0]}/${uuidv4()}`);
+  const response = await fileRef.putString(upload, 'data_url');
+  const imageURL = response.ref.getDownloadURL();
+  return imageURL;
+}
+
+export async function deleteFile({ image }) {
+  await storage.refFromURL(image).delete();
 }
