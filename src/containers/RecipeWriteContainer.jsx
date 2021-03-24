@@ -20,6 +20,7 @@ import {
   removeRecipe,
   removeFile,
 } from '../redux/recipe';
+import { updateRecipes } from '../redux/recipes';
 import {
   isEmpty,
   isMatch,
@@ -89,15 +90,14 @@ const RecipeWriteContainer = () => {
 
   const onSubmit = async () => {
     await dispatch(writeRecipe());
+    await dispatch(updateRecipes());
 
     if (isEmpty(recipe.id)) {
       history.push('/');
-      setTimeout(() => { history.go(0); }, 100);
       return;
     }
 
     history.push(`/recipe/${recipe.id}`);
-    setTimeout(() => { history.go(0); }, 100);
   };
 
   const onRemove = async () => {
@@ -107,8 +107,8 @@ const RecipeWriteContainer = () => {
     }
 
     await dispatch(removeRecipe());
+    await dispatch(updateRecipes());
     history.push('/');
-    setTimeout(() => { history.go(0); }, 100);
   };
 
   const onFileChange = (event) => {
@@ -128,7 +128,9 @@ const RecipeWriteContainer = () => {
   };
 
   const onRemoveFile = async () => {
-    dispatch(removeFile());
+    await dispatch(removeFile());
+    await dispatch(writeRecipe());
+    await dispatch(updateRecipes());
     fileInputRef.current.value = '';
   };
 
