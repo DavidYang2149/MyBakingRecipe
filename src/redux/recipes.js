@@ -41,7 +41,11 @@ const { actions, reducer } = createSlice({
 
 export function loadRecipes() {
   return async (dispatch, getState) => {
-    const { recipe, isLast } = getState().recipes.lastRecipe;
+    const {
+      recipes: {
+        lastRecipe: { recipe, isLast },
+      },
+    } = getState();
 
     if (isLast) { return; }
 
@@ -60,6 +64,16 @@ export function loadRecipes() {
     if (recipes.length < RECIPE_COUNT) {
       dispatch(actions.setLastRecipe({ name: 'isLast', value: true }));
     }
+  };
+}
+
+export function updateRecipes() {
+  return async (dispatch) => {
+    const response = await fetchRecipes();
+    const recipes = response.map((doc) => formatRecipe(doc));
+    dispatch(actions.setRecipes(recipes));
+    dispatch(actions.setLastRecipe({ name: 'recipe', value: recipes[recipes.length - 1] }));
+    dispatch(actions.setLastRecipe({ name: 'isLast', value: false }));
   };
 }
 
