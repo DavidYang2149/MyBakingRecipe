@@ -69,6 +69,12 @@ const { actions, reducer } = createSlice({
         newIngredient: { ...state.newIngredient, id: parseInt(targetId, 10), [targetName]: value },
       };
     },
+    clearRecipe(state) {
+      return {
+        ...state,
+        ...initialState,
+      };
+    },
     removeIngredient(state, { payload: { value } }) {
       const length = state.ingredients.length - 1;
       return {
@@ -183,6 +189,7 @@ export const {
   changeRecipe,
   changeIngredient,
   changeNewIngredient,
+  clearRecipe,
   removeIngredient,
   swapIngredients,
 } = actions;
