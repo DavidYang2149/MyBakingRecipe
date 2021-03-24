@@ -9,6 +9,7 @@ import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
 import { Button } from '../layouts/Recipe';
 import { removeRecipe } from '../redux/recipe';
+import { updateRecipes } from '../redux/recipes';
 import {
   isMatch,
   isEmpty,
@@ -35,8 +36,8 @@ const RecipeContainer = () => {
     }
 
     await dispatch(removeRecipe());
+    await dispatch(updateRecipes());
     history.push('/');
-    setTimeout(() => { history.go(0); }, 100);
   };
 
   return (
