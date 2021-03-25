@@ -64,6 +64,14 @@ const RecipeWriteContainer = () => {
   };
 
   const onKeyUpSetNewIngredient = (event) => {
+    if (isEmpty(newIngredient.ingredient)) {
+      return;
+    }
+
+    if (isEmpty(newIngredient.weight)) {
+      return;
+    }
+
     if (isMatch(event.key)('Enter')) {
       dispatch(setNewIngredient({ fields: newIngredient }));
       NewIngredientRef.current.focus();
