@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Label, Input, Button } from '../layouts/Recipe';
+import { isNotEmpty } from '../utils/utils';
 
 const RecipeImageUpload = ({
   upload, image, fileInputRef, onFileChange, onClearFile, onRemoveFile,
@@ -8,7 +9,7 @@ const RecipeImageUpload = ({
   return (
     <section>
       {
-        image && (
+        isNotEmpty(image) && (
           <div>
             <Label
               htmlFor="displayImage"
@@ -17,18 +18,14 @@ const RecipeImageUpload = ({
               이미지
             </Label>
             <img id="displayImage" src={image} width="200px" height="200px" alt="displayImage" />
-            {
-              image && (
-                <div>
-                  <Button
-                    type="button"
-                    onClick={onRemoveFile}
-                  >
-                    이미지 삭제하기
-                  </Button>
-                </div>
-              )
-            }
+            <div>
+              <Button
+                type="button"
+                onClick={onRemoveFile}
+              >
+                이미지 삭제하기
+              </Button>
+            </div>
           </div>
         )
       }
@@ -47,7 +44,7 @@ const RecipeImageUpload = ({
           ref={fileInputRef}
         />
         {
-          upload && (
+          isNotEmpty(upload) && (
             <>
               <div>
                 <img src={upload} width="200px" height="200px" alt="preview" />
