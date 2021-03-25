@@ -30,7 +30,9 @@ import {
 const RecipeWriteContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const fileInputRef = useRef();
+  const NewIngredientRef = useRef();
 
   const {
     user, recipe: {
@@ -64,11 +66,13 @@ const RecipeWriteContainer = () => {
   const onKeyUpSetNewIngredient = (event) => {
     if (isMatch(event.key)('Enter')) {
       dispatch(setNewIngredient({ fields: newIngredient }));
+      NewIngredientRef.current.focus();
     }
   };
 
   const onClickSetNewIngredient = () => {
     dispatch(setNewIngredient({ fields: newIngredient }));
+    NewIngredientRef.current.focus();
   };
 
   const onDragEndIngredient = (result) => {
@@ -158,6 +162,7 @@ const RecipeWriteContainer = () => {
       <IngredientAdd
         newId={ingredients.length + 1}
         newIngredient={newIngredient}
+        NewIngredientRef={NewIngredientRef}
         onChangeNewIngredient={onChangeNewIngredient}
         onKeyUpSetNewIngredient={onKeyUpSetNewIngredient}
         onClickSetNewIngredient={onClickSetNewIngredient}

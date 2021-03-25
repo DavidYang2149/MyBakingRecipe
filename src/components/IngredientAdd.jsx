@@ -6,7 +6,7 @@ import {
 import { isEmpty } from '../utils/utils';
 
 const IngredientAdd = ({
-  newId, newIngredient,
+  newId, newIngredient, NewIngredientRef,
   onChangeNewIngredient, onKeyUpSetNewIngredient, onClickSetNewIngredient,
 }) => {
   return (
@@ -37,6 +37,7 @@ const IngredientAdd = ({
             onChange={onChangeNewIngredient}
             onKeyUp={onKeyUpSetNewIngredient}
             width="30%"
+            ref={NewIngredientRef}
           />
           <Input
             type="number"
