@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 import RecipeList from '../components/RecipeList';
 
 const RecipesContainer = () => {
-  const { recipes } = useSelector((state) => ({
+  const { recipes: { recipesBook } } = useSelector((state) => ({
     recipes: state.recipes,
   }));
-  const { recipesBook } = recipes;
 
   return (
     <article>

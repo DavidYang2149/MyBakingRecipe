@@ -11,9 +11,9 @@ import IngredientAdd from '../components/IngredientAdd';
 import { Button } from '../layouts/Recipe';
 import {
   setNewIngredient,
-  changeNewIngredient,
   changeRecipe,
   changeIngredient,
+  changeNewIngredient,
   removeIngredient,
   swapIngredients,
   writeRecipe,
@@ -22,34 +22,24 @@ import {
 } from '../redux/recipe';
 import { updateRecipes } from '../redux/recipes';
 import {
-  isEmpty,
   isMatch,
+  isEmpty,
   isNotEmpty,
 } from '../utils/utils';
 
 const RecipeWriteContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const fileInputRef = useRef();
 
-  const { user, recipe } = useSelector((state) => ({
+  const {
+    user, recipe: {
+      id, userId, title, category, product, ingredients, newIngredient, description, upload, image,
+    },
+  } = useSelector((state) => ({
     user: state.user,
     recipe: state.recipe,
   }));
-
-  const {
-    userId,
-    title,
-    category,
-    product,
-    ingredients,
-    newIngredient,
-    description,
-    upload,
-    image,
-  } = recipe;
-
-  const fileInputRef = useRef();
-  const newId = ingredients.length + 1;
 
   const onChangeRecipe = (event) => {
     const { name, value } = event.target;
@@ -92,12 +82,12 @@ const RecipeWriteContainer = () => {
     await dispatch(writeRecipe());
     await dispatch(updateRecipes());
 
-    if (isEmpty(recipe.id)) {
+    if (isEmpty(id)) {
       history.push('/');
       return;
     }
 
-    history.push(`/recipe/${recipe.id}`);
+    history.push(`/recipe/${id}`);
   };
 
   const onRemove = async () => {
@@ -134,22 +124,22 @@ const RecipeWriteContainer = () => {
     fileInputRef.current.value = '';
   };
 
-  const isNotWriteAdd = (userUserId) => (id) => (recipeUserId) => {
-    if (isNotEmpty(userUserId) && isEmpty(id) && isEmpty(recipeUserId)) {
+  const isNotWriteAdd = (userUserId) => (recipeId) => (recipeUserId) => {
+    if (isNotEmpty(userUserId) && isEmpty(recipeId) && isEmpty(recipeUserId)) {
       return false;
     }
     return true;
   };
 
-  const isNotWriteUpdate = (userUserId) => (id) => (recipeUserId) => {
-    if (isNotEmpty(userUserId) && isNotEmpty(id) && isMatch(userUserId)(recipeUserId)) {
+  const isNotWriteUpdate = (userUserId) => (recipeId) => (recipeUserId) => {
+    if (isNotEmpty(userUserId) && isNotEmpty(recipeId) && isMatch(userUserId)(recipeUserId)) {
       return false;
     }
     return true;
   };
 
-  if (isNotWriteAdd(user.userId)(recipe.id)(userId)
-    && isNotWriteUpdate(user.userId)(recipe.id)(userId)) {
+  if (isNotWriteAdd(user.userId)(id)(userId)
+    && isNotWriteUpdate(user.userId)(id)(userId)) {
     return (
       <div>없음</div>
     );
@@ -166,7 +156,7 @@ const RecipeWriteContainer = () => {
       />
 
       <IngredientAdd
-        newId={newId}
+        newId={ingredients.length + 1}
         newIngredient={newIngredient}
         onChangeNewIngredient={onChangeNewIngredient}
         onKeyUpSetNewIngredient={onKeyUpSetNewIngredient}

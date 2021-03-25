@@ -1,30 +1,24 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  setUser,
-  clearUser,
-} from '../../redux/user';
-import { auth, provider } from '../../services/firebase';
 import Header from '../../components/common/Header';
+import { setUser, clearUser } from '../../redux/user';
+import { auth, provider } from '../../services/firebase';
 import { saveItem } from '../../utils/storage';
+import { isNotEmpty } from '../../utils/utils';
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => ({
+  const { user: { userId } } = useSelector((state) => ({
     user: state.user,
   }));
 
-  const {
-    userId,
-  } = user;
-
   const signInWithGoogle = async () => {
-    const result = await auth.signInWithPopup(provider);
-    if (result.user && result.user.email) {
-      saveItem('user', result.user.email);
-      dispatch(setUser({ name: 'userId', value: result.user.email }));
+    const { result: { user: { email } } } = await auth.signInWithPopup(provider);
+    if (isNotEmpty(email)) {
+      saveItem('user', email);
+      dispatch(setUser({ name: 'userId', value: email }));
     }
   };
 
@@ -32,6 +26,7 @@ const HeaderContainer = () => {
     await auth.signOut();
     dispatch(clearUser());
   };
+
   return (
     <Header
       userId={userId}
