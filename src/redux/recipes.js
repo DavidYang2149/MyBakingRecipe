@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { fetchRecipes } from '../services/recipes';
 import {
-  fetchRecipes,
-} from '../services/recipes';
-import {
-  formatRecipe,
   isEmpty,
+  formatRecipe,
   RECIPE_COUNT,
 } from '../utils/utils';
 

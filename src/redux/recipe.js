@@ -171,6 +171,7 @@ export function removeRecipe() {
     const { id, userId } = recipe;
 
     await deleteRecipe({ id, userId });
+    dispatch(actions.clearRecipe());
   };
 }
 
