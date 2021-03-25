@@ -15,7 +15,7 @@ const HeaderContainer = () => {
   }));
 
   const signInWithGoogle = async () => {
-    const { result: { user: { email } } } = await auth.signInWithPopup(provider);
+    const { user: { email } } = await auth.signInWithPopup(provider);
     if (isNotEmpty(email)) {
       saveItem('user', email);
       dispatch(setUser({ name: 'userId', value: email }));
