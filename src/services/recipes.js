@@ -4,8 +4,8 @@ import {
   db, auth, fireStore, storage,
 } from './firebase';
 import {
-  isEmpty,
   isMatch,
+  isEmpty,
   isNotEmpty,
   RECIPE_COUNT,
 } from '../utils/utils';
@@ -32,12 +32,11 @@ export async function fetchRecipes(lastRecipe) {
 }
 
 export async function postRecipe(recipe) {
-  const user = auth.currentUser;
-  if (isNotEmpty(user)) {
-    const userId = user.email;
+  const { currentUser: { user: { email } } } = auth;
+  if (isNotEmpty(email)) {
     const { id } = await db.collection('recipes').add({
       ...recipe,
-      userId,
+      userId: email,
       created: fieldValue.serverTimestamp(),
       updated: fieldValue.serverTimestamp(),
       show: true,
@@ -49,14 +48,13 @@ export async function postRecipe(recipe) {
 }
 
 export async function updateRecipe(recipe) {
-  const user = auth.currentUser;
-  if (isNotEmpty(user)) {
-    const userId = user.email;
+  const { currentUser: { user: { email } } } = auth;
+  if (isNotEmpty(email)) {
     const {
       id, title, category, product, ingredients, description, image,
     } = recipe;
     await db.collection('recipes').doc(id).update({
-      userId,
+      userId: email,
       title,
       category,
       product,
@@ -69,15 +67,15 @@ export async function updateRecipe(recipe) {
 }
 
 export async function deleteRecipe({ id, userId }) {
-  const user = auth.currentUser;
+  const { currentUser: { user: { email } } } = auth;
 
-  if (isNotEmpty(user) && isMatch(userId)(user.email)) {
+  if (isNotEmpty(email) && isMatch(userId)(email)) {
     await db.collection('recipes').doc(id).delete();
   }
 }
 
-export async function postFile({ userId, upload }) {
-  const fileRef = await storage.ref().child(`${userId.split('@')[0]}/${uuidv4()}`);
+export async function postFile({ userId, upload, uuid = uuidv4() }) {
+  const fileRef = await storage.ref().child(`${userId.split('@')[0]}/${uuid}`);
   const response = await fileRef.putString(upload, 'data_url');
   const imageURL = response.ref.getDownloadURL();
   return imageURL;
