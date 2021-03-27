@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Label } from '../layouts/Recipe';
+import { Label, Img } from '../layouts/Recipe';
 
 const RecipeImage = ({ image }) => {
   return (
@@ -12,7 +12,7 @@ const RecipeImage = ({ image }) => {
         >
           이미지
         </Label>
-        <img id="displayImage" src={image || 'images/cookie.jpeg'} width="200px" height="200px" alt="recipe" />
+        <Img id="displayImage" src={image || 'images/cookie.jpeg'} width="200px" height="200px" alt="recipe" />
       </div>
     </section>
   );
