@@ -114,6 +114,11 @@ const Hamburger = styled.span`
   }
 `;
 
+const Img = styled.img`
+  margin: 0.125rem;
+  padding: 0.75rem;
+`;
+
 export {
   Label,
   Input,
@@ -123,4 +128,5 @@ export {
   Button,
   Paragraph,
   Hamburger,
+  Img,
 };
