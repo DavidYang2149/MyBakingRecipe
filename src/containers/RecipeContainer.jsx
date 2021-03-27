@@ -7,6 +7,7 @@ import RecipeImage from '../components/RecipeImage';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
+import UseLoading from '../components/UseLoading';
 import { Button } from '../layouts/Recipe';
 import { removeRecipe } from '../redux/recipe';
 import { updateRecipes } from '../redux/recipes';
@@ -39,6 +40,12 @@ const RecipeContainer = () => {
     await dispatch(updateRecipes());
     history.push('/');
   };
+
+  if (isEmpty(id)) {
+    return (
+      <UseLoading />
+    );
+  }
 
   return (
     <article>
