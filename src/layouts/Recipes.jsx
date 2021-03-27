@@ -2,58 +2,69 @@ import styled from '@emotion/styled';
 
 const RecipeCards = styled.ul`
   @media (min-width: 600px) {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin: 0 -1rem;
-      justify-content: space-between;
-      li {
-        /* width: 30%; */
-        flex-basis: 30%;
-        flex-direction: column;
-        /* box-shadow: rgb(0 0 0 / 4%) 4px 4px 16px 0px;
-        padding: 1 1 0 0rem; */
-        /* min-width: 200px; */
-      }
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem;
   }
 `;
 
 const RecipeCard = styled.li`
-  border-radius: 5px;
-  margin-bottom: 2rem;
-  /* box-shadow: 1px 5px; */
-  /* box-shadow: rgb(0 0 0 / 4%) 4px 4px 16px 0px; */
+  margin-bottom: 3rem;
+  padding: 0 1rem;
 
+  @media (min-width: 600px) {
+    width: 44%;
+  }
+
+  @media (min-width: 768px) {
+    width: 29%;
+  }
+
+  /* @media (min-width: 1024px) {
+    width: 30%;
+  } */
 
   .card-image {
     height: 0;
     padding-bottom: 60%;
-    border-radius: 5px 5px 0 0;
     background-color: lightgray;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-  }
+    border-radius: 5px 5px 0 0;
 
-  .card-image img {
-    /* display: none; */
-    max-width: 200px;
-    max-height: 200px;
-    background-size: cover;
+    img {
+      display: none;
+    }
   }
 
   .card-desc {
     padding: 1rem;
-    background: white;
-  } 
-`;
+    background: #f8f8ef;
+    border-radius: 0 0 5px 5px;
 
-const Article = styled.article`
-  
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+
+    .card-created {
+      font-size: 0.8rem;
+      color: gray; 
+    }
+  }
 `;
 
 export {
   RecipeCards,
   RecipeCard,
-  Article,
 };
