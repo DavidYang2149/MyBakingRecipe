@@ -22,6 +22,8 @@ export async function fetchRecipe(id) {
         ingredients: [],
         newIngredient: { id: 0, ingredient: '', weight: 0 },
         description: '',
+        upload: null,
+        image: null,
       };
     },
     exists: true,
