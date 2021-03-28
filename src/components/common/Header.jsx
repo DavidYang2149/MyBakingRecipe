@@ -1,34 +1,57 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import {
   HeaderNav,
   HeaderTitle,
   HeaderUser,
   HeaderButton,
+  ButtonLines,
 } from '../../layouts/common/Header';
-import HomeIcon from '../../layouts/icons/HeaderIcon';
+import {
+  HomeIcon,
+  UserIcon,
+} from '../../layouts/icons/HeaderIcon';
 
 const Header = ({ userId, signInWithGoogle, signOut }) => {
+  const history = useHistory();
+
+  const onClickNewRecipe = () => {
+    history.push('/recipewrite/0');
+  };
+
   return (
     <HeaderNav>
-      <Link to="/">
-        <HomeIcon src="images/home.svg" alt="Home" />
-      </Link>
-      <Link to="/">
-        <HeaderTitle>My Baking Recipe</HeaderTitle>
-      </Link>
+      <div>
+        <Link to="/">
+          <HomeIcon src="images/home.svg" alt="Home" />
+        </Link>
+        <Link to="/">
+          <HeaderTitle>My Baking Recipe</HeaderTitle>
+        </Link>
+      </div>
       {
         userId
           ? (
-            <>
+            <ButtonLines>
               <HeaderUser>
-                {userId.split('@')[0]}
+                <Link to="/">
+                  {userId.split('@')[0]}
+                </Link>
               </HeaderUser>
-              <Link to="/recipewrite/0"><HeaderButton type="button">New Recipe</HeaderButton></Link>
+              <HeaderButton type="button" onClick={onClickNewRecipe}>
+                New Recipe
+              </HeaderButton>
               <HeaderButton type="button" onClick={signOut}>Logout</HeaderButton>
+              <UserIcon src="images/new-recipe.svg" onClick={onClickNewRecipe} alt="New Recipe" />
+              <UserIcon src="images/close-outline.svg" onClick={signOut} alt="Logout" />
+            </ButtonLines>
+          ) : (
+            <>
+              <HeaderButton type="button" onClick={signInWithGoogle}>Sign in</HeaderButton>
+              <UserIcon src="images/login-google.svg" onClick={signInWithGoogle} alt="singIn" />
             </>
-          ) : <HeaderButton type="button" onClick={signInWithGoogle}>Sign in</HeaderButton>
+          )
       }
     </HeaderNav>
   );
