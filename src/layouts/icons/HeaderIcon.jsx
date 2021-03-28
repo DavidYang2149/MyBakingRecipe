@@ -9,4 +9,18 @@ const HomeIcon = styled.img`
   }
 `;
 
-export default HomeIcon;
+const UserIcon = styled.img`
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  cursor: pointer;
+
+  @media screen and (min-width: 600px) {
+    display: none;
+  }
+`;
+
+export {
+  HomeIcon,
+  UserIcon,
+};
