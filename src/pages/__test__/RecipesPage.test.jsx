@@ -27,7 +27,14 @@ describe('ReipcesPage', () => {
     }));
   });
 
-  it('render Page', () => {
+  it('render Page', async () => {
+    global.IntersectionObserver = jest.fn(() => {
+      return {
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
     const { container } = render((
       <MemoryRouter>
         <ReipcesPage />

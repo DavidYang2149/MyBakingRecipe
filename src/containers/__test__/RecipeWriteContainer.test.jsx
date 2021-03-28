@@ -165,10 +165,20 @@ describe('RecipeWriteContainer', () => {
 
     context('keyup with enter', () => {
       it('set new ingredient', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            ...recipes[0],
+            newIngredient: { id: 0, ingredient: '바닐라빈', weight: 10 },
+          },
+          user: {
+            userId: '1',
+            displayName: '',
+          },
+        }));
         const { getByLabelText } = render(<RecipeWriteContainer />);
 
         const label = getByLabelText('원재료');
-        expect(label.value).toBe('');
 
         fireEvent.keyUp(label, {
           key: 'Enter',
@@ -179,8 +189,8 @@ describe('RecipeWriteContainer', () => {
           payload: {
             fields: {
               id: 0,
-              ingredient: '',
-              weight: 0,
+              ingredient: '바닐라빈',
+              weight: 10,
             },
           },
         });
@@ -331,6 +341,32 @@ describe('RecipeWriteContainer', () => {
       fireEvent.click(getAllByText('삭제')[0]);
 
       expect(dispatch).toBeCalledTimes(1);
+    });
+
+    it('change file', () => {
+      const { getByLabelText } = render(<RecipeWriteContainer />);
+
+      global.FileReader = jest.fn(() => {
+        return {
+          readAsDataURL: jest.fn(),
+          onloadend: jest.fn(),
+        };
+      });
+      const label = getByLabelText('레시피 이미지');
+      expect(label.value).toBe('');
+
+      fireEvent.change(label, {
+        target: {
+          files: 'cookie.jpeg',
+        },
+      });
+
+      // TODO: onFileChange
+      expect(dispatch).toBeCalledTimes(0);
+      // expect(dispatch).toBeCalledWith({
+      //   type: 'recipe/changeRecipe',
+      //   payload: { name: 'upload', value: 'cookie.jpeg' },
+      // });
     });
 
     it('mouse drag onDragEndIngredient', async () => {

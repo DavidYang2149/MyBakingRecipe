@@ -44,6 +44,27 @@ describe('RecipeContainer', () => {
       ));
     });
 
+    context('without recipe', () => {
+      it('renders container', () => {
+        useSelector.mockImplementation((selector) => selector({
+          ...allConditionsState,
+          recipe: {
+            id: null,
+          },
+          user: {
+            userId: '1',
+            displayName: '',
+          },
+        }));
+
+        render((
+          <MemoryRouter>
+            <RecipeContainer />
+          </MemoryRouter>
+        ));
+      });
+    });
+
     context('with exist recipe', () => {
       useSelector.mockImplementation((selector) => selector({
         ...allConditionsState,

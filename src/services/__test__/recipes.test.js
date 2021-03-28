@@ -11,6 +11,8 @@ import {
   deleteRecipe,
 } from '../recipes';
 
+jest.mock('../firebase');
+
 describe('Recipes', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({

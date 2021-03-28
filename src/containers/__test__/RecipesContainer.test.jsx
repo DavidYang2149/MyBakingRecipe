@@ -16,11 +16,27 @@ describe('RecipesContainer', () => {
     }));
   });
 
-  it('renders container', () => {
-    render((
-      <MemoryRouter>
-        <RecipesContainer />
-      </MemoryRouter>
-    ));
+  context('with recipes', () => {
+    it('renders container', () => {
+      render((
+        <MemoryRouter>
+          <RecipesContainer />
+        </MemoryRouter>
+      ));
+    });
+  });
+
+  context('without recipes', () => {
+    it('render loading', () => {
+      useSelector.mockImplementation((selector) => selector({
+        recipes: { recipesBook: [] },
+      }));
+
+      render((
+        <MemoryRouter>
+          <RecipesContainer />
+        </MemoryRouter>
+      ));
+    });
   });
 });

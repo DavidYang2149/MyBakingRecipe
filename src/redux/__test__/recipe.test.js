@@ -7,6 +7,7 @@ import reducer, {
   changeRecipe,
   changeIngredient,
   changeNewIngredient,
+  clearRecipe,
   loadRecipe,
   writeRecipe,
   removeRecipe,
@@ -27,6 +28,8 @@ describe('recipe reducer', () => {
     ingredients: [],
     newIngredient: { id: 0, ingredient: '', weight: 0 },
     description: '',
+    upload: null,
+    image: null,
   };
 
   context('when previous state is undefined', () => {
@@ -53,6 +56,8 @@ describe('recipe reducer', () => {
         ],
         newIngredient: { id: 5, ingredient: '', weight: 0 },
         description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+        upload: null,
+        image: null,
       };
 
       const state = reducer(initialState, setRecipe(recipe));
@@ -74,6 +79,8 @@ describe('recipe reducer', () => {
         ],
         newIngredient: { id: 0, ingredient: '', weight: 0 },
         description: '',
+        upload: null,
+        image: null,
       };
 
       const state = reducer(initialState, setNewIngredient({ fields: { id: 1, ingredient: '설탕', weight: 100 } }));
@@ -93,6 +100,8 @@ describe('recipe reducer', () => {
         ingredients: [],
         newIngredient: { id: 0, ingredient: '', weight: 0 },
         description: '',
+        upload: null,
+        image: null,
       };
 
       const state = reducer(initialState, changeRecipe({ name: 'title', value: '맛있는마들렌' }));
@@ -115,6 +124,8 @@ describe('recipe reducer', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          upload: null,
+          image: null,
         };
 
         const result = {
@@ -128,6 +139,8 @@ describe('recipe reducer', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          upload: null,
+          image: null,
         };
 
         const state = reducer(recipe, changeIngredient({ name: 'weight-1', value: 100 }));
@@ -149,6 +162,8 @@ describe('recipe reducer', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          upload: null,
+          image: null,
         };
 
         const state = reducer(recipe, changeIngredient({ name: 'weight-2', value: 100 }));
@@ -169,6 +184,8 @@ describe('recipe reducer', () => {
         ingredients: [],
         newIngredient: { id: 0, ingredient: '', weight: 100 },
         description: '',
+        upload: null,
+        image: null,
       };
 
       const state = reducer(initialState, changeNewIngredient({ name: 'weight-0', value: 100 }));
@@ -193,6 +210,8 @@ describe('recipe actions', () => {
           description: '',
           created: false,
           updated: false,
+          upload: null,
+          image: null,
         };
 
         const store = mockStore({});
@@ -216,6 +235,8 @@ describe('recipe actions', () => {
           ingredients: [],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          upload: null,
+          image: null,
         };
 
         const store = mockStore({});
@@ -239,6 +260,8 @@ describe('recipe actions', () => {
           ingredients: [],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '',
+          upload: null,
+          image: null,
         };
 
         const store = mockStore({});
@@ -274,14 +297,32 @@ describe('recipe actions', () => {
             ],
             newIngredient: { id: 0, ingredient: '', weight: 0 },
             description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+            upload: null,
+            image: null,
           },
         });
+
+        // for Mock Result
+        const result = {
+          id: 0,
+          userId: '',
+          title: '',
+          category: 0,
+          product: 0,
+          ingredients: [],
+          newIngredient: { id: 0, ingredient: '', weight: 0 },
+          description: '',
+          created: false,
+          updated: false,
+          upload: null,
+          image: null,
+        };
 
         await store.dispatch(writeRecipe());
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(changeRecipe({ name: 'id', value: '1' }));
+        expect(actions[0]).toEqual(setRecipe(result));
       });
     });
   });
@@ -307,6 +348,8 @@ describe('recipe actions', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          upload: null,
+          image: null,
         },
       });
 
@@ -335,6 +378,8 @@ describe('recipe actions', () => {
           ],
           newIngredient: { id: 0, ingredient: '', weight: 0 },
           description: '마들렌 만드는 방법. 오븐 180도에 10분간 굽기',
+          upload: null,
+          image: null,
         },
       });
 
@@ -342,7 +387,7 @@ describe('recipe actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions).toHaveLength(0);
+      expect(actions[0]).toEqual(clearRecipe());
     });
   });
 });
