@@ -48,7 +48,7 @@ const Header = ({ userId, signInWithGoogle, signOut }) => {
             </ButtonLines>
           ) : (
             <>
-              <HeaderButton type="button" onClick={signInWithGoogle}>Sign in</HeaderButton>
+              <HeaderButton type="button" onClick={signInWithGoogle}>Sign in (Google)</HeaderButton>
               <UserIcon src="images/login-google.svg" onClick={signInWithGoogle} alt="singIn" />
             </>
           )
