@@ -121,6 +121,14 @@ const RecipeWriteContainer = () => {
   const onFileChange = (event) => {
     const { target: { files } } = event;
     const theFile = files[0];
+    const limit3MB = 3 * 1024 * 1024;
+
+    if (isEmpty(theFile) || theFile.size > limit3MB) {
+      alert('3MB 이하의 이미지만 업로드 가능합니다.');
+      fileInputRef.current.value = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
       const { currentTarget: { result } } = finishedEvent;
@@ -209,6 +217,7 @@ const RecipeWriteContainer = () => {
         <Button
           type="button"
           onClick={onSubmit}
+          disabled={loading}
         >
           {isEmpty(userId) ? '저장하기' : '수정완료'}
         </Button>
@@ -217,6 +226,7 @@ const RecipeWriteContainer = () => {
             <Button
               type="button"
               onClick={onRemove}
+              disabled={loading}
             >
               삭제하기
             </Button>
