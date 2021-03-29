@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Label, Input, Img, Button,
+  Label, Input, Img, Button, Notice,
 } from '../layouts/Recipe';
 import { isNotEmpty } from '../utils/utils';
 
@@ -41,10 +41,11 @@ const RecipeImageUpload = ({
         <Input
           id="image"
           type="file"
-          accept="image/*"
+          accept="image/gif, image/jpeg, image/jpg, image/png"
           onChange={onFileChange}
           ref={fileInputRef}
         />
+        <Notice>3MB 이하 이미지(jpg, jpeg, png, gif)만 업로드 가능합니다.</Notice>
         {
           isNotEmpty(upload) && (
             <>
