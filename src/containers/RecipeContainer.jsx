@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -20,6 +20,7 @@ import {
 const RecipeContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const {
     user, recipe: {
@@ -36,6 +37,7 @@ const RecipeContainer = () => {
       return;
     }
 
+    setLoading(true);
     await dispatch(removeRecipe());
     await dispatch(updateRecipes());
     history.push('/');
@@ -80,6 +82,7 @@ const RecipeContainer = () => {
           </section>
         )
       }
+      {loading && <UseLoading />}
     </article>
   );
 };
