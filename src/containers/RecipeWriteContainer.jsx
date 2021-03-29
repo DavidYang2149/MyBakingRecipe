@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -26,10 +26,12 @@ import {
   isEmpty,
   isNotEmpty,
 } from '../utils/utils';
+import UseLoading from '../components/UseLoading';
 
 const RecipeWriteContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef();
   const NewIngredientRef = useRef();
@@ -91,6 +93,7 @@ const RecipeWriteContainer = () => {
   };
 
   const onSubmit = async () => {
+    setLoading(true);
     await dispatch(writeRecipe());
     await dispatch(updateRecipes());
 
@@ -108,8 +111,10 @@ const RecipeWriteContainer = () => {
       return;
     }
 
+    setLoading(true);
     await dispatch(removeRecipe());
     await dispatch(updateRecipes());
+
     history.push('/');
   };
 
@@ -130,9 +135,12 @@ const RecipeWriteContainer = () => {
   };
 
   const onRemoveFile = async () => {
+    setLoading(true);
     await dispatch(removeFile());
     await dispatch(writeRecipe());
     await dispatch(updateRecipes());
+
+    setLoading(false);
     fileInputRef.current.value = '';
   };
 
@@ -215,6 +223,7 @@ const RecipeWriteContainer = () => {
           )
         }
       </section>
+      {loading && <UseLoading />}
     </article>
   );
 };
