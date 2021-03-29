@@ -69,11 +69,16 @@ const Button = styled.button`
   cursor: pointer;
   margin: 10px;
   transition: 0.5s;
-
+  opacity: 0.8;
+  
   :disabled {
-    cursor: default;
-    opacity: 0.5;
-    background-color: #808080;
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+
+  :hover:enabled {
+    opacity: 1.0;
+    transition: 0.5s;
   }
 `;
 
@@ -119,6 +124,12 @@ const Img = styled.img`
   padding: 0.75rem;
 `;
 
+const Notice = styled.div`
+  margin-left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+`;
+
 export {
   Label,
   Input,
@@ -129,4 +140,5 @@ export {
   Paragraph,
   Hamburger,
   Img,
+  Notice,
 };
