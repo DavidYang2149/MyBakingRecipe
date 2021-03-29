@@ -76,6 +76,7 @@ const RecipeContainer = () => {
             <Button
               type="button"
               onClick={onRemove}
+              disabled={loading}
             >
               삭제하기
             </Button>
