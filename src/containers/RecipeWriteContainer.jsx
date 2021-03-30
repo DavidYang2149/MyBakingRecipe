@@ -93,6 +93,26 @@ const RecipeWriteContainer = () => {
   };
 
   const onSubmit = async () => {
+    if (isEmpty(title.trim())) {
+      alert('제목을 입력해주세요.');
+      return;
+    }
+
+    if (isEmpty(category)) {
+      alert('카테고리를 입력해주세요.');
+      return;
+    }
+
+    if (isEmpty(product)) {
+      alert('생산량을 입력해주세요.');
+      return;
+    }
+
+    if (isEmpty(description.trim())) {
+      alert('만드는 방법을 입력해주세요.');
+      return;
+    }
+
     setLoading(true);
     await dispatch(writeRecipe());
     await dispatch(updateRecipes());
@@ -217,7 +237,13 @@ const RecipeWriteContainer = () => {
         <Button
           type="button"
           onClick={onSubmit}
-          disabled={loading}
+          disabled={
+            loading
+            || isEmpty(title.trim())
+            || isEmpty(category)
+            || isEmpty(product)
+            || isEmpty(description.trim())
+          }
         >
           {isEmpty(userId) ? '저장하기' : '수정완료'}
         </Button>
