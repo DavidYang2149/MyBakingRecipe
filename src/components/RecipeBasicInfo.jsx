@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Label, Input, Select, Span,
+  Label, DutyLabel, Input, Select, Span,
 } from '../layouts/Recipe';
 import { isEmpty } from '../utils/utils';
 
@@ -20,12 +20,22 @@ const RecipeBasicInfo = ({
 
   return (
     <section>
-      <Label
-        htmlFor="title"
-        display="block"
-      >
-        레시피명
-      </Label>
+      {isEmpty(onChangeRecipe)
+        ? (
+          <Label
+            htmlFor="title"
+            display="block"
+          >
+            레시피명
+          </Label>
+        ) : (
+          <DutyLabel
+            htmlFor="title"
+            display="block"
+          >
+            레시피명
+          </DutyLabel>
+        )}
       <Input
         type="text"
         id="title"
@@ -36,20 +46,42 @@ const RecipeBasicInfo = ({
         display="block"
         disabled={isEmpty(onChangeRecipe)}
       />
-      <Label
-        htmlFor="category"
-        width="30%"
-        display="inline-block"
-      >
-        카테고리
-      </Label>
-      <Label
-        htmlFor="product"
-        width="20%"
-        display="inline-block"
-      >
-        생산량
-      </Label>
+      {isEmpty(onChangeRecipe)
+        ? (
+          <>
+            <Label
+              htmlFor="category"
+              width="30%"
+              display="inline-block"
+            >
+              카테고리
+            </Label>
+            <Label
+              htmlFor="product"
+              width="20%"
+              display="inline-block"
+            >
+              생산량
+            </Label>
+          </>
+        ) : (
+          <>
+            <DutyLabel
+              htmlFor="category"
+              width="30%"
+              display="inline-block"
+            >
+              카테고리
+            </DutyLabel>
+            <DutyLabel
+              htmlFor="product"
+              width="20%"
+              display="inline-block"
+            >
+              생산량
+            </DutyLabel>
+          </>
+        )}
       <div>
         <Select
           id="category"

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Label, Textarea } from '../layouts/Recipe';
+import { Label, DutyLabel, Textarea } from '../layouts/Recipe';
 import { isEmpty } from '../utils/utils';
 
 const RecipeDescription = ({
@@ -8,12 +8,23 @@ const RecipeDescription = ({
 }) => {
   return (
     <section>
-      <Label
-        htmlFor="description"
-        display="block"
-      >
-        만드는 방법
-      </Label>
+      {isEmpty(onChangeRecipe)
+        ? (
+          <Label
+            htmlFor="description"
+            display="block"
+          >
+            만드는 방법
+          </Label>
+        ) : (
+          <DutyLabel
+            htmlFor="description"
+            display="block"
+          >
+            만드는 방법
+          </DutyLabel>
+        )}
+
       <Textarea
         id="description"
         name="description"
