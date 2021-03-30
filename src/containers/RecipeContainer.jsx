@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import RecipeTitle from '../components/RecipeTitle';
+import RecipeUser from '../components/RecipeUser';
 import RecipeImage from '../components/RecipeImage';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
@@ -24,7 +25,7 @@ const RecipeContainer = () => {
 
   const {
     user, recipe: {
-      id, userId, title, category, product, ingredients, description, image,
+      id, userId, title, category, product, ingredients, description, image, created,
     },
   } = useSelector((state) => ({
     user: state.user,
@@ -52,6 +53,7 @@ const RecipeContainer = () => {
   return (
     <article>
       <RecipeTitle title={title} />
+      <RecipeUser user={userId} created={created} />
       <RecipeImage image={image} />
       <RecipeBasicInfo
         title={title}
