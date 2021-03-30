@@ -10,6 +10,25 @@ const Label = styled.label`
   padding: 0.75rem;
 `;
 
+const DutyLabel = styled.label`
+  display: ${(props) => props.display};
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-width: 100px;
+  width: ${(props) => props.width};
+  margin: 0.125rem;
+  padding: 0.75rem;
+
+  :before {
+  color: #ed5464;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: 5px;
+  content: '*';
+
+  }
+`;
+
 const Input = styled.input`
   color: #000;
   display: ${(props) => props.display};
@@ -132,6 +151,7 @@ const Notice = styled.div`
 
 export {
   Label,
+  DutyLabel,
   Input,
   Select,
   Span,
