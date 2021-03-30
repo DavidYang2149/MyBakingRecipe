@@ -154,6 +154,16 @@ export function writeRecipe() {
       return;
     }
 
+    // Validation Check
+    if (
+      isEmpty(title.trim())
+      || isEmpty(category)
+      || isEmpty(product)
+      || isEmpty(description.trim())
+    ) {
+      return;
+    }
+
     // Image upload Check
     let imageURL = '';
 
