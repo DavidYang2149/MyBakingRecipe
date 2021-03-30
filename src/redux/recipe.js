@@ -9,6 +9,7 @@ import {
   deleteFile,
 } from '../services/recipes';
 import {
+  isMatch,
   isEmpty,
   isNotEmpty,
   formatRecipe,
@@ -53,6 +54,18 @@ const { actions, reducer } = createSlice({
     },
     changeIngredient(state, { payload: { name, value } }) {
       const [targetName, targetId] = name.split('-');
+
+      if (isMatch(targetName)('weight')) {
+        return {
+          ...state,
+          ingredients: state.ingredients.map((ingredient) => {
+            return parseInt(ingredient.id, 10) === parseInt(targetId, 10)
+              ? { ...ingredient, [targetName]: parseInt(value, 10) }
+              : ingredient;
+          }),
+        };
+      }
+
       return {
         ...state,
         ingredients: state.ingredients.map((ingredient) => {
@@ -64,6 +77,16 @@ const { actions, reducer } = createSlice({
     },
     changeNewIngredient(state, { payload: { name, value } }) {
       const [targetName, targetId] = name.split('-');
+
+      if (isMatch(targetName)('weight')) {
+        return {
+          ...state,
+          newIngredient: {
+            ...state.newIngredient, id: parseInt(targetId, 10), [targetName]: parseInt(value, 10),
+          },
+        };
+      }
+
       return {
         ...state,
         newIngredient: { ...state.newIngredient, id: parseInt(targetId, 10), [targetName]: value },
