@@ -7,7 +7,7 @@ const Label = styled.label`
   min-width: 100px;
   width: ${(props) => props.width};
   margin: 0.125rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
 `;
 
 const DutyLabel = styled.label`
@@ -17,7 +17,7 @@ const DutyLabel = styled.label`
   min-width: 100px;
   width: ${(props) => props.width};
   margin: 0.125rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
 
   :before {
   color: #ed5464;
@@ -101,9 +101,11 @@ const Button = styled.button`
   }
 `;
 
-const Paragraph = styled.p`
-  font-size: 2rem;
+const Title = styled.p`
+  font-size: 2.5rem;
   font-weight: 700;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Hamburger = styled.span`
@@ -140,13 +142,51 @@ const Hamburger = styled.span`
 
 const Img = styled.img`
   margin: 0.125rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
 `;
 
 const Notice = styled.div`
   margin-left: 1rem;
   font-size: 0.75rem;
   font-weight: 500;
+`;
+
+const UserName = styled.span`
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 1.5rem;
+  
+  :before {
+    content: 'by ';
+    font-size: 1rem;
+    font-weight: 500;
+  }
+`;
+
+const Date = styled.span`
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-left: 1.5rem;
+`;
+
+const Line = styled.hr`
+  margin-top: 10px;
+  width: 95%;
+  border: none;
+  padding: 2px 0;
+  letter-spacing: 5px;
+  background-color: rgb(245, 174, 69);
+  opacity: 0.8;
+  animation: showline 1s ease-out 1;
+
+  @keyframes showline {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 95%;
+    }
+  }
 `;
 
 export {
@@ -157,8 +197,11 @@ export {
   Span,
   Textarea,
   Button,
-  Paragraph,
+  Title,
   Hamburger,
   Img,
   Notice,
+  UserName,
+  Date,
+  Line,
 };
