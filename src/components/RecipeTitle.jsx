@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Paragraph } from '../layouts/Recipe';
+import { Title } from '../layouts/Recipe';
 
 const RecipeTitle = ({ title }) => {
   return (
-    <Paragraph>
+    <Title>
       {title}
-    </Paragraph>
+    </Title>
   );
 };
 
