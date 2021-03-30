@@ -27,6 +27,8 @@ const IngredientItem = ({
         />
         <Input
           type="number"
+          min="0"
+          max="1000000000"
           id={`weight-${id}`}
           name={`weight-${id}`}
           value={weight}
@@ -56,6 +58,8 @@ const IngredientItem = ({
       />
       <Input
         type="number"
+        min="0"
+        max="1000000000"
         id={`weight-${id}`}
         name={`weight-${id}`}
         value={weight}

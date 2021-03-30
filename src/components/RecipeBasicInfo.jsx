@@ -97,6 +97,8 @@ const RecipeBasicInfo = ({
         </Select>
         <Input
           type="number"
+          min="0"
+          max="1000000000"
           id="product"
           name="product"
           value={product}

@@ -41,6 +41,8 @@ const IngredientAdd = ({
           />
           <Input
             type="number"
+            min="0"
+            max="1000000000"
             id={`weight-${newId}`}
             name={`weight-${newId}`}
             value={newIngredient.weight}
