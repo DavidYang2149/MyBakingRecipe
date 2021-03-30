@@ -101,13 +101,6 @@ const Button = styled.button`
   }
 `;
 
-const Title = styled.p`
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-left: 1rem;
-  margin-bottom: 0.5rem;
-`;
-
 const Hamburger = styled.span`
   margin-left: 8px;
   margin-bottom: 5px;
@@ -151,6 +144,13 @@ const Notice = styled.div`
   font-weight: 500;
 `;
 
+const Title = styled.p`
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+`;
+
 const UserName = styled.span`
   font-size: 1.2rem;
   font-weight: 700;
@@ -173,6 +173,7 @@ const Line = styled.hr`
   margin-top: 10px;
   width: 95%;
   border: none;
+  border-radius: 2px;
   padding: 2px 0;
   letter-spacing: 5px;
   background-color: rgb(245, 174, 69);
@@ -184,7 +185,7 @@ const Line = styled.hr`
       width: 0%;
     }
     100% {
-      width: 95%;
+      width: 96%;
     }
   }
 `;
