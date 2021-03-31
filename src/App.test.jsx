@@ -44,7 +44,7 @@ describe('App', () => {
     it('renders Recipe404Page', () => {
       const { container } = renderApp({ path: '/notExist' });
 
-      expect(container).toHaveTextContent('Recipe is Not Found!');
+      expect(container).toHaveTextContent('해당 페이지를 찾을 수 없습니다.');
     });
   });
 });

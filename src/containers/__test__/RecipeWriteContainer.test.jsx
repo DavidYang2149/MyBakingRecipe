@@ -96,7 +96,7 @@ describe('RecipeWriteContainer', () => {
 
         const { container } = render(<RecipeWriteContainer />);
 
-        expect(container).toHaveTextContent('없음');
+        expect(container).toHaveTextContent('해당 페이지를 찾을 수 없습니다.');
       });
     });
   });
