@@ -47,6 +47,13 @@ const { actions, reducer } = createSlice({
       };
     },
     changeRecipe(state, { payload: { name, value } }) {
+      if (isMatch(name)('product')) {
+        return {
+          ...state,
+          [name]: parseInt(value, 10),
+        };
+      }
+
       return {
         ...state,
         [name]: value,
@@ -185,7 +192,7 @@ export function writeRecipe() {
       };
 
       const createId = await postRecipe(recipeInfo);
-      await dispatch(actions.changeRecipe({ name: 'id', value: createId }));
+      await dispatch(loadRecipe(createId));
       return;
     }
 
