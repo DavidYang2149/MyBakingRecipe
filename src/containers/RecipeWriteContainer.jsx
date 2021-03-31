@@ -8,6 +8,8 @@ import RecipeDescription from '../components/RecipeDescription';
 import RecipeImageUpload from '../components/RecipeImageUpload';
 import IngredientList from '../components/IngredientList';
 import IngredientAdd from '../components/IngredientAdd';
+import RecipeNotFound from '../components/RecipeNotFound';
+import UseLoading from '../components/UseLoading';
 import { Button } from '../layouts/Recipe';
 import {
   setNewIngredient,
@@ -26,7 +28,6 @@ import {
   isEmpty,
   isNotEmpty,
 } from '../utils/utils';
-import UseLoading from '../components/UseLoading';
 
 const RecipeWriteContainer = () => {
   const dispatch = useDispatch();
@@ -189,7 +190,7 @@ const RecipeWriteContainer = () => {
   if (isNotWriteAdd(user.userId)(id)(userId)
     && isNotWriteUpdate(user.userId)(id)(userId)) {
     return (
-      <div>없음</div>
+      <RecipeNotFound />
     );
   }
 
