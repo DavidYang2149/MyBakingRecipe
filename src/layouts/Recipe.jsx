@@ -190,6 +190,16 @@ const Line = styled.hr`
   }
 `;
 
+const Center = styled.div`
+  text-align: center;
+
+  img {
+    width: 70%;
+    height: 70%;
+    margin-bottom: 20px;
+  }
+`;
+
 export {
   Label,
   DutyLabel,
@@ -205,4 +215,5 @@ export {
   UserName,
   Date,
   Line,
+  Center,
 };
