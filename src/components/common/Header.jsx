@@ -12,6 +12,7 @@ import {
   HomeIcon,
   UserIcon,
 } from '../../layouts/icons/HeaderIcon';
+import { getFirstSplit } from '../../utils/utils';
 
 const Header = ({ userId, signInWithGoogle, signOut }) => {
   const history = useHistory();
@@ -36,7 +37,7 @@ const Header = ({ userId, signInWithGoogle, signOut }) => {
             <ButtonLines>
               <HeaderUser>
                 <Link to="/">
-                  {userId.split('@')[0]}
+                  {getFirstSplit(userId)('@')}
                 </Link>
               </HeaderUser>
               <HeaderButton type="button" onClick={onClickNewRecipe}>

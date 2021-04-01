@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { RecipeCard } from '../layouts/Recipes';
-import { isEmpty } from '../utils/utils';
+import { isEmpty, getFirstSplit } from '../utils/utils';
 
 const RecipeItem = ({ recipe }) => {
   if (isEmpty(recipe)) {
@@ -22,7 +22,7 @@ const RecipeItem = ({ recipe }) => {
           <p>
             by
             {' '}
-            <strong>{recipe.userId.split('@')[0]}</strong>
+            <strong>{getFirstSplit(recipe.userId)('@')}</strong>
           </p>
         </div>
       </Link>
