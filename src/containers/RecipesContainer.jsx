@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import RecipeList from '../components/RecipeList';
-import UseLoading from '../components/UseLoading';
+import Loading from '../components/Loading';
 import { isEmpty } from '../utils/utils';
 
 const RecipesContainer = () => {
@@ -12,7 +12,7 @@ const RecipesContainer = () => {
 
   if (isEmpty(recipesBook.length)) {
     return (
-      <UseLoading />
+      <Loading />
     );
   }
 

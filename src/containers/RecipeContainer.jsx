@@ -8,7 +8,7 @@ import RecipeImage from '../components/RecipeImage';
 import RecipeBasicInfo from '../components/RecipeBasicInfo';
 import RecipeDescription from '../components/RecipeDescription';
 import IngredientList from '../components/IngredientList';
-import UseLoading from '../components/UseLoading';
+import Loading from '../components/Loading';
 import { Button } from '../layouts/Recipe';
 import { removeRecipe } from '../redux/recipe';
 import { updateRecipes } from '../redux/recipes';
@@ -46,7 +46,7 @@ const RecipeContainer = () => {
 
   if (isEmpty(id)) {
     return (
-      <UseLoading />
+      <Loading />
     );
   }
 
@@ -85,7 +85,7 @@ const RecipeContainer = () => {
           </section>
         )
       }
-      {loading && <UseLoading />}
+      {loading && <Loading />}
     </article>
   );
 };

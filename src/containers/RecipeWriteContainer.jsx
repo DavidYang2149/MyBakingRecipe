@@ -9,7 +9,7 @@ import RecipeImageUpload from '../components/RecipeImageUpload';
 import IngredientList from '../components/IngredientList';
 import IngredientAdd from '../components/IngredientAdd';
 import RecipeNotFound from '../components/RecipeNotFound';
-import UseLoading from '../components/UseLoading';
+import Loading from '../components/Loading';
 import { Button } from '../layouts/Recipe';
 import {
   setNewIngredient,
@@ -260,7 +260,7 @@ const RecipeWriteContainer = () => {
           )
         }
       </section>
-      {loading && <UseLoading />}
+      {loading && <Loading />}
     </article>
   );
 };
