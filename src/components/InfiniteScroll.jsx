@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { isEmpty } from '../utils/utils';
 
-const UseInfiniteScroll = ({
+const InfiniteScroll = ({
   root = null, target, onIntersect, threshold = 1.0, rootMargin = '50px',
 }) => {
   useEffect(() => {
@@ -23,4 +23,4 @@ const UseInfiniteScroll = ({
   }, [target, root, rootMargin, onIntersect, threshold]);
 };
 
-export default UseInfiniteScroll;
+export default InfiniteScroll;
