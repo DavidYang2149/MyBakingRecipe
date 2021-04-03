@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -46,27 +46,27 @@ const RecipeWriteContainer = () => {
     recipe: state.recipe,
   }));
 
-  const onChangeRecipe = (event) => {
+  const onChangeRecipe = useCallback((event) => {
     const { name, value } = event.target;
     dispatch(changeRecipe({ name, value }));
-  };
+  }, [dispatch]);
 
-  const onChangeIngredient = (event) => {
+  const onChangeIngredient = useCallback((event) => {
     const { name, value } = event.target;
     dispatch(changeIngredient({ name, value }));
-  };
+  }, [dispatch]);
 
-  const onChangeNewIngredient = (event) => {
+  const onChangeNewIngredient = useCallback((event) => {
     const { name, value } = event.target;
     dispatch(changeNewIngredient({ name, value }));
-  };
+  }, [dispatch]);
 
-  const onRemoveIngredient = (event) => {
+  const onRemoveIngredient = useCallback((event) => {
     const { value } = event.target;
     dispatch(removeIngredient({ value }));
-  };
+  }, [dispatch]);
 
-  const onKeyUpSetNewIngredient = (event) => {
+  const onKeyUpSetNewIngredient = useCallback((event) => {
     if (isEmpty(newIngredient.ingredient)) {
       return;
     }
@@ -79,21 +79,21 @@ const RecipeWriteContainer = () => {
       dispatch(setNewIngredient({ fields: newIngredient }));
       NewIngredientRef.current.focus();
     }
-  };
+  }, [dispatch, newIngredient]);
 
-  const onClickSetNewIngredient = () => {
+  const onClickSetNewIngredient = useCallback(() => {
     dispatch(setNewIngredient({ fields: newIngredient }));
     NewIngredientRef.current.focus();
-  };
+  }, [dispatch, newIngredient]);
 
-  const onDragEndIngredient = (result) => {
+  const onDragEndIngredient = useCallback((result) => {
     const originIndex = result.source.index || 0;
     const destinationIndex = result.destination.index || 0;
 
     dispatch(swapIngredients({ originIndex, destinationIndex }));
-  };
+  }, [dispatch]);
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     if (isEmpty(title.trim())) {
       alert('제목을 입력해주세요.');
       return;
@@ -124,9 +124,9 @@ const RecipeWriteContainer = () => {
     }
 
     history.push(`/recipe/${id}`);
-  };
+  }, [dispatch, title, category, product, description, id]);
 
-  const onRemove = async () => {
+  const onRemove = useCallback(async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
     if (isEmpty(ensure)) {
       return;
@@ -137,9 +137,9 @@ const RecipeWriteContainer = () => {
     await dispatch(updateRecipes());
 
     history.push('/');
-  };
+  }, [dispatch]);
 
-  const onFileChange = (event) => {
+  const onFileChange = useCallback((event) => {
     const { target: { files } } = event;
     const theFile = files[0];
     const limit3MB = 3 * 1024 * 1024;
@@ -156,14 +156,14 @@ const RecipeWriteContainer = () => {
       dispatch(changeRecipe({ name: 'upload', value: result }));
     };
     reader.readAsDataURL(theFile);
-  };
+  }, [dispatch]);
 
-  const onClearFile = () => {
+  const onClearFile = useCallback(() => {
     dispatch(changeRecipe({ name: 'upload', value: null }));
     fileInputRef.current.value = '';
-  };
+  }, [dispatch]);
 
-  const onRemoveFile = async () => {
+  const onRemoveFile = useCallback(async () => {
     setLoading(true);
     await dispatch(removeFile());
     await dispatch(writeRecipe());
@@ -171,21 +171,21 @@ const RecipeWriteContainer = () => {
 
     setLoading(false);
     fileInputRef.current.value = '';
-  };
+  }, [dispatch]);
 
-  const isNotWriteAdd = (userUserId) => (recipeId) => (recipeUserId) => {
+  const isNotWriteAdd = useCallback((userUserId) => (recipeId) => (recipeUserId) => {
     if (isNotEmpty(userUserId) && isEmpty(recipeId) && isEmpty(recipeUserId)) {
       return false;
     }
     return true;
-  };
+  }, []);
 
-  const isNotWriteUpdate = (userUserId) => (recipeId) => (recipeUserId) => {
+  const isNotWriteUpdate = useCallback((userUserId) => (recipeId) => (recipeUserId) => {
     if (isNotEmpty(userUserId) && isNotEmpty(recipeId) && isMatch(userUserId)(recipeUserId)) {
       return false;
     }
     return true;
-  };
+  }, []);
 
   if (isNotWriteAdd(user.userId)(id)(userId)
     && isNotWriteUpdate(user.userId)(id)(userId)) {

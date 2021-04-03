@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -32,7 +32,7 @@ const RecipeContainer = () => {
     recipe: state.recipe,
   }));
 
-  const onRemove = async () => {
+  const onRemove = useCallback(async () => {
     const ensure = window.confirm('레시피를 삭제하시겠습니까?');
     if (isEmpty(ensure)) {
       return;
@@ -42,7 +42,7 @@ const RecipeContainer = () => {
     await dispatch(removeRecipe());
     await dispatch(updateRecipes());
     history.push('/');
-  };
+  }, [dispatch]);
 
   if (isEmpty(id)) {
     return (
