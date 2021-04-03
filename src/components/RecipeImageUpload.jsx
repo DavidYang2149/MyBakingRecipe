@@ -68,4 +68,4 @@ const RecipeImageUpload = ({
   );
 };
 
-export default RecipeImageUpload;
+export default React.memo(RecipeImageUpload);

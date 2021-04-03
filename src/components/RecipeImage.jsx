@@ -18,4 +18,4 @@ const RecipeImage = ({ image }) => {
   );
 };
 
-export default RecipeImage;
+export default React.memo(RecipeImage);

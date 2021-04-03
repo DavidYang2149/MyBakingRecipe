@@ -83,4 +83,4 @@ const IngredientList = ({
   );
 };
 
-export default IngredientList;
+export default React.memo(IngredientList);

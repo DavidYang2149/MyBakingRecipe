@@ -58,4 +58,4 @@ const Header = ({ userId, signInWithGoogle, signOut }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

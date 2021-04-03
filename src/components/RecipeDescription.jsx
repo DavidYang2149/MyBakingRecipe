@@ -36,4 +36,4 @@ const RecipeDescription = ({
   );
 };
 
-export default RecipeDescription;
+export default React.memo(RecipeDescription);

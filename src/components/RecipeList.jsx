@@ -22,4 +22,4 @@ const RecipeList = ({ recipesBook }) => {
   );
 };
 
-export default RecipeList;
+export default React.memo(RecipeList);

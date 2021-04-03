@@ -14,4 +14,4 @@ const RecipeUser = ({ user, created }) => {
   );
 };
 
-export default RecipeUser;
+export default React.memo(RecipeUser);

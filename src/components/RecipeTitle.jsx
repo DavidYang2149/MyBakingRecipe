@@ -10,4 +10,4 @@ const RecipeTitle = ({ title }) => {
   );
 };
 
-export default RecipeTitle;
+export default React.memo(RecipeTitle);

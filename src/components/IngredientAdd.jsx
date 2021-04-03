@@ -64,4 +64,4 @@ const IngredientAdd = ({
   );
 };
 
-export default IngredientAdd;
+export default React.memo(IngredientAdd);

@@ -112,4 +112,4 @@ const RecipeBasicInfo = ({
   );
 };
 
-export default RecipeBasicInfo;
+export default React.memo(RecipeBasicInfo);
