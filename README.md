@@ -1,5 +1,8 @@
 # My Baking Recipe
-[My Baking Recipe](https://davidyang2149.github.io/MyBakingRecipe)은 레시피를 관리하는 앱입니다.
+[My Baking Recipe](https://mybakingrecipe.app)은 레시피를 관리하는 애플리케이션입니다.
+
+## 소개
+사용 방법 소개.
 
 ## Install dependencies
 
