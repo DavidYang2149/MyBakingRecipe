@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RecipeNotFound from '../components/RecipeNotFound';
+import RecipeNotFound from '../components/recipe/RecipeNotFound';
 
 const Recipe404Page = () => {
   return (

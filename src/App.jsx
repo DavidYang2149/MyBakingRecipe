@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { sessionLoginCheck } from './redux/user';
 
-import Loading from './components/Loading';
+import Loading from './components/common/Loading';
 import Main from './layouts/Main';
 
 const HeaderContainer = lazy(() => import('./containers/common/HeaderContainer'));
