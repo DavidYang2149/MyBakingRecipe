@@ -13,6 +13,8 @@ const RecipePage = lazy(() => import('./pages/RecipePage'));
 const RecipeWritePage = lazy(() => import('./pages/RecipeWritePage'));
 const Recipe404Page = lazy(() => import('./pages/Recipe404Page'));
 
+const ChatPage = lazy(() => import('./pages/chat/ChatPage'));
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -29,6 +31,7 @@ const App = () => {
             <Route exact path="/" component={RecipesPage} />
             <Route path="/recipe/:id" component={RecipePage} />
             <Route path="/recipewrite/:id" component={RecipeWritePage} />
+            <Route path="/chat" component={ChatPage} />
             <Route component={Recipe404Page} />
           </Switch>
         </Main>

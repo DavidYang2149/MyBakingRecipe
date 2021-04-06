@@ -50,4 +50,13 @@ export const formatRecipe = (recipe) => {
   };
 };
 
+export const formatMessage = (chat) => {
+  const { created } = chat.data();
+
+  return {
+    ...chat.data(),
+    created: changeDateToString(created),
+  };
+};
+
 export const RECIPE_COUNT = 12;
