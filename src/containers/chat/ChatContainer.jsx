@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ChatMessageList from '../../components/chat/ChatMessageList';
@@ -14,6 +14,7 @@ import {
 
 const ChatContainer = () => {
   const dispatch = useDispatch();
+  const lastChat = useRef();
 
   const {
     user: {
@@ -46,6 +47,7 @@ const ChatContainer = () => {
 
     if (isMatch(event.key)('Enter')) {
       await dispatch(writeMessage());
+      lastChat.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -55,6 +57,7 @@ const ChatContainer = () => {
     }
 
     await dispatch(writeMessage());
+    lastChat.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -62,6 +65,7 @@ const ChatContainer = () => {
       <ChatMessageList
         chatList={chatList}
         owner={owner}
+        lastChat={lastChat}
       />
       <ChatMessageWriteBox
         message={message}

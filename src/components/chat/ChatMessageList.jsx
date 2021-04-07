@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ChatMessage from './ChatMessage';
 import { ChatMessageItems } from '../../layouts/chat/Chat';
 import { isNotEmpty, isNotArray } from '../../utils/utils';
 
-const ChatMessageList = ({ chatList, owner }) => {
+const ChatMessageList = ({ chatList, owner, lastChat }) => {
   if (isNotArray(chatList)) {
     return (
       <></>
     );
   }
+
+  useEffect(() => {
+    lastChat.current.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
   return (
     <ChatMessageItems>
@@ -24,6 +28,7 @@ const ChatMessageList = ({ chatList, owner }) => {
           );
         })
       )}
+      <div ref={lastChat} />
     </ChatMessageItems>
   );
 };

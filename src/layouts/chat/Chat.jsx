@@ -4,15 +4,17 @@ const ChatBox = styled.article`
   margin: 0 auto;
   /* text-align: center; */
   max-width: 600px;
-  min-height: 300px;
-  max-height: 600px;
+  min-height: 80vh;
+  max-height: 100vh;
 `;
 
 const ChatMessageItems = styled.ul`
-  min-height: 300px;
-  background-color: #f8f8ef;
-  border-radius: 5px;
+  min-height: 70vh;
+  max-height: 90vh;
+  overflow: scroll;
   padding: 20px 20px 10px 20px;
+  border-radius: 5px;
+  background-color: #f8f8ef;
 `;
 
 const ChatMessageItem = styled.li`
@@ -112,19 +114,16 @@ const SendButton = styled.button`
   height: 60px;
   padding: 1rem;
   cursor: pointer;
+  transition: 0.5s;
   opacity: 0.8;
   
-  :hover {
-    opacity: 1.0;
-  }
-
   :disabled {
     cursor: not-allowed;
     opacity: 0.2;
   }
 
   :hover:enabled {
-    opacity: 0.8;
+    opacity: 1.0;
     transition: 0.5s;
   }
 `;
