@@ -15,6 +15,10 @@ const ChatMessageItems = styled.ul`
   padding: 20px 20px 10px 20px;
   border-radius: 5px;
   background-color: #f8f8ef;
+
+  .continueMessage {
+    margin-top: -9px;
+  }
 `;
 
 const ChatMessageItem = styled.li`
@@ -37,6 +41,10 @@ const ChatMessageItem = styled.li`
     height: 40px;
     margin: 2px 5px;
     border-radius: 50%;
+  }
+
+  .hidden {
+    width: 50px;
   }
 
   div > span {
@@ -73,6 +81,10 @@ const MyChatMessageItem = styled.li`
     height: 40px;
     margin: 2px 5px;
     border-radius: 50%;
+  }
+
+  .hidden {
+    width: 50px;
   }
 
   div > span {

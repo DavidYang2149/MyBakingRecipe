@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ChatMessageList from '../../components/chat/ChatMessageList';
 import ChatMessageWriteBox from '../../components/chat/ChatMessageWriteBox';
-import RecipeNotFound from '../../components/recipe/RecipeNotFound';
+import Loading from '../../components/common/Loading';
 import { ChatBox } from '../../layouts/chat/Chat';
 import { changeMessage, writeMessage } from '../../redux/chat';
 import {
@@ -29,7 +29,7 @@ const ChatContainer = () => {
 
   if (isEmpty(userId)) {
     return (
-      <RecipeNotFound />
+      <Loading />
     );
   }
 

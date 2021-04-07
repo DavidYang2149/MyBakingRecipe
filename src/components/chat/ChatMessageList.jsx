@@ -18,12 +18,14 @@ const ChatMessageList = ({ chatList, owner, lastChat }) => {
   return (
     <ChatMessageItems>
       {(
-        isNotEmpty(chatList.length) && chatList.map((chat) => {
+        isNotEmpty(chatList.length) && chatList.map((chat, index) => {
+          const preUser = index ? chatList[index - 1].user : '';
           return (
             <ChatMessage
               key={chat.created}
               chat={chat}
               owner={owner}
+              preUser={preUser}
             />
           );
         })
