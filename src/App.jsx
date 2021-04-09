@@ -8,9 +8,9 @@ import Loading from './components/common/Loading';
 import Main from './layouts/Main';
 
 const HeaderContainer = lazy(() => import('./containers/common/HeaderContainer'));
-const RecipesPage = lazy(() => import('./pages/RecipesPage'));
-const RecipePage = lazy(() => import('./pages/RecipePage'));
-const RecipeWritePage = lazy(() => import('./pages/RecipeWritePage'));
+const RecipesPage = lazy(() => import('./pages/recipe/RecipesPage'));
+const RecipePage = lazy(() => import('./pages/recipe/RecipePage'));
+const RecipeWritePage = lazy(() => import('./pages/recipe/RecipeWritePage'));
 const Recipe404Page = lazy(() => import('./pages/Recipe404Page'));
 
 const ChatPage = lazy(() => import('./pages/chat/ChatPage'));
