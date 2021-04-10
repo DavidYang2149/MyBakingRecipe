@@ -1,20 +1,24 @@
-import React, { useRef } from 'react';
+/* eslint-disable consistent-return */
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ChatMessageList from '../../components/chat/ChatMessageList';
 import ChatMessageWriteBox from '../../components/chat/ChatMessageWriteBox';
 import Loading from '../../components/common/Loading';
+import RecipeNotFound from '../../components/recipe/RecipeNotFound';
 import { ChatBox } from '../../layouts/chat/Chat';
 import { changeMessage, writeMessage } from '../../redux/chat';
 import {
   isEmpty,
   isMatch,
+  isNotEmpty,
   getFirstSplit,
 } from '../../utils/utils';
 
 const ChatContainer = () => {
   const dispatch = useDispatch();
   const lastChat = useRef();
+  const [loadingTime, setLoadingTime] = useState(0);
 
   const {
     user: {
@@ -26,6 +30,34 @@ const ChatContainer = () => {
     user: state.user,
     chat: state.chat,
   }));
+
+  useEffect(() => {
+    // XXX CASE: Terminate Sequence (Result: Loading Failed)
+    if (isMatch(loadingTime)(-1)) {
+      return;
+    }
+
+    // XXX CASE: Loading Success
+    if (isMatch(loadingTime)(5) && isNotEmpty(userId)) {
+      return;
+    }
+
+    // XXX CASE: Loading Failed
+    if (isMatch(loadingTime)(5) && isEmpty(userId)) {
+      setLoadingTime(-1);
+      return;
+    }
+
+    const timeout = setTimeout(() => setLoadingTime(loadingTime + 1), 1000);
+
+    return () => clearTimeout(timeout);
+  }, [loadingTime]);
+
+  if (isEmpty(userId) && isMatch(loadingTime)(-1)) {
+    return (
+      <RecipeNotFound />
+    );
+  }
 
   if (isEmpty(userId)) {
     return (
