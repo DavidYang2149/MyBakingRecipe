@@ -33,6 +33,7 @@ const ChatContainer = () => {
     chat: state.chat,
   }));
 
+  // FIXME CASE: 로그인 후 /chat 에서 로그아웃 후에는 무한 로딩 발생
   useEffect(() => {
     // XXX CASE: Terminate Sequence (Result: Loading Failed)
     if (checkCurrentSecond(-1)) {
