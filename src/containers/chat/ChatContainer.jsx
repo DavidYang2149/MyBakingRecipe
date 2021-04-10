@@ -20,6 +20,8 @@ const ChatContainer = () => {
   const lastChat = useRef();
   const [loadingTime, setLoadingTime] = useState(0);
 
+  const checkCurrentSecond = (value) => isMatch(loadingTime)(value);
+
   const {
     user: {
       userId,
@@ -33,18 +35,18 @@ const ChatContainer = () => {
 
   useEffect(() => {
     // XXX CASE: Terminate Sequence (Result: Loading Failed)
-    if (isMatch(loadingTime)(-1)) {
-      return;
-    }
-
-    // XXX CASE: Loading Success
-    if (isMatch(loadingTime)(5) && isNotEmpty(userId)) {
+    if (checkCurrentSecond(-1)) {
       return;
     }
 
     // XXX CASE: Loading Failed
-    if (isMatch(loadingTime)(5) && isEmpty(userId)) {
+    if (checkCurrentSecond(5) && isEmpty(userId)) {
       setLoadingTime(-1);
+      return;
+    }
+
+    // XXX CASE: Loading Success
+    if (checkCurrentSecond(5) && isNotEmpty(userId)) {
       return;
     }
 
