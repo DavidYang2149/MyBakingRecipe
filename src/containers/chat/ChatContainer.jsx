@@ -13,6 +13,8 @@ import {
   isMatch,
   isNotEmpty,
   getFirstSplit,
+  isLessThen,
+  isGreaterThen,
 } from '../../utils/utils';
 
 const ChatContainer = () => {
@@ -21,6 +23,8 @@ const ChatContainer = () => {
   const [loadingTime, setLoadingTime] = useState(0);
 
   const checkCurrentSecond = (value) => isMatch(loadingTime)(value);
+  const isLessThenFiveSecond = (value) => isLessThen(5)(value);
+  const isGreaterThenFiveSecond = (value) => isGreaterThen(5)(value);
 
   const {
     user: {
@@ -33,7 +37,6 @@ const ChatContainer = () => {
     chat: state.chat,
   }));
 
-  // FIXME CASE: 로그인 후 /chat 에서 로그아웃 후에는 무한 로딩 발생
   useEffect(() => {
     // XXX CASE: Terminate Sequence (Result: Loading Failed)
     if (checkCurrentSecond(-1)) {
@@ -41,20 +44,21 @@ const ChatContainer = () => {
     }
 
     // XXX CASE: Loading Failed
-    if (checkCurrentSecond(5) && isEmpty(userId)) {
+    if (isGreaterThenFiveSecond(loadingTime) && isEmpty(userId)) {
       setLoadingTime(-1);
       return;
     }
 
     // XXX CASE: Loading Success
-    if (checkCurrentSecond(5) && isNotEmpty(userId)) {
+    if (isLessThenFiveSecond(loadingTime) && isNotEmpty(userId)) {
+      setLoadingTime(0);
       return;
     }
 
     const timeout = setTimeout(() => setLoadingTime(loadingTime + 1), 1000);
 
     return () => clearTimeout(timeout);
-  }, [loadingTime]);
+  }, [userId, loadingTime]);
 
   if (isEmpty(userId) && isMatch(loadingTime)(-1)) {
     return (
