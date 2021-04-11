@@ -28,6 +28,20 @@ export const isNotArray = (value) => {
   return !isArray(value);
 };
 
+export const isLessThen = (subject) => (value) => {
+  if (subject > value) {
+    return true;
+  }
+  return false;
+};
+
+export const isGreaterThen = (subject) => (value) => {
+  if (subject < value) {
+    return true;
+  }
+  return false;
+};
+
 export const changeDateToString = (date) => {
   if (isEmpty(date)) {
     return false;
