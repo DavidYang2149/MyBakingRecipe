@@ -8,7 +8,7 @@ import allConditionsState from '../../../../fixtures/allConditionsState';
 import ReipcesPage from '../../recipe/RecipesPage';
 
 jest.mock('react-redux');
-jest.mock('../../services/recipes');
+jest.mock('../../../services/recipes');
 
 window.IntersectionObserver = jest.fn(function () {
   this.observe = jest.fn();
