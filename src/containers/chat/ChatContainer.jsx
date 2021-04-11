@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ChatMessageList from '../../components/chat/ChatMessageList';
@@ -60,6 +62,33 @@ const ChatContainer = () => {
     return () => clearTimeout(timeout);
   }, [userId, loadingTime]);
 
+  const owner = getFirstSplit(userId)('@');
+
+  const onChangeMessage = useCallback((event) => {
+    const { name, value } = event.target;
+    dispatch(changeMessage({ name, value }));
+  }, [dispatch]);
+
+  const onKeyUpMessage = useCallback(async (event) => {
+    if (isEmpty(message.trim())) {
+      return;
+    }
+
+    if (isMatch(event.key)('Enter')) {
+      await dispatch(writeMessage());
+      lastChat.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [dispatch, message]);
+
+  const onSubmit = useCallback(async () => {
+    if (isEmpty(message)) {
+      return;
+    }
+
+    await dispatch(writeMessage());
+    lastChat.current.scrollIntoView({ behavior: 'smooth' });
+  }, [dispatch, message]);
+
   if (isEmpty(userId) && isMatch(loadingTime)(-1)) {
     return (
       <RecipeNotFound />
@@ -71,33 +100,6 @@ const ChatContainer = () => {
       <Loading />
     );
   }
-
-  const owner = getFirstSplit(userId)('@');
-
-  const onChangeMessage = (event) => {
-    const { name, value } = event.target;
-    dispatch(changeMessage({ name, value }));
-  };
-
-  const onKeyUpMessage = async (event) => {
-    if (isEmpty(message.trim())) {
-      return;
-    }
-
-    if (isMatch(event.key)('Enter')) {
-      await dispatch(writeMessage());
-      lastChat.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const onSubmit = async () => {
-    if (isEmpty(message)) {
-      return;
-    }
-
-    await dispatch(writeMessage());
-    lastChat.current.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <ChatBox>
