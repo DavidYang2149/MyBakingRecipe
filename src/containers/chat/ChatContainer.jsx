@@ -69,7 +69,7 @@ const ChatContainer = () => {
     dispatch(changeMessage({ name, value }));
   }, [dispatch]);
 
-  const onKeyUpMessage = useCallback(async (event) => {
+  const onKeyPressMessage = useCallback(async (event) => {
     if (isEmpty(message.trim())) {
       return;
     }
@@ -111,7 +111,7 @@ const ChatContainer = () => {
       <ChatMessageWriteBox
         message={message}
         onChangeMessage={onChangeMessage}
-        onKeyUpMessage={onKeyUpMessage}
+        onKeyPressMessage={onKeyPressMessage}
         onSubmit={onSubmit}
       />
     </ChatBox>
