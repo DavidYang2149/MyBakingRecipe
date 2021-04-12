@@ -8,7 +8,7 @@ import {
 import { isEmpty } from '../../utils/utils';
 
 const ChatMessageWriteBox = ({
-  message, onChangeMessage, onKeyUpMessage, onSubmit,
+  message, onChangeMessage, onKeyPressMessage, onSubmit,
 }) => {
   return (
     <MessageBox>
@@ -17,7 +17,7 @@ const ChatMessageWriteBox = ({
         name="message"
         onChange={onChangeMessage}
         // onKeyUp={onKeyUpMessage}
-        onKeyPress={onKeyUpMessage}
+        onKeyPress={onKeyPressMessage}
         placeholder="메시지를 입력하세요"
         value={message}
       />
