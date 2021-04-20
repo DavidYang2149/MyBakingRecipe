@@ -33,6 +33,13 @@ describe('Header', () => {
 
       fireEvent.click(getByText('New Recipe'));
     });
+
+    it('click Chat', () => {
+      const userId = 'test';
+      const { getByText } = renderHeader(userId);
+
+      fireEvent.click(getByText('Chat'));
+    });
   });
 
   context('without userId', () => {
