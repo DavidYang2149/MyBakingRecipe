@@ -1,6 +1,7 @@
 import {
   changeDateToString,
   formatRecipe,
+  formatMessage,
   isEmpty,
   isMatch,
   isArray,
@@ -36,6 +37,18 @@ test('formatRecipe', () => {
 
   const result = formatRecipe(settings);
   expect(result).toEqual(sampleRecipes[0]);
+});
+
+test('formatMessage', () => {
+  const settings = {
+    created: false,
+    data: () => ({
+      ...settings,
+    }),
+  };
+
+  const result = formatMessage(settings);
+  expect(result).toEqual(settings);
 });
 
 describe('isEmpty', () => {
