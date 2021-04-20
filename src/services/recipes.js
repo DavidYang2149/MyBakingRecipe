@@ -12,7 +12,7 @@ import {
 } from '../utils/utils';
 
 const timeStamp = (dateTime) => fireStore.Timestamp.fromDate(new Date(dateTime));
-const fieldValue = fireStore.FieldValue;
+// const fieldValue = fireStore.FieldValue;
 
 export async function fetchRecipe(id) {
   const recipesRef = db.collection('recipes');
@@ -38,8 +38,8 @@ export async function postRecipe(recipe) {
     const { id } = await db.collection('recipes').add({
       ...recipe,
       userId: email,
-      created: fieldValue.serverTimestamp(),
-      updated: fieldValue.serverTimestamp(),
+      created: fireStore.FieldValue.serverTimestamp(),
+      updated: fireStore.FieldValue.serverTimestamp(),
       show: true,
     });
 
@@ -62,7 +62,7 @@ export async function updateRecipe(recipe) {
       ingredients,
       description,
       image,
-      updated: fieldValue.serverTimestamp(),
+      updated: fireStore.FieldValue.serverTimestamp(),
     });
   }
 }
