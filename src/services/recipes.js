@@ -33,7 +33,7 @@ export async function fetchRecipes(lastRecipe) {
 }
 
 export async function postRecipe(recipe) {
-  const { currentUser: { email } } = auth;
+  const { currentUser: { email } } = auth || { currentUser: {} };
   if (isNotEmpty(email)) {
     const { id } = await db.collection('recipes').add({
       ...recipe,
@@ -49,7 +49,7 @@ export async function postRecipe(recipe) {
 }
 
 export async function updateRecipe(recipe) {
-  const { currentUser: { email } } = auth;
+  const { currentUser: { email } } = auth || { currentUser: {} };
   if (isNotEmpty(email)) {
     const {
       id, title, category, product, ingredients, description, image,
@@ -68,7 +68,7 @@ export async function updateRecipe(recipe) {
 }
 
 export async function deleteRecipe({ id, userId }) {
-  const { currentUser: { email } } = auth;
+  const { currentUser: { email } } = auth || { currentUser: {} };
 
   if (isNotEmpty(email) && isMatch(userId)(email)) {
     await db.collection('recipes').doc(id).delete();
